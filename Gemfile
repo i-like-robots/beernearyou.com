@@ -24,6 +24,9 @@ gem 'uglifier', '>= 1.3.0'
 # Foursquare API wrapper
 gem 'foursquare2'
 
+# Untappd API wrapper
+gem 'untappd'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

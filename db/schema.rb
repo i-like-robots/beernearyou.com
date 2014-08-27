@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826221734) do
+ActiveRecord::Schema.define(version: 20140827152901) do
 
   create_table "venues", force: true do |t|
     t.string   "name"
     t.string   "foursquare_id"
+    t.integer  "untappd_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "venues", ["foursquare_id"], name: "index_venues_on_foursquare_id"
+  add_index "venues", ["untappd_id"], name: "index_venues_on_untappd_id"
 
 end
