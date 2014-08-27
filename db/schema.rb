@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827152901) do
+ActiveRecord::Schema.define(version: 20140827160600) do
+
+  create_table "venue_locations", force: true do |t|
+    t.integer  "venue_id"
+    t.decimal  "latitude",       precision: 10, scale: 6
+    t.decimal  "longitude",      precision: 10, scale: 6
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "postal_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "venues", force: true do |t|
     t.string   "name"
