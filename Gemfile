@@ -6,17 +6,23 @@ gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+# Use .env file for local configuration
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use Sass for stylesheets
 gem 'sass-rails', '~> 4.0.3'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Use SLim for templates
+# Use Slim for templates
 gem 'slim-rails'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Foursquare API wrapper
+gem 'foursquare2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
