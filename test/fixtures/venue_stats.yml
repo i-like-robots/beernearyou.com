@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  venue_id: 1
+  checkin_total: 1
+  top_beers: MyText
+
+two:
+  venue_id: 1
+  checkin_total: 1
+  top_beers: MyText

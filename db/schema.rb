@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827160600) do
+ActiveRecord::Schema.define(version: 20140828125704) do
 
   create_table "venue_locations", force: true do |t|
     t.integer  "venue_id"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20140827160600) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "venue_locations", ["venue_id"], name: "index_venue_locations_on_venue_id"
+
+  create_table "venue_stats", force: true do |t|
+    t.integer  "venue_id"
+    t.integer  "checkin_total"
+    t.text     "top_beers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "venue_stats", ["venue_id"], name: "index_venue_stats_on_venue_id"
 
   create_table "venues", force: true do |t|
     t.string   "name"

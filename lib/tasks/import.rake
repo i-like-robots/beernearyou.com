@@ -14,16 +14,16 @@ namespace :import do
       import_venue_location.for_these(Venue.all)
     end
 
-    desc 'Import latest checkins for all venues'
-    task :checkins => :environment do
-      require "#{Rails.root}/lib/import/venue/checkins"
+    desc 'Import stats for all venues'
+    task :stats => :environment do
+      require "#{Rails.root}/lib/import/venue/stats"
 
-      import_venue_checkins = Import::Venue::Checkins.new(
+      import_venue_stats = Import::Venue::Stats.new(
         id: ENV['UNTAPPD_CLIENT_ID'],
         secret: ENV['UNTAPPD_CLIENT_SECRET']
       )
 
-      import_venue_checkins.for_these(Venue.all)
+      import_venue_stats.for_these(Venue.all)
     end
 
   end
