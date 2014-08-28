@@ -1,6 +1,23 @@
 h1 = @venue.name
+
+h2 Venue
+
 dl
   dt Foursquare ID 
   dd = @venue.foursquare_id
   dt Untappd ID
   dd = @venue.untappd_id
+
+h2 Venue location (from Foursquare)
+
+dl
+  dt Coordinates
+  dd = "#{@venue.venue_location.latitude}, #{@venue.venue_location.longitude}"
+  dt Address
+  dd
+    address
+      = @venue.venue_location.street_address
+      br
+      = @venue.venue_location.city
+      br
+      = @venue.venue_location.postal_code

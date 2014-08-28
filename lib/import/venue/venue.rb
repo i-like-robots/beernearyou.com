@@ -1,4 +1,4 @@
 module Import
-  module Venues
+  module Venue
   end
 end
