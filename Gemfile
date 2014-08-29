@@ -21,8 +21,8 @@ gem 'slim-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Foursquare API wrapper
-gem 'foursquare2'
+# Use HTTParty to wrap requests
+gem 'httparty'
 
 # Untappd API wrapper
 gem 'untappd'

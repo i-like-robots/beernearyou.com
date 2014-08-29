@@ -37,14 +37,6 @@ GEM
       dotenv (= 0.11.1)
     erubis (2.7.0)
     execjs (2.2.1)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
-      faraday (>= 0.7.4, < 0.10)
-    foursquare2 (2.0.1)
-      faraday (~> 0.8)
-      faraday_middleware (>= 0.8)
-      hashie (>= 1.0, < 3.0.0)
     hashie (2.1.2)
     hike (1.2.3)
     httparty (0.13.1)
@@ -63,7 +55,6 @@ GEM
     minitest (5.4.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (2.0.0)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -140,7 +131,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv-rails
-  foursquare2
+  httparty
   jquery-rails
   pry
   rails (= 4.1.5)
