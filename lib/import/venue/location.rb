@@ -5,24 +5,17 @@ module Import
 
     class Location
 
-      def initialize(auth)
-        @client = ApiRequest::Foursquare.new({ client_id: auth[:id], client_secret: auth[:secret] })
-      end
-
-      def by_id(venue_id)
-        @client.venue(venue_id)
-      end
-
       def for_these(venues)
         venues.each do |venue|
-          foursquare_data = by_id(venue.foursquare_id)
-          update_record(venue, foursquare_data['location'])
+          update_record(venue)
         end
       end
 
       private
 
-      def update_record(venue, location_hash)
+      def update_record(venue)
+        location_hash = venue.foursquare_data['location']
+
         mapped_data = {
           latitude: location_hash['lat'],
           longitude: location_hash['lng'],
