@@ -1,11 +1,27 @@
-h1 Nearby
+h1 Search nearby
 
-ul
-  - @venues.each do |venue|
-    li 
-      a href="/venue/#{venue.foursquare_id}" = venue.name
-      dl
-        dt Distance
-        dd = "#{venue.distance} miles"
-        dt Address
-        dd = venue.full_address
+- if @venues.nil?
+
+  div.notice.notice--error
+    | You location was not provided or could not be found
+
+- elsif @venues.length == 0
+
+  div.notice.notice--warning
+    | No results were found for your search, 
+    a href="/search" Try again?
+
+- else
+
+  div.notice.notice--success
+    = "#{@venues.length} results found!"
+
+  ul
+    - @venues.each do |venue|
+      li 
+        a href="/venue/#{venue.foursquare_id}" = venue.name
+        dl
+          dt Distance
+          dd = "#{venue.distance} miles"
+          dt Address
+          dd = venue.full_address

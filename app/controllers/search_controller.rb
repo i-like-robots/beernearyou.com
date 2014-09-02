@@ -11,13 +11,13 @@ class SearchController < ApplicationController
     end
 
     if origin
-      @venues = nearby_with_origin(origin)
+      @venues = find_venues_with_origin(origin)
     end
   end
 
   private
 
-  def nearby_with_origin(origin)
+  def find_venues_with_origin(origin)
     Location.near(origin, 20)
       .joins(:venue)
       .select('venues.*')

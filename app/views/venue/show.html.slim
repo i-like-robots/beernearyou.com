@@ -12,12 +12,12 @@ h2 Venue location (from Foursquare)
 
 dl
   dt Coordinates
-  dd = "#{@venue.venue_location.latitude}, #{@venue.venue_location.longitude}"
+  dd = "#{@venue.location.latitude}, #{@venue.location.longitude}"
   dt Address
   dd
     address
-      = @venue.venue_location.street_address
+      = @venue.location.street_address
       br
-      = @venue.venue_location.city
+      = @venue.location.city
       br
-      = @venue.venue_location.postal_code
+      = @venue.location.postal_code
