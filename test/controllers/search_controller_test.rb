@@ -6,8 +6,8 @@ class SearchControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get nearby" do
-    get :nearby
+  test "should get results" do
+    get :results
     assert_response :success
   end
 

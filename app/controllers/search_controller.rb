@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   def index
   end
 
-  def nearby
+  def results
     if params[:lat] && params[:lng]
       origin = [ params[:lat], params[:lng] ]
     elsif params[:postcode]
