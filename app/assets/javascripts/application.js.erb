@@ -1,0 +1,11 @@
+//= require jquery
+//= require_self
+//= require_tree .
+
+window.app = window.app || {};
+
+window.app.config = {
+  MAPBOX_URL: "<%= ENV['MAPBOX_URL'] %>",
+  MAPBOX_TOKEN: "<%= ENV['MAPBOX_TOKEN'] %>",
+  MAPBOX_PROJECT: "<%= ENV['MAPBOX_PROJECT'] %>"
+};

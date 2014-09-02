@@ -1,9 +1,9 @@
 h1 Search nearby
 
-- if @venues.nil?
+- if @origin.nil? || @venues.nil?
 
   div.notice.notice--error
-    | You location was not provided or could not be found
+    | Your location was not provided or could not be found
 
 - elsif @venues.length == 0
 
@@ -16,9 +16,11 @@ h1 Search nearby
   div.notice.notice--success
     = "#{@venues.length} results found!"
 
-  ul
+  div#map style="width: 640px; height: 480px;"
+
+  ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}"
     - @venues.each do |venue|
-      li 
+      li data-lat="#{venue.latitude}" data-lng="#{venue.longitude}"
         a href="/venue/#{venue.foursquare_id}" = venue.name
         dl
           dt Distance

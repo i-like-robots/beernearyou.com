@@ -9,6 +9,7 @@ Nearby.prototype.init = function() {
   this.$submit.text("Requesting your location");
   this.$target.on("submit", $.proxy(this._onSubmit, this));
   window.navigator.geolocation.getCurrentPosition($.proxy(this._onPosition, this));
+  return this;
 };
 
 Nearby.prototype._onSubmit = function() {
