@@ -1,0 +1,11 @@
+h1 Nearby
+
+ul
+  - @venues.each do |venue|
+    li 
+      a href="/venue/#{venue.foursquare_id}" = venue.name
+      dl
+        dt Distance
+        dd = "#{venue.distance} miles"
+        dt Address
+        dd = venue.full_address
