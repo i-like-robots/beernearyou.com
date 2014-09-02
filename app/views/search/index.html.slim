@@ -2,11 +2,25 @@ h1 Search
 
 form action="/search/nearby" id="nearby"
 
-  input type="hidden" name="lat"
-  input type="hidden" name="lng"
+  fieldset
 
-  button type="submit" disabled=true
+    legend Find nearest based on my current location
 
-noscript
+    input type="hidden" name="lat"
+    input type="hidden" name="lng"
 
-  | JavaScript must be enabled to use this feature
+    button type="submit" disabled=true
+
+    noscript
+
+      | JavaScript must be enabled to use this feature
+
+form action="/search/nearby" id="address"
+
+  fieldset
+
+    legend Find nearest by postcode or address
+
+    input type="text" name="postcode"
+
+    button type="submit" Search
