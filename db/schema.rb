@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140831223601) do
 
-  create_table "venue_locations", force: true do |t|
+  create_table "locations", force: true do |t|
     t.integer  "venue_id"
     t.decimal  "latitude",       precision: 10, scale: 6
     t.decimal  "longitude",      precision: 10, scale: 6
@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 20140831223601) do
     t.datetime "updated_at"
   end
 
-  add_index "venue_locations", ["venue_id"], name: "index_venue_locations_on_venue_id"
+  add_index "locations", ["venue_id"], name: "index_locations_on_venue_id"
+  add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_longitude"
 
   create_table "venues", force: true do |t|
     t.string   "name"

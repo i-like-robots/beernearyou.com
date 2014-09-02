@@ -24,10 +24,10 @@ module Import
           postal_code: location_hash['postalCode']
         }
 
-        if venue.venue_location.nil?
-          venue.create_venue_location(mapped_data)
+        if venue.location.nil?
+          venue.create_location(mapped_data)
         else
-          venue.venue_location.update_attributes(mapped_data)
+          venue.location.update_attributes(mapped_data)
         end
       end
 

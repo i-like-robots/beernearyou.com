@@ -9,6 +9,9 @@ gem 'sqlite3'
 # Use .env file for local configuration
 gem 'dotenv-rails', groups: [:development, :test]
 
+# Use Geocoder for location-based searches
+gem 'geocoder'
+
 # Use Sass for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 

@@ -2,7 +2,8 @@ require 'api_request/service/foursquare'
 
 class Venue < ActiveRecord::Base
 
-  has_one :venue_location, dependent: :destroy
+  has_one :location, dependent: :destroy
+  accepts_nested_attributes_for :location
 
   def foursquare_data
     @fsq_data ||= self.class.foursquare_client.venue(self.foursquare_id)
