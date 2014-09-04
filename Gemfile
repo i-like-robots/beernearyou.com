@@ -27,6 +27,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use HTTParty to wrap requests
 gem 'httparty'
 
+# Use Rspec instead of Test::Unit
+gem 'rspec-rails', groups: [:development, :test]
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

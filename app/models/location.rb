@@ -7,7 +7,7 @@ class Location < ActiveRecord::Base
   end
 
   def coordinates
-    [ latitude, city, longitude ].join(', ')
+    [ latitude, longitude ].join(', ')
   end
 
   reverse_geocoded_by :latitude, :longitude, address: :full_address
