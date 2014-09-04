@@ -1,5 +1,3 @@
-require 'api_request/service/foursquare'
-
 module Import
   module Venue
 

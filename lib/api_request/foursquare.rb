@@ -1,5 +1,3 @@
-require 'api_request/service/service'
-
 module ApiRequest
   class Foursquare < ApiRequest::Service
 

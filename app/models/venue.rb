@@ -1,5 +1,3 @@
-require 'api_request/service/foursquare'
-
 class Venue < ActiveRecord::Base
 
   has_one :location, dependent: :destroy

@@ -8,5 +8,7 @@ Bundler.require(*Rails.groups)
 
 module CraftBeerLondon
   class Application < Rails::Application
+    # Add lib to autoload path
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
