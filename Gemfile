@@ -30,6 +30,9 @@ gem 'httparty'
 # Use Rspec instead of Test::Unit
 gem 'rspec-rails', groups: [:development, :test]
 
+# Use Factory Girl for database fixtures
+gem 'factory_girl_rails', groups: [:development, :test]
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

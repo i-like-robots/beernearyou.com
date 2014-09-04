@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Location, :type => :model do
 
-  subject(:instance) { Location.first }
+  subject(:instance) { build(:location) }
 
   describe '#full_address' do
 
     it 'returns the full address' do
       actual = instance.full_address
-      expected = '25-29 Sicilian Ave, London, WC1A 2QH'
+      expected = '15-19 Goldhawk Rd, Shepherds Bush, W12 8QQ'
 
       expect(actual).to eq(expected)
     end
@@ -19,7 +19,7 @@ RSpec.describe Location, :type => :model do
 
     it 'returns concatenated coordinates' do
       actual = instance.coordinates
-      expected = '51.5187307024007, -0.12148312134648'
+      expected = '51.5030784148458, -0.224192154875118'
 
       expect(actual).to eq(expected)
     end
