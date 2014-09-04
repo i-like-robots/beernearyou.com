@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
 
+  before_filter :sanitize_params
+
   def index
   end
 
@@ -26,6 +28,11 @@ class SearchController < ApplicationController
       .joins(:venue)
       .select('venues.*')
       .reorder('distance ASC, venues.name')
+  end
+
+  def sanitize_params
+    params[:lat] = params[:lat].try(:to_f) || nil
+    params[:lng] = params[:lng].try(:to_f) || nil
   end
 
 end
