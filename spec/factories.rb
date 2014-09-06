@@ -1,6 +1,7 @@
 FactoryGirl.define do
 
   factory :venue do
+    association :location
     name 'BrewDog Shepherds Bush'
     foursquare_id  '529655db11d20a5e5ce7251e'
     untappd_id 1192406

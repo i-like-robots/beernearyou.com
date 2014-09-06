@@ -30,6 +30,9 @@ gem 'httparty'
 # Use Rspec instead of Test::Unit
 gem 'rspec-rails', groups: [:development, :test]
 
+# Use Capybara for better view specs
+gem 'capybara', groups: [:development, :test]
+
 # Use Factory Girl for database fixtures
 gem 'factory_girl_rails', groups: [:development, :test]
 

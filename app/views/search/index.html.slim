@@ -6,8 +6,8 @@ form action="/search/results" id="nearby"
 
     legend Find nearest based on my current location
 
-    input type="hidden" name="lat"
-    input type="hidden" name="lng"
+    input type="hidden" name="lat" required=true
+    input type="hidden" name="lng" required=true
 
     button type="submit" disabled=true
 
@@ -21,6 +21,6 @@ form action="/search/results" id="address"
 
     legend Find nearest by postcode or address
 
-    input type="text" name="postcode"
+    input type="text" name="postcode" required=true
 
     button type="submit" Search
