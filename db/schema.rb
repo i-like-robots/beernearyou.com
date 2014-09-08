@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908173501) do
+ActiveRecord::Schema.define(version: 20140908205609) do
 
   create_table "venues", force: true do |t|
     t.string   "name"
     t.string   "foursquare_id"
     t.integer  "untappd_id"
-    t.decimal  "lat",       precision: 10, scale: 6
-    t.decimal  "lng",       precision: 10, scale: 6
+    t.decimal  "lat",            precision: 10, scale: 6
+    t.decimal  "lng",            precision: 10, scale: 6
     t.string   "street_address"
     t.string   "city"
     t.string   "postal_code"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140908173501) do
   end
 
   add_index "venues", ["foursquare_id"], name: "index_venues_on_foursquare_id"
+  add_index "venues", ["lat", "lng"], name: "index_venues_on_lat_and_lng"
   add_index "venues", ["untappd_id"], name: "index_venues_on_untappd_id"
-  add_index "venues", ["lat", "lng"], name: "index_venues_on_lat_lng"
 
 end
