@@ -20,7 +20,7 @@ h1 Search nearby
 
   ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}"
     - @venues.each do |venue|
-      li data-lat="#{venue.latitude}" data-lng="#{venue.longitude}"
+      li data-lat="#{venue.lat}" data-lng="#{venue.lng}"
         a href="/venue/#{venue.foursquare_id}" = venue.name
         dl
           dt Distance

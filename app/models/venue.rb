@@ -1,10 +1,29 @@
 class Venue < ActiveRecord::Base
 
-  has_one :location, dependent: :destroy
-  accepts_nested_attributes_for :location
+  before_create :add_location
+
+  reverse_geocoded_by :lat, :lng, address: :full_address
+
+  def full_address
+    [ street_address, city, postal_code ].join(', ')
+  end
+
+  def coordinates
+    [ lat, lng ].join(', ')
+  end
 
   def foursquare_data
     @fsq_data ||= self.class.foursquare_client.venue(self.foursquare_id)
+  end
+
+  def add_location
+    location = foursquare_data['location']
+
+    self.lat = location['lat']
+    self.lng = location['lng']
+    self.street_address = location['address']
+    self.city = location['city']
+    self.postal_code = location['postalCode']
   end
 
   private
