@@ -24,10 +24,7 @@ class SearchController < ApplicationController
   end
 
   def find_venues_with_origin(origin)
-    Location.near(origin, 20)
-      .joins(:venue)
-      .select('venues.*')
-      .reorder('distance ASC, venues.name')
+    Venue.near(origin, 20).reorder('distance ASC, name DESC')
   end
 
   def sanitize_params

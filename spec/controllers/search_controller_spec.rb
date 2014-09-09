@@ -7,11 +7,11 @@ RSpec.describe SearchController, :type => :controller do
 
   describe '#results' do
 
-    let(:stub) { build(:venue) }
+    let(:venues) { build_list(:venue, 5, :with_location) }
     let(:origin) { [ 51.514150, -0.227108 ] }
 
     before(:each) do
-      expect(subject).to receive(:find_venues_with_origin).with(origin).and_return(stub)
+      expect(subject).to receive(:find_venues_with_origin).with(origin).and_return(venues)
     end
 
     context 'search by location' do
@@ -20,7 +20,7 @@ RSpec.describe SearchController, :type => :controller do
 
       it 'finds nearby venues with given coordinates' do
         get :results, query
-        expect(assigns(:venues)).to eq(stub)
+        expect(assigns(:venues)).to eq(venues)
         expect(assigns(:origin)).to eq(origin)
       end
 
@@ -36,7 +36,7 @@ RSpec.describe SearchController, :type => :controller do
 
       it 'finds nearby venues with given coordinates' do
         get :results, query
-        expect(assigns(:venues)).to eq(stub)
+        expect(assigns(:venues)).to eq(venues)
         expect(assigns(:origin)).to eq(origin)
       end
 
