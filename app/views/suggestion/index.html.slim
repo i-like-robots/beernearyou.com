@@ -1,0 +1,7 @@
+- flash.each do |name, message|
+  p.notice class="notice--#{name}" = message
+
+= form_for(@suggestion, url: { action: 'create' }) do |f|
+  = f.text_field(:name, required: true)
+  = f.url_field(:url)
+  = f.submit('Suggest the thing')

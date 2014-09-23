@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'suggestion', to: 'suggestion#index'
+  post 'suggestion', to: 'suggestion#create'
+
   get 'search', to: 'search#index'
   get 'search/results'
 
