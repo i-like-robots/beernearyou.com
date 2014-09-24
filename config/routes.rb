@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Upmin::Engine => '/_admin'
+
   get 'suggestion', to: 'suggestion#index'
   post 'suggestion', to: 'suggestion#create'
 

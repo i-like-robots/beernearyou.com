@@ -27,6 +27,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use HTTParty to wrap requests
 gem 'httparty'
 
+# Use Upmin to create an administration area
+gem 'upmin-admin'
+
 # Use Rspec instead of Test::Unit
 gem 'rspec-rails', groups: [:development, :test]
 
