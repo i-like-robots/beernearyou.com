@@ -5,7 +5,7 @@ class VenueController < ApplicationController
   end
 
   def show
-    @venue = Venue.find_by(foursquare_id: params[:id])
+    @venue = Venue.find_by(foursquare_id: params[:id]) or not_found
   end
 
 end
