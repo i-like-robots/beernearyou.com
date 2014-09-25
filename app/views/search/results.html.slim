@@ -1,11 +1,15 @@
-h1 Search nearby
+h1 Search
 
 - if @origin.nil? || @venues.nil?
+
+  - content_for(:page_title, "Search error")
 
   div.notice.notice--error
     | Your location was not provided or could not be found
 
 - elsif @venues.length == 0
+
+  - content_for(:page_title, "No results")
 
   div.notice.notice--warning
     | No results were found for your search, 
@@ -13,8 +17,10 @@ h1 Search nearby
 
 - else
 
-  div.notice.notice--success
-    = "#{@venues.length} results found!"
+  - content_for(:page_title, "Search found #{pluralize(@venues.length, 'result')}")
+
+  p.notice.notice--success
+    = "#{pluralize(@venues.length, 'result')} found!"
 
   div#map style="width: 640px; height: 480px;"
 

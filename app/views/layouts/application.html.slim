@@ -2,7 +2,9 @@ doctype html
 html
   head
 
-    title Craft Beer in London
+    title
+      = yield(:page_title)
+      |  | Craft Beer in London
 
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
