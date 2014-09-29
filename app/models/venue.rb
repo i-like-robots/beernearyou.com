@@ -3,8 +3,6 @@ class Venue < ActiveRecord::Base
   validates :name, presence: true
   validates :foursquare_id, presence: true
 
-  upmin_attributes :name, :foursquare_id
-
   before_create :add_location
 
   reverse_geocoded_by :lat, :lng, address: :full_address
