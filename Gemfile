@@ -27,10 +27,14 @@ gem 'httparty'
 # Use Upmin to create an administration area
 gem 'upmin-admin'
 
-group :development do
+group :development, :test do
 
   # Use .env file for local configuration
   gem 'dotenv-rails'
+
+end
+
+group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

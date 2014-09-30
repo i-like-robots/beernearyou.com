@@ -4,8 +4,9 @@ RSpec.describe SuggestionController, :type => :controller do
 
   describe "#create" do
 
-    let(:params)     { attributes_for(:suggestion) }
-    let(:form_data)  { { suggestion: params } }
+    let(:mailer)      { double(:mailer) }
+    let(:params)      { attributes_for(:suggestion) }
+    let(:form_data)   { { suggestion: params } }
 
     context 'with invalid data' do
 
@@ -21,6 +22,11 @@ RSpec.describe SuggestionController, :type => :controller do
     context 'with valid data' do
 
       let(:params) { attributes_for(:suggestion, :with_name) }
+
+      before(:each) do
+        expect(mailer).to receive(:deliver)
+        expect(SuggestionMailer).to receive(:new_suggestion_email).and_return(mailer)
+      end
 
       it 'saves the suggestion' do
         post :create, form_data

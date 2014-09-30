@@ -9,6 +9,7 @@ class SuggestionController < ApplicationController
 
     if @suggestion.save
       flash.now[:success] = 'Suggestion saved'
+      SuggestionMailer.new_suggestion_email(@suggestion).deliver
     else
       error = @suggestion.errors.first
       flash.now[:error] = "Suggestion failed, '#{error.first}' #{error.last}"
