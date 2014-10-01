@@ -12,7 +12,7 @@ class SuggestionController < ApplicationController
       SuggestionMailer.new_suggestion_email(@suggestion).deliver
     else
       error = @suggestion.errors.first
-      flash.now[:error] = "Suggestion failed, '#{error.first}' #{error.last}"
+      flash.now[:error] = "Suggestion failed, #{error.last}"
     end
 
     render :index

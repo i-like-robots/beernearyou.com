@@ -21,7 +21,7 @@ RSpec.describe SuggestionController, :type => :controller do
 
     context 'with valid data' do
 
-      let(:params) { attributes_for(:suggestion, :with_name) }
+      let(:params) { attributes_for(:suggestion, :with_name, :with_url) }
 
       before(:each) do
         expect(mailer).to receive(:deliver)

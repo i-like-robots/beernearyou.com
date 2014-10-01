@@ -4,6 +4,10 @@
   p.notice class="notice--#{name}" = message
 
 = form_for(@suggestion, url: { action: 'create' }) do |f|
+  = f.label(:name)
   = f.text_field(:name, required: true)
-  = f.url_field(:url)
+
+  = f.label(:url)
+  = f.url_field(:url, required: true)
+
   = f.submit('Suggest the thing')

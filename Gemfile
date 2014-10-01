@@ -32,15 +32,15 @@ group :development, :test do
   # Use .env file for local configuration
   gem 'dotenv-rails'
 
+  # Use Pry for simpler debugging
+  gem 'pry'
+
 end
 
 group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Use Pry for simpler debugging
-  gem 'pry'
 
 end
 
@@ -56,6 +56,3 @@ group :test do
   gem 'factory_girl_rails'
 
 end
-
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc

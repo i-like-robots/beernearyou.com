@@ -1,3 +1,4 @@
 class Suggestion < ActiveRecord::Base
-  validates :name, presence: true
+  validates_presence_of :name, message: 'please enter a name'
+  validates_presence_of :url, message: 'please enter a URL'
 end
