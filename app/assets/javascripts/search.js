@@ -1,5 +1,6 @@
 //= require components/nearby
 //= require components/mapbox
+//= require components/bearing
 //= require components/distance
 //= require components/results_map
 
@@ -36,11 +37,12 @@ $(function() {
   }
 
   //
-  // Results live distance
+  // Live results distance and bearing
   //
 
   if ($results.is(".is-live") && window.navigator.geolocation) {
     $results.children().each(function() {
+      new Bearing($(this)).init();
       new Distance($(this)).init();
     });
   }

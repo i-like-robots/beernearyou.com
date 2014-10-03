@@ -8,7 +8,6 @@ function Distance($target, options) {
     frequency: 5000
   };
 
-
   this.$target = $target;
   this.$distance = $target.find(".js-distance");
   this.options = $.extend({}, defaults, options);
