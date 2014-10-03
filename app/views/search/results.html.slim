@@ -2,14 +2,14 @@ h1 Search
 
 - if @origin.nil? || @venues.nil?
 
-  - content_for(:page_title, "Search error")
+  - content_for(:page_title, 'Search error')
 
   div.notice.notice--error
     | Your location was not provided or could not be found
 
 - elsif @venues.length == 0
 
-  - content_for(:page_title, "No results")
+  - content_for(:page_title, 'No results')
 
   div.notice.notice--warning
     | No results were found for your search, 
@@ -22,14 +22,14 @@ h1 Search
   p.notice.notice--success
     = "#{pluralize(@venues.length, 'result')} found!"
 
-  div#map style="width: 640px; height: 480px;"
+  div#map style='width: 640px; height: 480px;'
 
-  ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}"
+  ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
     - @venues.each do |venue|
       li data-lat="#{venue.lat}" data-lng="#{venue.lng}"
         a href="/venue/#{venue.foursquare_id}" = venue.name
         dl
           dt Distance
-          dd = "#{venue.distance} miles"
+          dd.js-distance = "#{'%.2f' % venue.distance} miles"
           dt Address
           dd = venue.full_address

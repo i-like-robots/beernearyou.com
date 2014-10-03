@@ -1,5 +1,6 @@
 //= require components/nearby
 //= require components/mapbox
+//= require components/distance
 //= require components/results_map
 
 $(function() {
@@ -17,7 +18,7 @@ $(function() {
   }
 
   //
-  // Results Mapox integration
+  // Results Mapbox integration
   //
 
   var $map = $("#map");
@@ -32,6 +33,16 @@ $(function() {
 
     mapbox = new Mapbox($map, options).init();
     new ResultsMap($results, mapbox).init();
+  }
+
+  //
+  // Results live distance
+  //
+
+  if ($results.is(".is-live") && window.navigator.geolocation) {
+    $results.children().each(function() {
+      new Distance($(this)).init();
+    });
   }
 
 });

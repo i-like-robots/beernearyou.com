@@ -6,7 +6,8 @@ class SearchController < ApplicationController
   end
 
   def results
-    @origin ||= create_origin_with_params(params)
+    @origin = create_origin_with_params(params)
+    @live = true unless params[:postcode]
 
     if @origin
       @venues = find_venues_with_origin(@origin)

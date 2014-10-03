@@ -20,6 +20,7 @@ RSpec.describe SearchController, :type => :controller do
 
       it 'finds nearby venues with given coordinates' do
         get :results, query
+        expect(assigns(:live)).to eq(true)
         expect(assigns(:venues)).to eq(venues)
         expect(assigns(:origin)).to eq(origin)
       end
@@ -36,6 +37,7 @@ RSpec.describe SearchController, :type => :controller do
 
       it 'finds nearby venues with given coordinates' do
         get :results, query
+        expect(assigns(:live)).to_not eq(true)
         expect(assigns(:venues)).to eq(venues)
         expect(assigns(:origin)).to eq(origin)
       end
