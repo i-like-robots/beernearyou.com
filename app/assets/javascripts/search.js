@@ -2,6 +2,7 @@
 //= require components/mapbox
 //= require components/results_map
 //= require components/live_results
+//= require components/live_compass
 
 $(function() {
 
@@ -32,11 +33,17 @@ $(function() {
     };
 
     mapbox = new Mapbox($map, options).init();
-    resultsMap = new ResultsMap($results, mapbox).init();
+    new ResultsMap($results, mapbox).init();
 
     // Live result updates
     if ($results.is(".is-live") && window.navigator.geolocation) {
-      new LiveResults($results, resultsMap).init();
+      new LiveResults($results).init();
+
+      if (window.DeviceOrientationEvent) {
+        $results.find(".js-result").each(function() {
+          new LiveCompass($(this)).init();
+        });
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-function LiveResults($target, resultsMap, options) {
+function LiveResults($target, options) {
   var defaults = {
     metric: false,
     frequency: 5000
@@ -6,23 +6,24 @@ function LiveResults($target, resultsMap, options) {
 
   this.$target = $target;
   this.$results = $target.find(".js-result");
-  this.resultsMap = resultsMap;
+
   this.options = $.extend({}, defaults, options);
 }
 
 LiveResults.prototype.init = function() {
-  setInterval($.proxy(this._onUpdate, this), this.options.frequency);
+  this._onUpdate();
   return this;
 };
 
 LiveResults.prototype._onUpdate = function() {
   window.navigator.geolocation.getCurrentPosition($.proxy(this._onPosition, this));
+  setTimeout($.proxy(this._onUpdate, this), this.options.frequency);
 };
 
 LiveResults.prototype._onPosition = function(pos) {
   this.position = [pos.coords.latitude, pos.coords.longitude];
-  this.resultsMap.updateCenterMarker(this.position);
 
+  this.$target.trigger("position:update", [this.position]);
   this.$results.each($.proxy(this._updateResult, this));
 };
 

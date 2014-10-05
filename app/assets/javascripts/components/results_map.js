@@ -4,6 +4,7 @@ function ResultsMap($target, mapbox) {
 }
 
 ResultsMap.prototype.init = function() {
+  this.$target.on("position:update", $.proxy(this._onUpdate, this));
   this.mapbox.$target.on("mapbox:load", $.proxy(this._onLoad, this));
   return this;
 };
@@ -15,6 +16,10 @@ ResultsMap.prototype._onLoad = function() {
 
   group.addTo(this.mapbox.map);
   this.mapbox.map.fitBounds(group.getBounds());
+};
+
+ResultsMap.prototype._onUpdate = function(e, origin) {
+  this.mapbox.updateMarkerPosition(this.centerMarker, origin);
 };
 
 ResultsMap.prototype.createFeatures = function($results) {
@@ -57,8 +62,4 @@ ResultsMap.prototype.createMarker = function(origin, options, content) {
   var marker = this.mapbox.createMarker(origin, options);
   var popup = this.mapbox.createPopup(content);
   return marker.bindPopup(popup);
-};
-
-ResultsMap.prototype.updateCenterMarker = function(origin) {
-  this.mapbox.updateMarkerPosition(this.centerMarker, origin);
 };

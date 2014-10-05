@@ -33,5 +33,9 @@ h1 Search
           dd.js-distance = "#{'%.2f' % venue.distance} miles"
           dt Bearing
           dd.js-bearing = "#{venue.bearing}°"
+          dt Compass
+          dd
+            .js-compass style="position: relative; width: 40px; height: 40px;"
+              .js-compass-needle style="position: absolute; top: 50%; left: 50%; height: 40px; width: 2px; margin: -10px 0 0 -1px; background: red;"
           dt Address
           dd = venue.full_address
