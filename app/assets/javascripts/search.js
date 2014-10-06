@@ -1,7 +1,7 @@
 //= require components/nearby
 //= require components/mapbox
 //= require components/results_map
-//= require components/distance_bearing
+//= require components/live_results
 
 $(function() {
 
@@ -32,17 +32,12 @@ $(function() {
     };
 
     mapbox = new Mapbox($map, options).init();
-    new ResultsMap($results, mapbox).init();
-  }
+    resultsMap = new ResultsMap($results, mapbox).init();
 
-  //
-  // Live results distance and bearing
-  //
-
-  if ($results.is(".is-live") && window.navigator.geolocation) {
-    $results.children().each(function() {
-      new DistanceBearing($(this)).init();
-    });
+    // Live result updates
+    if ($results.is(".is-live") && window.navigator.geolocation) {
+      new LiveResults($results, resultsMap).init();
+    }
   }
 
 });

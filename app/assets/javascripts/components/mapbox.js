@@ -35,6 +35,10 @@ Mapbox.prototype.createMarker = function(origin, options) {
   return window.L.marker(origin, { icon: icon });
 };
 
+Mapbox.prototype.updateMarkerPosition = function(marker, origin) {
+  marker.setLatLng(origin);
+};
+
 Mapbox.prototype.createPopup = function(content) {
   return window.L.popup().setContent(content);
 };

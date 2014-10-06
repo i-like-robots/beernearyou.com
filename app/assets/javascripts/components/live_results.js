@@ -1,50 +1,62 @@
-function DistanceBearing($target, options) {
+function LiveResults($target, resultsMap, options) {
   var defaults = {
     metric: false,
     frequency: 5000
   };
 
   this.$target = $target;
-  this.$bearing = $target.find(".js-bearing");
-  this.$distance = $target.find(".js-distance");
+  this.$results = $target.find(".js-result");
+  this.resultsMap = resultsMap;
   this.options = $.extend({}, defaults, options);
 }
 
-DistanceBearing.prototype.init = function() {
+LiveResults.prototype.init = function() {
   setInterval($.proxy(this._onUpdate, this), this.options.frequency);
   return this;
 };
 
-DistanceBearing.prototype._onUpdate = function() {
+LiveResults.prototype._onUpdate = function() {
   window.navigator.geolocation.getCurrentPosition($.proxy(this._onPosition, this));
 };
 
-DistanceBearing.prototype._onPosition = function(pos) {
-  var destination = [this.$target.data("lat"), this.$target.data("lng")];
-  var position = [pos.coords.latitude, pos.coords.longitude];
-  var bearing = this.calculateBearing(position, destination);
-  var distance = this.calculateDistance(position, destination);
+LiveResults.prototype._onPosition = function(pos) {
+  this.position = [pos.coords.latitude, pos.coords.longitude];
+  this.resultsMap.updateCenterMarker(this.position);
 
-  this.$bearing.text(bearing.toFixed(1) + "°");
-  this.$distance.text(distance.toFixed(2) + " " + this.units());
+  this.$results.each($.proxy(this._updateResult, this));
 };
 
-DistanceBearing.prototype._toRadians = function(coordinates) {
+LiveResults.prototype._updateResult = function(i) {
+  var $result = this.$results.eq(i);
+  var $bearing = $result.find(".js-bearing");
+  var $distance = $result.find(".js-distance");
+
+  var destination = [$result.data("lat"), $result.data("lng")];
+  var bearing = this.calculateBearing(this.position, destination);
+  var distance = this.calculateDistance(this.position, destination);
+
+  $bearing.text(bearing.toFixed(1) + "°");
+  $distance.text(distance.toFixed(2) + " " + this.units());
+
+  $result.trigger("result:update", [distance, bearing]);
+};
+
+LiveResults.prototype._toRadians = function(coordinates) {
   return $.map(coordinates, function(component) {
     return component * (Math.PI / 180);
   });
 };
 
-DistanceBearing.prototype._earthRadius = function(metric) {
+LiveResults.prototype._earthRadius = function(metric) {
   var radiusKM = 6371.0;
   return metric ? radiusKM : (radiusKM * 0.621371192);
 };
 
-DistanceBearing.prototype.units = function() {
+LiveResults.prototype.units = function() {
   return this.options.metric ? "kilometers" : "miles";
 };
 
-DistanceBearing.prototype.calculateBearing = function(point1, point2) {
+LiveResults.prototype.calculateBearing = function(point1, point2) {
   point1 = this._toRadians(point1);
   point2 = this._toRadians(point2);
 
@@ -56,7 +68,7 @@ DistanceBearing.prototype.calculateBearing = function(point1, point2) {
   return (90 - bearing + 360) % 360;
 };
 
-DistanceBearing.prototype.calculateDistance = function(point1, point2) {
+LiveResults.prototype.calculateDistance = function(point1, point2) {
 
   // Haversine formula
   // <http://www.movable-type.co.uk/scripts/latlong.html>

@@ -26,7 +26,7 @@ h1 Search
 
   ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
     - @venues.each do |venue|
-      li data-lat="#{venue.lat}" data-lng="#{venue.lng}"
+      li.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
         a href="/venue/#{venue.foursquare_id}" = venue.name
         dl
           dt Distance

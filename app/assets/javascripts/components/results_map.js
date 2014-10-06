@@ -25,7 +25,8 @@ ResultsMap.prototype.createFeatures = function($results) {
     features.push(this.createResultMarker($results.eq(i)));
   }
 
-  features.push(this.createCenterMarker(this.$target));
+  this.centerMarker = this.createCenterMarker(this.$target);
+  features.push(this.centerMarker);
 
   return features;
 };
@@ -56,4 +57,8 @@ ResultsMap.prototype.createMarker = function(origin, options, content) {
   var marker = this.mapbox.createMarker(origin, options);
   var popup = this.mapbox.createPopup(content);
   return marker.bindPopup(popup);
+};
+
+ResultsMap.prototype.updateCenterMarker = function(origin) {
+  this.mapbox.updateMarkerPosition(this.centerMarker, origin);
 };
