@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140923210344) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "suggestions", force: true do |t|
     t.string   "name"
     t.string   "url"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 20140923210344) do
     t.datetime "updated_at"
   end
 
-  add_index "venues", ["foursquare_id"], name: "index_venues_on_foursquare_id"
-  add_index "venues", ["lat", "lng"], name: "index_venues_on_lat_and_lng"
-  add_index "venues", ["untappd_id"], name: "index_venues_on_untappd_id"
+  add_index "venues", ["foursquare_id"], name: "index_venues_on_foursquare_id", using: :btree
+  add_index "venues", ["lat", "lng"], name: "index_venues_on_lat_and_lng", using: :btree
+  add_index "venues", ["untappd_id"], name: "index_venues_on_untappd_id", using: :btree
 
 end
