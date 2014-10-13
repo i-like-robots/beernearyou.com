@@ -1,0 +1,22 @@
+.btn {
+  @extend %base-input;
+  display: inline-block;
+  background: none;
+  color: $palette-mid-gray;
+  text-decoration: none;
+
+  &::-moz-focus-inner {
+      padding: 0;
+      border: 0;
+  }
+
+  &:hover,
+  &:active {
+    color: $palette-dark-gray;
+  }
+
+  &:active {
+    @extend %base-shadow-inset;
+  }
+
+}

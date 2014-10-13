@@ -1,0 +1,16 @@
+:focus {
+  outline: 1px dotted;
+  outline-offset: 1px;
+}
+
+body {
+  margin: 0;
+  background: $base-background-color;
+  padding: 0;
+  color: $base-text-color;
+}
+
+a {
+  text-decoration: underline;
+  color: $base-accent-color;
+}

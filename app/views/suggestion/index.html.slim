@@ -5,9 +5,9 @@
 
 = form_for(@suggestion, url: { action: 'create' }) do |f|
   = f.label(:name)
-  = f.text_field(:name, required: true)
+  = f.text_field(:name, required: true, class: 'input')
 
-  = f.label(:url)
-  = f.url_field(:url, required: true)
+  = f.label(:url, 'Website address')
+  = f.url_field(:url, required: true, class: 'input')
 
-  = f.submit('Suggest the thing')
+  = f.submit('Suggest the thing', class: 'btn')

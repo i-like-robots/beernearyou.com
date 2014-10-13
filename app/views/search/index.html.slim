@@ -11,7 +11,7 @@ h1 Search
     = hidden_field_tag(:lat, nil, required: true)
     = hidden_field_tag(:lng, nil, required: true)
 
-    button type="submit" disabled=true
+    button.btn type="submit" disabled=true
 
     noscript
 
@@ -24,6 +24,6 @@ h1 Search
     legend Find nearest by postcode or address
 
     = label_tag(:postcode, 'Postcode or address')
-    = text_field_tag(:postcode, nil, required: true)
+    = text_field_tag(:postcode, nil, required: true, class: 'input')
 
-    button type="submit" Search
+    button.btn type="submit" Search

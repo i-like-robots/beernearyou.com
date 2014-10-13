@@ -10,7 +10,7 @@ gem 'pg'
 gem 'geocoder'
 
 # Use Sass for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '5.0.0.beta1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

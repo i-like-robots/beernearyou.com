@@ -1,0 +1,77 @@
+body {
+  @extend %base-font;
+  @include text-size("base");
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text--h1,
+.text--h2,
+.text--h3,
+.text--h4,
+.text--h5,
+.text--h6 {
+  margin: 0 0 0.25em;
+  font-family: $font-headline;
+  font-weight: bold;
+  color: $palette-dark-gray;
+}
+
+// Text sizing
+h1,
+.text--h1,
+.text--mega {
+  @include responsive-text-size("mega");
+}
+
+h2,
+.text--h2,
+.text--kilo {
+  @include responsive-text-size("kilo");
+}
+
+h3,
+.text--h3,
+.text--hecto {
+  @include responsive-text-size("hecto");
+}
+
+h4,
+.text--h4,
+.text--deca {
+  @include responsive-text-size("deca");
+}
+
+h5,
+h6,
+.text--h5,
+.text--h6,
+.text--base {
+  @include text-size("base");
+}
+
+.text--deci {
+  @include text-size("deci");
+}
+
+.text--centi {
+  @include text-size("centi");
+}
+
+// Text alignment
+.text--left {
+  text-align: left;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--right {
+  text-align: right;
+}

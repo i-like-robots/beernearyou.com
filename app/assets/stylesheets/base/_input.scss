@@ -1,0 +1,10 @@
+.input {
+  @extend %base-input;
+  background: $base-background-color;
+  color: $palette-mid-gray;
+
+  &:focus {
+    color: $palette-dark-gray;
+  }
+
+}

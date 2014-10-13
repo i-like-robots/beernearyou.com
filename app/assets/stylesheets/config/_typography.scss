@@ -1,0 +1,79 @@
+$font-body: Helvetica, Arial, sans-serif;
+$font-headline: $font-body;
+
+$text-sizing: (
+  centi: (
+    small: (
+      font-size: 0.75em,
+      line-height: 1
+    )
+  ),
+  deci: (
+    small: (
+      font-size: 0.875em,
+      line-height: 1.25
+    )
+  ),
+  base: (
+    small: (
+      font-size: 1em,
+      line-height: 1.25
+    ),
+    medium: (
+      font-size: 1em,
+      line-height: 1.375
+    )
+  ),
+  deca: (
+    small: (
+      font-size: 1.125em,
+      line-height: 1.111
+    ),
+    medium: (
+      font-size: 1.125em,
+      line-height: 1.222
+    )
+  ),
+  hecto: (
+    small: (
+      font-size: 1.375em,
+      line-height: 1.136
+    ),
+    medium: (
+      font-size: 1.5em,
+      line-height: 1.25
+    ),
+    large: (
+      font-size: 1.75em,
+      line-height: 1.25
+    )
+  ),
+  kilo: (
+    small: (
+      font-size: 1.625em,
+      line-height: 1.154
+    ),
+    medium: (
+      font-size: 2em,
+      line-height: 1.25
+    ),
+    large: (
+      font-size: 2.25em,
+      line-height: 1.25
+    )
+  ),
+  mega: (
+    small: (
+      font-size: 2em,
+      line-height: 1.25
+    ),
+    medium: (
+      font-size: 2.5em,
+      line-height: 1.125
+    ),
+    large: (
+      font-size: 3em,
+      line-height: 1.05
+    )
+  )
+);

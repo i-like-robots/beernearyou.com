@@ -1,0 +1,22 @@
+// Layout
+$layout-min-width:  300px;
+$layout-max-width:  1440px;
+
+// Breakpoints
+$named-breakpoints: (
+  small:    480px,
+  medium:   720px,
+  large:    960px,
+  x-large:  1280px
+);
+
+// Flexible grid
+$grid-column:       60;
+$grid-gutter:       20;
+$grid-max-columns:  12;
+
+// Margins and padding
+$base-margin:         0 20px 24px;
+$base-margin-small:   0 10px 12px;
+$base-padding:        12px 20px;
+$base-padding-small:  6px 10px;
