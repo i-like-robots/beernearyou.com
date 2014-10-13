@@ -2,14 +2,14 @@
 
 h1 Search
 
-form action="/search/results" id="nearby"
+= form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'nearby')
 
   fieldset
 
     legend Find nearest based on my current location
 
-    input type="hidden" name="lat" required=true
-    input type="hidden" name="lng" required=true
+    = hidden_field_tag(:lat, nil, required: true)
+    = hidden_field_tag(:lng, nil, required: true)
 
     button type="submit" disabled=true
 
@@ -17,12 +17,13 @@ form action="/search/results" id="nearby"
 
       | JavaScript must be enabled to use this feature
 
-form action="/search/results" id="address"
+= form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'address')
 
   fieldset
 
     legend Find nearest by postcode or address
 
-    input type="text" name="postcode" required=true
+    = label_tag(:postcode, 'Postcode or address')
+    = text_field_tag(:postcode, nil, required: true)
 
     button type="submit" Search
