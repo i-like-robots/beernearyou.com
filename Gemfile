@@ -27,10 +27,10 @@ gem 'httparty'
 # Use Upmin to create an administration area
 gem 'upmin-admin'
 
-group :development, :test do
+# Use .env file for local configuration
+gem 'dotenv-rails'
 
-  # Use .env file for local configuration
-  gem 'dotenv-rails'
+group :development, :test do
 
   # Use Pry for simpler debugging
   gem 'pry'
