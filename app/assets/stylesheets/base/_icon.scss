@@ -1,0 +1,46 @@
+.icon:after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: image-url("sprites.png") no-repeat;
+  background-size: cover;
+}
+
+.icon--text:after {
+  position: relative;
+  top: 0.125em;
+  margin-left: 0.625em;
+}
+
+.icon--link:after {
+  background-position: 0 0;
+}
+
+.icon--wifi:after {
+  background-position: -1em 0;
+}
+
+.icon--clock:after {
+  background-position: -2em 0;
+}
+
+.icon--search:after {
+  background-position: -3em 0;
+}
+
+.icon--address:after {
+  background-position: -4em 0;
+}
+
+.icon--position:after {
+  background-position: -5em 0;
+}
+
+.icon--left:after {
+  background-position: -6em 0;
+}
+
+.icon--right:after {
+  background-position: -7em 0;
+}
