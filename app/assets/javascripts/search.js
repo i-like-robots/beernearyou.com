@@ -14,7 +14,7 @@ $(function() {
 
   var $nearby = $("#nearby");
 
-  if ($nearby.length && window.navigator.geolocation) {
+  if ($nearby.length && window.app.support.check("geolocation")) {
     new Nearby($nearby).init();
   }
 
@@ -36,10 +36,10 @@ $(function() {
     new ResultsMap($results, mapbox).init();
 
     // Live result updates
-    if ($results.is(".is-live") && window.navigator.geolocation) {
+    if ($results.is(".is-live") && window.app.support.check("geolocation")) {
       new LiveResults($results).init();
 
-      if (window.DeviceOrientationEvent) {
+      if (window.app.support.check("deviceOrientation")) {
         $results.find(".js-result").each(function() {
           new LiveCompass($(this)).init();
         });

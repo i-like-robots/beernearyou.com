@@ -1,4 +1,5 @@
 //= require jquery
+//= require components/support
 //= require_self
 //= require_tree .
 
@@ -9,3 +10,5 @@ window.app.config = {
   MAPBOX_TOKEN: "<%= ENV['MAPBOX_TOKEN'] %>",
   MAPBOX_PROJECT: "<%= ENV['MAPBOX_PROJECT'] %>"
 };
+
+window.app.support = new Support($("html")).init();
