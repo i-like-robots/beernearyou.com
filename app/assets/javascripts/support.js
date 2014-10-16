@@ -1,25 +1,22 @@
-function Support($target, options) {
-  var defaults = {
+function Support() {
+  this.options = {
     addClassNames: true,
     supportPrefix: "has",
     noSupportPrefix: "no"
   };
 
-  this.$target = $target;
-  this.options = $.extend({}, defaults, options);
+  this.results = {};
 }
 
 Support.prototype.init = function() {
   var test, result, prefix;
 
-  this.results = {};
-
   for (test in this.tests) {
-    result = this.results[test] = this.tests[test].call(window);
+    result = this.results[test] = this.tests[test]();
     prefix = result ? this.options.supportPrefix : this.options.noSupportPrefix;
 
     if (this.options.addClassNames) {
-      this.$target.addClass(prefix + "-" + test);
+      document.documentElement.className += " " + prefix + "-" + test + " ";
     }
   }
 
@@ -33,15 +30,17 @@ Support.prototype.check = function(feature) {
 Support.prototype.tests = {
 
   svg: function() {
-    return "SVGAngle" in this;
+    return "SVGAngle" in window;
   },
 
   deviceOrientation: function() {
-    return "DeviceOrientationEvent" in this;
+    return "DeviceOrientationEvent" in window;
   },
 
   geolocation: function() {
-    return "geolocation" in this.navigator;
+    return "geolocation" in window.navigator;
   }
 
 };
+
+window.support = new Support().init();
