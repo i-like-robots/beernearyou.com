@@ -1,6 +1,7 @@
 function LiveResults($target, options) {
   var defaults = {
     metric: false,
+    timeout: 10000,
     frequency: 5000
   };
 
@@ -11,13 +12,18 @@ function LiveResults($target, options) {
 }
 
 LiveResults.prototype.init = function() {
-  this._onUpdate();
-  return this;
-};
+  var positionOptions = {
+    enableHighAccuracy: true,
+    timeout: this.options.timeout
+  };
 
-LiveResults.prototype._onUpdate = function() {
-  window.navigator.geolocation.getCurrentPosition($.proxy(this._onPosition, this));
-  setTimeout($.proxy(this._onUpdate, this), this.options.frequency);
+  this.watch = window.navigator.geolocation.watchPosition(
+    $.proxy(this._onPosition, this),
+    $.proxy(this._onError, this),
+    positionOptions
+  );
+
+  return this;
 };
 
 LiveResults.prototype._onPosition = function(pos) {
@@ -25,6 +31,10 @@ LiveResults.prototype._onPosition = function(pos) {
 
   this.$target.trigger("position:update", [this.position]);
   this.$results.each($.proxy(this._updateResult, this));
+};
+
+LiveResults.prototype._onError = function(error) {
+  window.console && window.console.log(error);
 };
 
 LiveResults.prototype._updateResult = function(i) {
