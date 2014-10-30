@@ -1,0 +1,15 @@
+@function base-margin($direction: null) {
+  @if $direction != null {
+    @return directional-value($base-margin, $direction);
+  }
+
+  @return $base-margin;
+}
+
+@function base-padding($direction: null) {
+  @if $direction != null {
+    @return directional-value($base-padding, $direction);
+  }
+
+  @return $base-padding;
+}

@@ -1,0 +1,64 @@
+@function em($pxval, $base: $root-font-size) {
+  @if not unitless($pxval) {
+      $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+      $base: strip-units($base);
+  }
+
+  @return ($pxval / $base) * 1em;
+}
+
+@function rem($pxval) {
+  $base: $root-font-size;
+
+  @if not unitless($pxval) {
+      $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+      $base: strip-units($base);
+  }
+
+  @return ($pxval / $base) * 1rem;
+}
+
+@function strip-units($val) {
+  @return ($val / ($val * 0 + 1));
+}
+
+@function unpack($shorthand) {
+  @if length($shorthand) == 1 {
+    @return nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1);
+  } @else if length($shorthand) == 2 {
+    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 1) nth($shorthand, 2);
+  } @else if length($shorthand) == 3 {
+    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 3) nth($shorthand, 2);
+  } @else {
+    @return $shorthand;
+  }
+}
+
+@function directional-value($values, $direction) {
+  $values: unpack($values);
+
+  @if $direction == "top" {
+    @return nth($values, 1);
+  }
+  @if $direction == "right" {
+    @return nth($values, 2);
+  }
+  @if $direction == "bottom" {
+    @return nth($values, 3);
+  }
+  @if $direction == "left" {
+    @return nth($values, 4);
+  }
+}
+
+@mixin prefixer($property, $value, $prefixes: webkit moz) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+
+  #{$property}: $value;
+}

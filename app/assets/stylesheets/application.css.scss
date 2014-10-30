@@ -1,3 +1,19 @@
-@import 'config/*';
-@import 'lib/*';
-@import 'base/*';
+@import "config/color";
+@import "config/grid";
+@import "config/layout";
+@import "config/responsive";
+@import "config/typography";
+
+@import "lib/extends";
+@import "lib/functions";
+@import "lib/mixins";
+
+@import "base/document";
+@import "base/button";
+@import "base/content-area";
+@import "base/flow-content";
+@import "base/grid";
+@import "base/icon";
+@import "base/input";
+@import "base/typography";
+@import "base/utility";

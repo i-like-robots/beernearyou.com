@@ -1,0 +1,19 @@
+ul,
+ol,
+dl,
+pre,
+blockquote {
+  margin-left: base-margin("left");
+}
+
+ul,
+ol {
+  padding-left: base-padding("left");
+}
+
+hr {
+  border: 0;
+  background: $base-border-color;
+  padding: 0;
+  height: 1px;
+}

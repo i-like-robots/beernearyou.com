@@ -1,0 +1,10 @@
+@function grid-column($columns) {
+  $width: ($columns * $grid-column) + (($columns - 1) * $grid-gutter);
+  $container-width: $grid-max-columns * ($grid-column + $grid-gutter);
+  @return percentage($width / $container-width);
+}
+
+@function grid-gutter() {
+  $container-width: $grid-max-columns * ($grid-column + $grid-gutter);
+  @return percentage($grid-gutter / $container-width);
+}
