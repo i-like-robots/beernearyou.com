@@ -14,31 +14,31 @@ function Nearby($target, options) {
 }
 
 Nearby.prototype.init = function() {
+  this.$target.one("submit", $.proxy(this._onSubmit, this));
+  return this;
+};
+
+Nearby.prototype._onSubmit = function(e) {
+  e.preventDefault();
+
+  this.$submit.text("Requesting your location…").prop("disabled", true);
+
   var positionOptions = {
     enableHighAccuracy: true,
     timeout: this.options.timeout
   };
 
-  this.$submit.text("Requesting your location");
-  this.$target.on("submit", $.proxy(this._onSubmit, this));
-
-  this.watch = window.navigator.geolocation.watchPosition(
+  window.navigator.geolocation.watchPosition(
     $.proxy(this._onPosition, this),
     $.proxy(this._onError, this),
     positionOptions
   );
-
-  return this;
-};
-
-Nearby.prototype._onSubmit = function() {
-  return this.$lat.val() && this.$lng.val();
 };
 
 Nearby.prototype._onPosition = function(pos) {
   this.$lat.val(pos.coords.latitude.toFixed(6));
   this.$lng.val(pos.coords.longitude.toFixed(6));
-  this.$submit.text("Find nearby venues").attr("disabled", false);
+  this.$target.submit();
 };
 
 Nearby.prototype._onError = function(error) {
