@@ -1,22 +1,24 @@
-function Support() {
-  this.options = {
+function Support(options) {
+  var defaults = {
     addClassNames: true,
     supportPrefix: "has",
     noSupportPrefix: "no"
   };
 
-  this.results = {};
+  this.options = $.extend({}, defaults, options);
 }
 
 Support.prototype.init = function() {
   var test, result, prefix;
+
+  this.results = {};
 
   for (test in this.tests) {
     result = this.results[test] = this.tests[test]();
     prefix = result ? this.options.supportPrefix : this.options.noSupportPrefix;
 
     if (this.options.addClassNames) {
-      document.documentElement.className += " " + prefix + "-" + test + " ";
+      document.documentElement.className += " " + prefix + "-" + test;
     }
   }
 
@@ -42,5 +44,3 @@ Support.prototype.tests = {
   }
 
 };
-
-window.support = new Support().init();

@@ -4,6 +4,8 @@
 //= require_tree ./components
 //= require_tree ./views
 
+window.support = new Support().init();
+
 $(document).ready(function() {
   var views = $("html").data("jsView").split(" ");
 
