@@ -6,7 +6,7 @@ html data-js-view="#{yield(:js_view)}"
       = yield(:page_title)
       |  | Craft Beer in London
 
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
@@ -14,4 +14,24 @@ html data-js-view="#{yield(:js_view)}"
 
     .container
 
-      == yield
+      header role='banner'
+        a href="/" title="Go to home page"
+          = image_tag 'badge.png', alt: 'Craft Beer London logo'
+
+      - if show_search_box
+        section role='search'
+          = render partial: 'partials/search'
+
+      main role='main'
+        == yield
+
+      footer role='contentinfo'
+
+        nav role='navigation' aria-label='Helpful links'
+          => link_to 'Suggest a venue', controller: 'suggestion', action: 'index'
+          => link_to 'Colophon'
+
+        p: small
+          => '©'
+          a href='http://maketea.co.uk' Matt Hinchliffe
+          =< Date.current.year
