@@ -18,7 +18,7 @@ html data-js-view="#{yield(:js_view)}"
         a href="/" title="Go to home page"
           = image_tag 'badge.png', alt: 'Craft Beer London logo'
 
-      - if show_search_box
+      - unless current_page?('/')
         section role='search'
           = render partial: 'partials/search'
 

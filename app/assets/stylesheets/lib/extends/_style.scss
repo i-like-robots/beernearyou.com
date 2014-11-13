@@ -3,7 +3,7 @@
 }
 
 %base-shadow-inset {
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 %base-shadow-high {
@@ -21,10 +21,10 @@
   border: 2px solid;
   line-height: 1.625;
   font-size: 100%;
-  color: $palette-mid-gray;
+  color: $palette-gray-60;
 
   &:disabled {
-    color: $palette-light-gray;
+    color: $palette-gray-20;
   }
 
 }

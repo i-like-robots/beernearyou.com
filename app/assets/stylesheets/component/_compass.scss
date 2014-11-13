@@ -1,0 +1,37 @@
+.Compass {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border: 2px solid $palette-gray-60;
+  border-radius: 100%;
+
+  &:before {
+    content: "N";
+    position: absolute;
+    top: 2px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: $palette-gray-80;
+  }
+}
+
+.Compass-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+  width: 2px;
+  margin: -25px 0 0 -1px;
+  background: $palette-hl-peacoat;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -5px;
+    border: 6px solid transparent;
+    border-bottom-color: $palette-hl-peacoat;
+  }
+}

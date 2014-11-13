@@ -1,10 +1,9 @@
 .TextInput {
   @extend %base-input;
   background: $base-background-color;
-  color: $palette-mid-gray;
 
   &:focus {
-    color: $palette-dark-gray;
+    color: $palette-gray-80;
     background: white;
   }
 

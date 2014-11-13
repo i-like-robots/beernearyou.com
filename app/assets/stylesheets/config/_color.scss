@@ -1,12 +1,21 @@
-// Color palette
-$palette-gold:        #D6A73F;
-$palette-dark-gray:   #3E4147;
-$palette-mid-gray:    #64666B;
-$palette-light-gray:  #838488;
-$palette-peacoat:     #12495D;
+// Highlights palette
+$palette-hl-gold:     #D6A73F;
+$palette-hl-peacoat:  #12495D;
+
+// Grayscale palette
+$palette-gray-80:     #333;
+$palette-gray-60:     #666;
+$palette-gray-40:     #999;
+$palette-gray-20:     #CCC;
+$palette-gray-05:     #F2F2F2;
+
+// Notice colors
+$palette-notice-error:   #D9534F;
+$palette-notice-warning: #F0AD4E;
+$palette-notice-success: #5Cb85C;
 
 // Base colors
-$base-text-color:       $palette-dark-gray;
-$base-accent-color:     $palette-gold;
-$base-border-color:     $palette-mid-gray;
-$base-background-color: white;
+$base-text-color:       $palette-gray-80;
+$base-accent-color:     $palette-hl-gold;
+$base-border-color:     $palette-gray-60;
+$base-background-color: $palette-gray-05;

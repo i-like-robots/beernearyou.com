@@ -23,4 +23,9 @@ body {
 a {
   text-decoration: underline;
   color: $base-accent-color;
+
+  &:hover {
+    color: darken($base-accent-color, 15%);
+  }
+
 }
