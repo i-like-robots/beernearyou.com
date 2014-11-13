@@ -5,61 +5,61 @@ h3,
 h4,
 h5,
 h6,
-.text--heading {
+.t-heading {
   font-weight: bold;
   text-rendering: optimizeLegibility;
 }
 
 // Text sizing
 h1,
-.text--mega {
+.t-mega {
   @include responsive-text-size("mega");
 }
 
 h2,
-.text--kilo {
+.t-kilo {
   @include responsive-text-size("kilo");
 }
 
 h3,
-.text--hecto {
+.t-hecto {
   @include responsive-text-size("hecto");
 }
 
 h4,
-.text--deca {
+.t-deca {
   @include responsive-text-size("deca");
 }
 
 h5,
 h6,
 body,
-.text--base {
+.t-base {
   @include responsive-text-size("deca");
 }
 
-.text--deci {
+.t-deci {
   @include responsive-text-size("deci");
 }
 
 small,
-.text--centi {
+.t-centi {
   @include responsive-text-size("centi");
 }
 
 // Text alignment
-.text--left {
+.t-left {
   text-align: left;
 }
 
-.text--center {
+.t-center {
   text-align: center;
 }
 
-.text--right {
+.t-right {
   text-align: right;
 }
 
-.text--justify {
+.t-justify {
   text-align: justify;
 }

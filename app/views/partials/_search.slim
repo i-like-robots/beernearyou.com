@@ -3,7 +3,7 @@
   = hidden_field_tag(:lat, nil, required: true)
   = hidden_field_tag(:lng, nil, required: true)
 
-  button.btn.btn--fill.icon.icon--text.icon--position type="submit" Beers nearby
+  button.Button.Button--fill.Icon.Icon--text.Icon--position type="submit" Beers nearby
 
   noscript
 
@@ -12,6 +12,6 @@
 = form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'address')
 
   = label_tag(:postcode, 'Beers near')
-  = text_field_tag(:postcode, nil, required: true, class: 'input', placeholder: random_postcode)
+  = text_field_tag(:postcode, nil, required: true, class: 'TextInput', placeholder: random_postcode)
 
-  button.btn.icon.icon--text.icon--address type="submit" Search
+  button.Button.Icon.Icon--text.Icon--address type="submit" Search

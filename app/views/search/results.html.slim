@@ -6,14 +6,14 @@ h1 Search
 
   - content_for(:page_title, 'Search error')
 
-  div.notice.notice--error
+  div.Notice.Notice--error
     | Your location was not provided or could not be found
 
 - elsif @venues.length == 0
 
   - content_for(:page_title, 'No results')
 
-  div.notice.notice--warning
+  div.Notice.Notice--warning
     | No results were found for your search, 
     a href="/search" Try again?
 
@@ -21,7 +21,7 @@ h1 Search
 
   - content_for(:page_title, "Search found #{pluralize(@venues.length, 'result')}")
 
-  p.notice.notice--success
+  p.Notice.Notice--success
     = "#{pluralize(@venues.length, 'result')} found!"
 
   div#map style='width: 640px; height: 480px;'

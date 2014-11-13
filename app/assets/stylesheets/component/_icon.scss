@@ -1,4 +1,4 @@
-.icon:after {
+.Icon:after {
   content: "";
   display: inline-block;
   width: 1em;
@@ -7,40 +7,40 @@
   background-size: cover;
 }
 
-.icon--text:after {
+.Icon--text:after {
   position: relative;
   top: 0.25em;
   margin-left: 0.4375em;
 }
 
-.icon--link:after {
+.Icon--link:after {
   background-position: 0 0;
 }
 
-.icon--wifi:after {
+.Icon--wifi:after {
   background-position: -1em 0;
 }
 
-.icon--clock:after {
+.Icon--clock:after {
   background-position: -2em 0;
 }
 
-.icon--search:after {
+.Icon--search:after {
   background-position: -3em 0;
 }
 
-.icon--address:after {
+.Icon--address:after {
   background-position: -4em 0;
 }
 
-.icon--position:after {
+.Icon--position:after {
   background-position: -5em 0;
 }
 
-.icon--left:after {
+.Icon--left:after {
   background-position: -6em 0;
 }
 
-.icon--right:after {
+.Icon--right:after {
   background-position: -7em 0;
 }

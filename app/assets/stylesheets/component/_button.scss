@@ -1,9 +1,8 @@
-.btn {
+.Button {
   @extend %base-input;
   display: inline-block;
   transition: color 0.25s, background 0.25s, border 0.25s;
   background: none;
-  color: $palette-mid-gray;
   text-decoration: none;
 
   &::-moz-focus-inner {
@@ -22,7 +21,7 @@
 
 }
 
-.btn--fill {
+.Button--fill {
   display: block;
   width: 100%;
   text-align: center;

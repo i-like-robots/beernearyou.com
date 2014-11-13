@@ -21,4 +21,10 @@
   border: 2px solid;
   line-height: 1.625;
   font-size: 100%;
+  color: $palette-mid-gray;
+
+  &:disabled {
+    color: $palette-light-gray;
+  }
+
 }
