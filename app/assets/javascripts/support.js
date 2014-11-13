@@ -35,12 +35,12 @@ Support.prototype.tests = {
     return "SVGAngle" in window;
   },
 
-  deviceOrientation: function() {
-    return "DeviceOrientationEvent" in window;
-  },
-
   geolocation: function() {
     return "geolocation" in window.navigator;
+  },
+
+  deviceOrientation: function() {
+    return "DeviceOrientationEvent" in window && "orientation" in window;
   }
 
 };

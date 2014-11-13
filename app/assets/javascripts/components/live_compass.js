@@ -6,7 +6,10 @@ function LiveCompass($target, options) {
 
 LiveCompass.prototype.init = function() {
   this.$target.on("result:update", $.proxy(this._onUpdate, this));
-  window.addEventListener("deviceorientation", $.proxy(this._onOrientation, this));
+
+  this._onOrientationProxy = $.proxy(this._onOrientation, this);
+  window.addEventListener("deviceorientation", this._onOrientationProxy);
+
   return this;
 };
 
@@ -16,6 +19,14 @@ LiveCompass.prototype._onUpdate = function(e, distance, bearing) {
 
 LiveCompass.prototype._onOrientation = function(e) {
   var direction = window.orientation;
+
+  if (e.alpha == null) {
+    // Devices may have a gyroscope as a safety measure
+    // to protect mechanical hard drives but they're
+    // useless for accessing direction. Because this
+    // can't be detected upfront we'll just cut our losses.
+    window.addEventListener("deviceorientation", this._onOrientationProxy);
+  }
 
   if (!isNaN(e.webkitCompassHeading)) {
     direction += e.webkitCompassHeading;
