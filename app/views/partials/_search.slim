@@ -1,17 +1,19 @@
-= form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'nearby')
+#site-search
 
-  = hidden_field_tag(:lat, nil, required: true)
-  = hidden_field_tag(:lng, nil, required: true)
+  = form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'search-nearby')
 
-  button.Button.Button--fill.Icon.Icon--text.Icon--position type="submit" Beers nearby
+    = hidden_field_tag(:lat, nil, required: true)
+    = hidden_field_tag(:lng, nil, required: true)
 
-  noscript
+    button.Button.Button--fill.Icon.Icon--text.Icon--position type="submit" Beers nearby
 
-    | JavaScript must be enabled to use this feature
+    noscript
 
-= form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'address')
+      | JavaScript must be enabled to use this feature
 
-  = label_tag(:postcode, 'Beers near')
-  = text_field_tag(:postcode, nil, required: true, class: 'TextInput', placeholder: random_postcode)
+  = form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'search-address')
 
-  button.Button.Icon.Icon--text.Icon--address type="submit" Search
+    = label_tag(:postcode, 'Beers nearby…')
+    = text_field_tag(:postcode, nil, required: true, class: 'TextInput', placeholder: random_postcode)
+
+    button.Button.Icon.Icon--text.Icon--address type="submit" Search

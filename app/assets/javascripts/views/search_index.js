@@ -1,7 +1,2 @@
-window.app.view.searchIndex = function() {
-  var $nearby = $("#nearby");
-
-  if ($nearby.length && window.support.check("geolocation")) {
-    new Nearby($nearby).init();
-  }
-};
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.

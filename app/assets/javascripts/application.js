@@ -7,16 +7,14 @@
 window.support = new Support().init();
 
 $(document).ready(function() {
-  var views = $("html").data("jsView").split(" ");
+  var views = $("html").data("jsView").split(" ").concat("global");
 
-  // Clean out any blank values
-  views = $.grep(views, function(view) {
-    return view && view.length;
+  // Clean out any blank or repeat values
+  views = $.grep(views, function(view, i) {
+    return view && $.inArray(view, views) == i;
   });
 
-  if (views.length) {
-    $.each(views, function(i, view) {
-      window.app.view[view].call(window);
-    });
-  }
+  $.each(views, function(i, view) {
+    window.app.view[view].call(window);
+  });
 });
