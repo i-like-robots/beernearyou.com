@@ -12,6 +12,9 @@ window.app.view.searchResults = function() {
     var mapbox = new Mapbox($map, options).init();
     new ResultsMap($results, mapbox).init();
 
+    // Draggable results panel
+    new DraggablePanel($results).init();
+
     // Live result updates
     if ($results.is(".is-live") && window.support.check("geolocation")) {
       new LiveResults($results).init();
