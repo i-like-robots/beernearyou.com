@@ -6,9 +6,16 @@ h4,
 h5,
 h6,
 .t-heading {
-  font-weight: bold;
+  font-weight: normal;
   text-rendering: optimizeLegibility;
 }
+
+h5,
+h6,
+.t-heading.t-base {
+  text-transform: uppercase;
+}
+
 
 // Text sizing
 h1,
@@ -35,7 +42,7 @@ h5,
 h6,
 body,
 .t-base {
-  @include responsive-text-size("deca");
+  @include responsive-text-size("base");
 }
 
 .t-deci {

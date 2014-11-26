@@ -1,40 +1,40 @@
-$root-font-size: 16px;
+$root-font-size: 18px;
 
-$flow-margin: 1.5rem;
+$flow-margin: 24px;
 
-$base-font-face: "Cutive Mono", "Courier New", Courier, monospace;
+$base-font-face: "Courier New", Courier, monospace;
 
 $text-sizing: (
   centi: (
     small: (
-      font-size: 0.75rem,
-      line-height: 1
+      font-size: 12px,
+      line-height: 16px
     )
   ),
   deci: (
     small: (
-      font-size: 0.875rem,
-      line-height: 1.25
+      font-size: 14px,
+      line-height: 20px
     )
   ),
   base: (
     small: (
-      font-size: 1rem,
-      line-height: 1.25
+      font-size: 16px,
+      line-height: 24px
     ),
-    medium: (
-      font-size: 1rem,
-      line-height: 1.375
+    large: (
+      font-size: 18px,
+      line-height: 26px
     )
   ),
   deca: (
     small: (
-      font-size: 1.125rem,
-      line-height: 1.111
+      font-size: 24px,
+      line-height: 32px
     ),
-    medium: (
-      font-size: 1.125rem,
-      line-height: 1.222
+    large: (
+      font-size: 24px,
+      line-height: 36px
     )
   ),
   hecto: (

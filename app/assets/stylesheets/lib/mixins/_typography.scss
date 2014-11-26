@@ -3,9 +3,9 @@
 
   @if $text-size-properties != null {
     font-size: map-get($text-size-properties, "font-size");
-    line-height: map-get($text-size-properties, "font-weight");
+    line-height: map-get($text-size-properties, "line-height");
   } @else {
-    @error "Breakpoint '#{$breakpoint-name}' for text size '#{$text-size}' is not defined";
+    @warn "Breakpoint '#{$breakpoint-name}' for text size '#{$text-size}' is not defined";
   }
 }
 
