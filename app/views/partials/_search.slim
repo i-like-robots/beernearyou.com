@@ -1,19 +1,22 @@
-#site-search
+div.SearchBox
 
-  = form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'search-nearby')
+  = form_tag({ controller: 'search', action: 'results' }, method: 'get', class: 'SearchBox-nearby', id: 'search-nearby')
 
     = hidden_field_tag(:lat, nil, required: true)
     = hidden_field_tag(:lng, nil, required: true)
 
-    button.Button.Button--fill.Icon.Icon--text.Icon--position type="submit" Beers nearby
+    p.SearchBox-label Thirsty? Find somewhere nearby:
+    button.SearchBox-submit.Button.Button--fill.Button--aqua.Icon.Icon--text.Icon--position type="submit" Use your location
 
     noscript
 
       | JavaScript must be enabled to use this feature
 
-  = form_tag({ controller: 'search', action: 'results' }, method: 'get', id: 'search-address')
+  = form_tag({ controller: 'search', action: 'results' }, method: 'get', class: 'SearchBox-address', id: 'search-address')
 
-    = label_tag(:postcode, 'Beers nearby…')
-    = text_field_tag(:postcode, nil, required: true, class: 'TextInput', placeholder: random_postcode)
+    = label_tag(:postcode, 'Drinking later? Find somewhere near…', class: 'SearchBox-label')
 
-    button.Button.Icon.Icon--text.Icon--address type="submit" Search
+    .InputPair
+
+      = text_field_tag(:postcode, nil, required: true, class: 'SearchBox-input InputPair-input TextInput', placeholder: random_postcode)
+      button.SearchBox-submit.InputPair-button.Button.Button--aqua.Icon.Icon--text.Icon--address type="submit" Search

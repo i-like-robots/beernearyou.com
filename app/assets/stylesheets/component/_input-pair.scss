@@ -1,0 +1,32 @@
+.InputPair-input,
+.InputPair-button {
+  width: 100%;
+}
+
+.InputPair-button {
+  margin-bottom: base-margin("top");
+}
+
+@include respond-above("medium") {
+
+  .InputPair {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .InputPair-input,
+  .InputPair-button {
+    width: auto;
+  }
+
+  .InputPair-input {
+    -webkit-flex-grow: 2;
+    flex-grow: 2;
+  }
+
+  .InputPair-button {
+    margin-top: 0;
+    margin-left: base-margin("left");
+  }
+
+}

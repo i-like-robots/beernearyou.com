@@ -2,6 +2,9 @@ doctype html
 html data-js-view="#{yield(:js_view)}"
   head
 
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+
     title
       = yield(:page_title)
       |  | Craft Beer in London
@@ -12,15 +15,13 @@ html data-js-view="#{yield(:js_view)}"
 
   body
 
-    .Container
-
-      header role='banner'
-        a href="/" title="Go to home page"
-          = image_tag 'badge.png', alt: 'Craft Beer London logo'
-
       - unless current_page?('/')
-        section role='search'
-          = render partial: 'partials/search'
+        header role='banner'
+          a href="/" title="Go to home page"
+            = image_tag 'badge.svg', alt: 'Craft Beer London logo', width: 120
+
+          section role='search'
+            = render partial: 'partials/search'
 
       main role='main'
         == yield
@@ -28,8 +29,10 @@ html data-js-view="#{yield(:js_view)}"
       footer role='contentinfo'
 
         nav role='navigation' aria-label='Helpful links'
-          => link_to 'Suggest a venue', controller: 'suggestion', action: 'index'
-          => link_to 'Colophon'
+          ul
+            li => link_to 'Suggest a venue', controller: 'suggestion', action: 'index'
+            li => link_to 'View all venues', controller: 'venue', action: 'index'
+            li => link_to 'Colophon'
 
         p: small
           => '©'

@@ -8,10 +8,6 @@
   outline-offset: 1px;
 }
 
-html {
-  font-size: $root-font-size;
-}
-
 body {
   @extend %base-font;
   margin: 0;

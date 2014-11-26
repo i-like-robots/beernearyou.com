@@ -1,8 +1,6 @@
-$root-font-size: 18px;
-
-$flow-margin: 24px;
-
 $base-font-face: "Courier New", Courier, monospace;
+
+$base-paragraph-spacing: 24px;
 
 $text-sizing: (
   centi: (
@@ -20,63 +18,43 @@ $text-sizing: (
   base: (
     small: (
       font-size: 16px,
-      line-height: 24px
-    ),
-    large: (
-      font-size: 18px,
       line-height: 26px
     )
   ),
   deca: (
     small: (
-      font-size: 24px,
-      line-height: 32px
-    ),
-    large: (
-      font-size: 24px,
-      line-height: 36px
+      font-size: 20px,
+      line-height: 30px
     )
   ),
   hecto: (
     small: (
-      font-size: 1.375rem,
-      line-height: 1.136
-    ),
-    medium: (
-      font-size: 1.5rem,
-      line-height: 1.25
+      font-size: 22px,
+      line-height: 28px
     ),
     large: (
-      font-size: 1.75rem,
-      line-height: 1.25
+      font-size: 24px,
+      line-height: 32px
     )
   ),
   kilo: (
     small: (
-      font-size: 1.625rem,
-      line-height: 1.154
-    ),
-    medium: (
-      font-size: 2rem,
-      line-height: 1.25
+      font-size: 24px,
+      line-height: 32px
     ),
     large: (
-      font-size: 2.25rem,
-      line-height: 1.25
+      font-size: 28px,
+      line-height: 36px
     )
   ),
   mega: (
     small: (
-      font-size: 2rem,
-      line-height: 1.25
-    ),
-    medium: (
-      font-size: 2.5rem,
-      line-height: 1.125
+      font-size: 36px,
+      line-height: 48px
     ),
     large: (
-      font-size: 3rem,
-      line-height: 1.05
+      font-size: 40px,
+      line-height: 60px
     )
   )
 );

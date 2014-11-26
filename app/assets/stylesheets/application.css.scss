@@ -8,8 +8,6 @@
 @import "lib/functions";
 @import "lib/mixins";
 
-@import "font/cutive";
-
 @import "base/document";
 @import "base/flow-content";
 @import "base/grid";
@@ -19,6 +17,9 @@
 @import "component/button";
 @import "component/compass";
 @import "component/content-area";
+@import "component/cover";
 @import "component/icon";
+@import "component/input-pair";
 @import "component/notice";
+@import "component/search-box";
 @import "component/text-input";

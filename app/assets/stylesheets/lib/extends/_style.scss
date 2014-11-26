@@ -21,10 +21,10 @@
   border: 2px solid;
   line-height: 1.625;
   font-size: 100%;
-  color: $palette-gray-60;
+  color: $palette-gray-80;
 
   &:disabled {
-    color: $palette-gray-20;
+    opacity: 0.5;
   }
 
 }

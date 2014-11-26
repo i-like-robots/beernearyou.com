@@ -1,27 +1,3 @@
-@function em($pxval, $base: $root-font-size) {
-  @if not unitless($pxval) {
-      $pxval: strip-units($pxval);
-  }
-  @if not unitless($base) {
-      $base: strip-units($base);
-  }
-
-  @return ($pxval / $base) * 1em;
-}
-
-@function rem($pxval) {
-  $base: $root-font-size;
-
-  @if not unitless($pxval) {
-      $pxval: strip-units($pxval);
-  }
-  @if not unitless($base) {
-      $base: strip-units($base);
-  }
-
-  @return ($pxval / $base) * 1rem;
-}
-
 @function strip-units($val) {
   @return ($val / ($val * 0 + 1));
 }

@@ -1,9 +1,9 @@
 .TextInput {
   @extend %base-input;
-  background: $base-background-color;
+  box-sizing: border-box;
+  background: $palette-gray-05;
 
   &:focus {
-    color: $palette-gray-80;
     background: white;
   }
 

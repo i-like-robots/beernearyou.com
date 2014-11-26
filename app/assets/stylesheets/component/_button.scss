@@ -2,17 +2,12 @@
   @extend %base-input;
   display: inline-block;
   transition: color 0.25s, background 0.25s, border 0.25s;
-  background: none;
+  background-color: transparent;
   text-decoration: none;
 
   &::-moz-focus-inner {
       border: 0;
       padding: 0;
-  }
-
-  &:hover,
-  &:active {
-    color: $palette-gray-80;
   }
 
   &:active {
@@ -22,7 +17,18 @@
 }
 
 .Button--fill {
-  display: block;
   width: 100%;
-  text-align: center;
+}
+
+.Button--aqua {
+  border-color: $palette-hl-aqua;
+  background-color: $palette-hl-aqua;
+  color: white;
+
+  &:hover,
+  &:active {
+    border-color: darken($palette-hl-aqua, 5%);
+    background-color: darken($palette-hl-aqua, 5%);
+  }
+
 }
