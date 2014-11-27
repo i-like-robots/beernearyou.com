@@ -7,8 +7,8 @@ RSpec.describe "search/index", :type => :view do
     it 'renders inputs for lat and lng' do
       render
 
-      expect(rendered).to have_selector('#nearby input[name="lat"]')
-      expect(rendered).to have_selector('#nearby input[name="lng"]')
+      expect(rendered).to have_selector('input[name="lat"]')
+      expect(rendered).to have_selector('input[name="lng"]')
     end
 
   end
@@ -18,7 +18,7 @@ RSpec.describe "search/index", :type => :view do
     it 'renders a input for postcode' do
       render
 
-      expect(rendered).to have_selector('#address input[name="postcode"]')
+      expect(rendered).to have_selector('input[name="postcode"]')
     end
 
   end

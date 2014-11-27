@@ -22,7 +22,7 @@ RSpec.describe "suggestion/index", :type => :view do
 
       render
 
-      expect(rendered).to have_selector('.notice.notice--error')
+      expect(rendered).to have_selector('.Notice--error')
     end
 
   end
@@ -34,7 +34,7 @@ RSpec.describe "suggestion/index", :type => :view do
 
       render
 
-      expect(rendered).to have_selector('.notice.notice--success')
+      expect(rendered).to have_selector('.Notice--success')
     end
 
   end

@@ -20,7 +20,7 @@ RSpec.describe "search/results", :type => :view do
     it 'displays an error notice' do
       render
 
-      expect(rendered).to have_selector('.notice--error')
+      expect(rendered).to have_selector('.Notice--error')
       expect(rendered).to have_content(/Your location was not provided or could not be found/)
     end
 
@@ -36,7 +36,7 @@ RSpec.describe "search/results", :type => :view do
     it 'displays a no results notice' do
       render
 
-      expect(rendered).to have_selector('.notice--warning')
+      expect(rendered).to have_selector('.Notice--warning')
       expect(rendered).to have_content(/No results were found/)
       expect(rendered).to have_link('Try again?')
     end
