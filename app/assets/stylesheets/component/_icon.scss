@@ -1,46 +1,51 @@
-.Icon:after {
+.Icon::after {
   content: "";
   display: inline-block;
+  background: image-url("sprites.svg") no-repeat;
+  // Size background vertically, each row of icons is 100%
+  background-size: auto 200%;
   width: 1em;
   height: 1em;
-  background: image-url("sprites.svg") no-repeat;
-  background-size: cover;
 }
 
-.Icon--text:after {
+.Icon--white::after {
+  background-position-y: -1em;
+}
+
+.Icon--text::after {
   position: relative;
   top: 0.25em;
   margin-left: 16px;
 }
 
-.Icon--link:after {
-  background-position: 0 0;
+.Icon--link::after {
+  background-position-x: 0;
 }
 
-.Icon--wifi:after {
-  background-position: -1em 0;
+.Icon--wifi::after {
+  background-position-x: -1em;
 }
 
-.Icon--clock:after {
-  background-position: -2em 0;
+.Icon--clock::after {
+  background-position-x: -2em;
 }
 
-.Icon--search:after {
-  background-position: -3em 0;
+.Icon--search::after {
+  background-position-x: -3em;
 }
 
-.Icon--address:after {
-  background-position: -4em 0;
+.Icon--address::after {
+  background-position-x: -4em;
 }
 
-.Icon--position:after {
-  background-position: -5em 0;
+.Icon--position::after {
+  background-position-x: -5em;
 }
 
-.Icon--left:after {
-  background-position: -6em 0;
+.Icon--left::after {
+  background-position-x: -6em;
 }
 
-.Icon--right:after {
-  background-position: -7em 0;
+.Icon--right::after {
+  background-position-x: -7em;
 }

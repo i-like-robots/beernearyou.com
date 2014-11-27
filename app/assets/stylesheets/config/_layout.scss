@@ -3,7 +3,10 @@ $layout-min-width:    300px;
 $layout-max-width:    1600px;
 
 // Base margins and padding
+$base-margin-small:   0 10px 16px;
 $base-margin:         0 20px 24px;
-$base-margin-small:   0 10px 12px;
-$base-padding:        12px 20px;
-$base-padding-small:  8px 16px;
+$base-margin-large:   0 40px 36px;
+
+$base-padding-small:  10px 16px;
+$base-padding:        16px 20px;
+$base-padding-large:  36px 40px;

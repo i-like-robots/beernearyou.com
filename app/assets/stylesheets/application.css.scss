@@ -4,9 +4,11 @@
 @import "config/responsive";
 @import "config/typography";
 
+@import "lib/animation";
 @import "lib/extends";
 @import "lib/functions";
 @import "lib/mixins";
+@import "lib/transitions";
 
 @import "base/document";
 @import "base/flow-content";
@@ -23,3 +25,5 @@
 @import "component/notice";
 @import "component/search-box";
 @import "component/text-input";
+
+@import "view/shared/site-header";

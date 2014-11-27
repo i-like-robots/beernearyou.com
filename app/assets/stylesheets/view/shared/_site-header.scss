@@ -1,0 +1,106 @@
+.SiteHeader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  @include respond-above("medium") {
+    position: relative;
+  }
+
+}
+
+.SiteHeader-nav,
+.SiteHeader-searchPanel {
+  border-bottom: 2px solid;
+  background: white;
+}
+
+.SiteHeader-nav {
+  @extend %base-shadow-low;
+  position: relative;
+  z-index: 110;
+  padding: $base-padding-small;
+
+  // Flexbox only req. prefix in Safari
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  align-items: center;
+
+  @include respond-above("medium") {
+    padding: $base-padding;
+  }
+
+}
+
+.SiteHeader-name {
+  -webkit-flex: 1;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.SiteHeader-searchToggle {
+  border: 0;
+  padding: 6px;
+  background: none;
+
+  &::after {
+    display: block;
+    font-size: 24px;
+
+    @include respond-above("medium") {
+      font-size: 32px;
+    }
+
+  }
+
+}
+
+.SiteHeader-searchPanel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  // Hide the panel on first page load
+  display: none;
+  padding: $base-padding;
+
+  @include respond-above("medium") {
+    padding: $base-padding-large;
+  }
+
+  // This mask covers any bleed-through caused by animation easing
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: 60px;
+    background: white;
+  }
+
+  &.is-open,
+  &.is-closed {
+    display: block;
+  }
+
+  &.is-open {
+    @extend %base-shadow-low;
+
+    // Animations req. prefix in Chrome and Safari
+    -webkit-animation: slideIn .6s $ease-out-back;
+    animation: slideIn .6s $ease-out-back;
+  }
+
+  &.is-closed {
+    -webkit-animation: slideOut .6s $ease-in-back forwards;
+    animation: slideOut .6s $ease-in-back forwards;
+  }
+
+}

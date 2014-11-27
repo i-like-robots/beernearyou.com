@@ -22,6 +22,7 @@
 
 .Button--aqua {
   border-color: $palette-hl-aqua;
+  border-bottom-color: darken($palette-hl-aqua, 5%);
   background-color: $palette-hl-aqua;
   color: white;
 
