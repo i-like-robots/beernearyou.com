@@ -18,9 +18,11 @@ html data-js-view="#{yield(:js_view)}"
       - unless current_page?('/')
         header role='banner'
           a href="/" title="Go to home page"
-            = image_tag 'badge.svg', alt: 'Craft Beer London logo', width: 120
+            = image_tag 'glass.png', alt: 'Craft Beer London logo', width: 120
 
-          section role='search'
+          button aria-controls='#search' Search
+
+          section#search role='search'
             = render partial: 'partials/search'
 
       main role='main'
