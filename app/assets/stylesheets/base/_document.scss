@@ -11,17 +11,17 @@
 body {
   @extend %base-font;
   margin: 0;
-  background: $base-background-color;
+  background: white;
   padding: 0;
-  color: $base-text-color;
+  color: $palette-gray-80;
 }
 
 a {
   text-decoration: underline;
-  color: $base-accent-color;
+  color: $palette-hl-cyan;
 
   &:hover {
-    color: darken($base-accent-color, 15%);
+    color: $palette-hl-aqua;
   }
 
 }
