@@ -3,8 +3,15 @@ function DraggablePanel($target) {
 }
 
 DraggablePanel.prototype.init = function() {
-  this.$target.on("mousedown.dp touchstart.dp", ".js-draggable", $.proxy(this._onDragStart, this));
+  this.$target
+    .addClass("is-draggable is-closed")
+    .on("mousedown.dp touchstart.dp", ".js-draggable", $.proxy(this._onDragStart, this));
+
   return this;
+};
+
+DraggablePanel.prototype.teardown = function() {
+  this.$target.off(".dp").removeClass("is-draggable is-closed is-open");
 };
 
 DraggablePanel.prototype._onDragStart = function(e) {

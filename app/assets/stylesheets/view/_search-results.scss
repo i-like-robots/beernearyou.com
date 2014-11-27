@@ -1,0 +1,53 @@
+.SearchResults {
+  position: relative;
+  height: calc(100vh - 58px);
+
+  @include respond-above("medium") {
+    height: calc(100vh - 78px);
+  }
+
+}
+
+.SearchResults-map {
+  // Reset the z-index stack for embedded map
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 90%;
+
+  @include respond-above("medium") {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+  }
+
+  @include respond-above("large") {
+    width: 70%;
+  }
+
+}
+
+.SearchResults-results {
+  background: white;
+  overflow: auto;
+
+  @include respond-above("medium") {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    width: 40%;
+    height: 100%;
+  }
+
+  @include respond-above("large") {
+    left: 70%;
+    width: 30%;
+  }
+
+}
+
+.SearchResults-listItem {
+  display: block;
+}

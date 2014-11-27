@@ -1,0 +1,40 @@
+.DraggablePanel {
+
+  &.is-draggable {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transition: top .25s ease-out;
+  }
+
+  &.is-open {
+    top: 0;
+  }
+
+  &.is-closed {
+    top: 75%;
+  }
+
+  &.is-active {
+    transition: none;
+  }
+
+}
+
+.DraggablePanel-toggle {
+  display: none;
+  margin: 5px;
+  padding: 5px;
+  height: 10px;
+  background: rgba(0, 0, 0, .25);
+
+  .is-draggable & {
+    display: block;
+  }
+
+  .is-active & {
+    background: rgba(0, 0, 0, .75);
+  }
+
+}

@@ -12,8 +12,22 @@ window.app.view.searchResults = function() {
     var mapbox = new Mapbox($map, options).init();
     new ResultsMap($results, mapbox).init();
 
-    // Draggable results panel
-    new DraggablePanel($results).init();
+    // Draggable results panel for small screens
+    var panel = new DraggablePanel($results);
+
+    if (window.innerWidth < 720) {
+      panel.init();
+    }
+
+    $(window).on("resize", function() {
+      var active = panel.$target.hasClass("is-draggable");
+
+      if (window.innerWidth > 720 && active) {
+        panel.teardown();
+      } else if (window.innerWidth < 720 && !active) {
+        panel.init();
+      }
+    });
 
     // Live result updates
     if ($results.is(".is-live") && window.support.check("geolocation")) {
@@ -26,4 +40,5 @@ window.app.view.searchResults = function() {
       }
     }
   }
+
 };

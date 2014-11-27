@@ -1,10 +1,10 @@
 - content_for(:js_view, 'searchResults')
 
-h1 Search
-
 - if @origin.nil? || @venues.nil?
 
   - content_for(:page_title, 'Search error')
+
+  h1 Search error
 
   div.Notice.Notice--error
     | Your location was not provided or could not be found
@@ -12,6 +12,8 @@ h1 Search
 - elsif @venues.length == 0
 
   - content_for(:page_title, 'No results')
+
+  h1 No results
 
   div.Notice.Notice--warning
     | No results were found for your search, 
@@ -21,23 +23,28 @@ h1 Search
 
   - content_for(:page_title, "Search found #{pluralize(@venues.length, 'result')}")
 
-  p.Notice.Notice--success
-    = "#{pluralize(@venues.length, 'result')} found!"
+  div.SearchResults
 
-  div#map style='width: 640px; height: 480px;'
+    div.SearchResults-map id='map'
 
-  ul#results data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
-    - @venues.each do |venue|
-      li.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
-        a href="/venue/#{venue.foursquare_id}" = venue.name
-        dl
-          dt Distance
-          dd.js-distance = "#{'%.2f' % venue.distance} miles"
-          dt Bearing
-          dd.js-bearing = "#{venue.bearing}°"
-          dt Compass
-          dd
-            .Compass.js-compass
-              .Compass-needle.js-compass-needle style="transform: rotate(#{venue.bearing}deg);"
-          dt Address
-          dd = venue.full_address
+    div.SearchResults-results.DraggablePanel id='results' data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
+
+      div.SearchResults-toggle.DraggablePanel-toggle.js-draggable
+
+      h1.SearchResults-title Search results
+
+      ul.SearchResults-list
+        - @venues.each do |venue|
+          li.SearchResults-listItem.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
+            a href="/venue/#{venue.foursquare_id}" = venue.name
+            dl
+              dt Distance
+              dd.js-distance = "#{'%.2f' % venue.distance} miles"
+              dt Bearing
+              dd.js-bearing = "#{venue.bearing}°"
+              dt Compass
+              dd
+                .Compass.js-compass
+                  .Compass-needle.js-compass-needle style="transform: rotate(#{venue.bearing}deg);"
+              dt Address
+              dd = venue.full_address
