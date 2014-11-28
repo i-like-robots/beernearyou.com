@@ -21,7 +21,7 @@ Nearby.prototype.init = function() {
 Nearby.prototype._onSubmit = function(e) {
   e.preventDefault();
 
-  this.$submit.text("Requesting your location…").prop("disabled", true);
+  this.$submit.text("Requesting location…").prop("disabled", true);
 
   var positionOptions = {
     enableHighAccuracy: true,

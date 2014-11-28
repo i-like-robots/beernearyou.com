@@ -5,7 +5,7 @@ function DraggablePanel($target) {
 DraggablePanel.prototype.init = function() {
   this.$target
     .addClass("is-draggable is-closed")
-    .on("mousedown.dp touchstart.dp", ".js-draggable", $.proxy(this._onDragStart, this));
+    .on("mousedown.dp touchstart.dp", ".js-draggable", $.proxy(this._onStart, this));
 
   return this;
 };
@@ -14,13 +14,18 @@ DraggablePanel.prototype.teardown = function() {
   this.$target.off(".dp").removeClass("is-draggable is-closed is-open");
 };
 
-DraggablePanel.prototype._onDragStart = function(e) {
-  var position = this._getPosition(e);
+DraggablePanel.prototype._onStart = function(e) {
   var touches = e.originalEvent.touches;
 
   if (touches && touches.length > 1) return;
 
   e.preventDefault();
+
+  this.adjustPosition = this._getPosition(e) - this.$target.offset().top;
+  this.offsetPosition = this.$target.offsetParent().offset();
+  this.touchStartTime = Date.now();
+
+  var position = this._getRelativePosition(e);
 
   this.$target
     .css("top", position)
@@ -28,14 +33,14 @@ DraggablePanel.prototype._onDragStart = function(e) {
     .removeClass("is-open is-closed");
 
   $(window)
-    .on("mouseup.dp touchend.dp", $.proxy(this._onDragEnd, this))
-    .on("mousemove.dp touchmove.dp", $.proxy(this._onDragMove, this));
+    .on("mouseup.dp touchend.dp", $.proxy(this._onEnd, this))
+    .on("mousemove.dp touchmove.dp", $.proxy(this._onMove, this));
 
   this._startGesture(position);
 };
 
-DraggablePanel.prototype._onDragMove = function(e) {
-  var position = this._getPosition(e);
+DraggablePanel.prototype._onMove = function(e) {
+  var position = this._getRelativePosition(e);
   var direction = position < this.currentPosition ? "up" : "down";
 
   // Treat a change of direction as a new gesture
@@ -46,18 +51,19 @@ DraggablePanel.prototype._onDragMove = function(e) {
   this.$target.css("top", this.currentPosition = position);
 };
 
-DraggablePanel.prototype._onDragEnd = function(e) {
+DraggablePanel.prototype._onEnd = function(e) {
+  var now = Date.now();
   var velocity = this._calculateVelocity(this.gesture, {
     position: this.currentPosition,
-    time: Date.now()
+    time: now
   });
 
-  var open;
-
-  if (velocity > 0.05) {
-    open = this.gesture.direction == "up";
+  if ((now - this.touchStartTime) < 100) {
+    this.isOpen = !this.isOpen;
+  } else if (velocity > 0.05) {
+    this.isOpen = this.gesture.direction == "up";
   } else {
-    open = this.currentPosition <= (window.innerHeight / 2);
+    this.isOpen = this.currentPosition <= (window.innerHeight / 2);
   }
 
   $(window).off(".dp");
@@ -65,7 +71,7 @@ DraggablePanel.prototype._onDragEnd = function(e) {
   this.$target
     .css("top", "")
     .removeClass("is-active")
-    .addClass("is-" + (open ? "open" : "closed"));
+    .addClass("is-" + (this.isOpen ? "open" : "closed"));
 };
 
 DraggablePanel.prototype._startGesture = function(position, direction) {
@@ -84,4 +90,9 @@ DraggablePanel.prototype._calculateVelocity = function(startGesture, endGesture)
 
 DraggablePanel.prototype._getPosition = function(e) {
   return e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
+};
+
+DraggablePanel.prototype._getRelativePosition = function(e) {
+  var position = this._getPosition(e);
+  return position - this.adjustPosition - this.offsetPosition.top;
 };

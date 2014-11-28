@@ -10,10 +10,6 @@
       padding: 0;
   }
 
-  &:active {
-    @extend %base-shadow-inset;
-  }
-
 }
 
 .Button--fill {
@@ -26,9 +22,15 @@
   background-color: $palette-hl-aqua;
   color: white;
 
-  &:hover,
+  &:hover {
+    border-color: lighten($palette-hl-aqua, 2.5%);
+    border-bottom-color: darken($palette-hl-aqua, 5%);
+    background-color: lighten($palette-hl-aqua, 2.5%);
+  }
+
   &:active {
     border-color: darken($palette-hl-aqua, 5%);
+    border-top-color: darken($palette-hl-aqua, 7.5%);
     background-color: darken($palette-hl-aqua, 5%);
   }
 

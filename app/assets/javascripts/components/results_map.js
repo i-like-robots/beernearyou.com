@@ -10,7 +10,7 @@ ResultsMap.prototype.init = function() {
 };
 
 ResultsMap.prototype._onLoad = function() {
-  var $results = this.$target.children();
+  var $results = this.$target.find(".js-result");
   var features = this.createFeatures($results);
   var group = this.mapbox.createFeatureGroup(features);
 

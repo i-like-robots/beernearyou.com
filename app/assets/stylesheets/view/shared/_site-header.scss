@@ -5,8 +5,17 @@
   left: 0;
   z-index: 100;
 
+  + * {
+    margin-top: $header-height-small;
+  }
+
+
   @include respond-above("medium") {
     position: relative;
+
+    + * {
+      margin-top: 0;
+    }
   }
 
 }

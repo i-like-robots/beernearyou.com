@@ -6,6 +6,7 @@
     bottom: 0;
     width: 100%;
     transition: top .25s ease-out;
+    will-change: top;
   }
 
   &.is-open {
