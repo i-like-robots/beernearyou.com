@@ -31,20 +31,14 @@
 
       div.SearchResults-toggle.DraggablePanel-toggle.js-draggable
 
-      h1.SearchResults-title Search results
+      h1.SearchResults-title.t-kilo Search results
 
       ul.SearchResults-list
         - @venues.each do |venue|
-          li.SearchResults-listItem.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
-            a href="/venue/#{venue.foursquare_id}" = venue.name
-            dl
-              dt Distance
-              dd.js-distance = "#{'%.2f' % venue.distance} miles"
-              dt Bearing
-              dd.js-bearing = "#{venue.bearing}°"
-              dt Compass
-              dd
-                .Compass.js-compass
-                  .Compass-needle.js-compass-needle style="transform: rotate(#{venue.bearing}deg);"
-              dt Address
-              dd = venue.full_address
+          li.SearchResults-item.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
+            a.SearchResults-itemLink href="/venue/#{venue.foursquare_id}" title="#{venue.name}"
+              div.SearchResults-itemCompass
+                = render partial: 'partials/compass', locals: { bearing: venue.bearing }
+              h2.SearchResults-itemHeading.t-heading.t-base = venue.name
+              address.SearchResults-itemAddress = venue.street_address
+              div.SearchResults-itemDistance = "#{'%.2f' % venue.distance} miles"
