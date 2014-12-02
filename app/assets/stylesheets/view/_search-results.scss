@@ -30,9 +30,7 @@
 
 .SearchResults-results {
   @extend %base-shadow-low;
-  box-sizing: border-box;
   overflow: auto;
-  padding: $base-padding;
   background: white;
 
   @include respond-above("medium") {
@@ -46,6 +44,15 @@
 
   @include respond-above("large") {
     width: 30%;
+  }
+
+}
+
+.SearchResults-resultsContent {
+  padding: $base-padding-small;
+
+  @include respond-above("medium") {
+    padding: $base-padding;
   }
 
 }
