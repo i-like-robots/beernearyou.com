@@ -13,8 +13,19 @@ dl
 h2 Venue location (from Foursquare)
 
 dl
-  dt Coordinates
-  dd = @venue.coordinates
+  dt Website
+  dd = @venue.foursquare_data['url']
+  dt Status 
+  dd = @venue.foursquare_data['hours']['status']
+  dt Opening hours
+  dd
+    ul
+      - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
+        li
+          = timeframe['days']
+          ul
+            - timeframe['open'].each do |open|
+              li = open['renderedTime']
   dt Address
   dd
     address

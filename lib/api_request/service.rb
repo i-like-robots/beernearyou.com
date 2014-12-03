@@ -7,10 +7,16 @@ module ApiRequest
       @auth = auth
     end
 
-    def fetch(url, query_params, cache_length=0)
-      # Rails.cache.fetch(url, expires_in: cache_length) do
-        HTTParty.get("#{url}?#{to_query(query_params.merge(@auth))}")
-      # end
+    def fetch(url, query_params={}, cache_length=0)
+      Rails.cache.fetch(url, expires_in: cache_length) do
+        response = HTTParty.get("#{url}?#{to_query(query_params.merge(@auth))}")
+
+        if response['meta']['code'] != 200
+          raise StandardError "Couldn't fetch #{url}: #{response_data['meta']['errorDetail']}"
+        end
+
+        response['response']
+      end
     end
 
     private

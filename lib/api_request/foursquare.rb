@@ -7,12 +7,7 @@ module ApiRequest
 
     def venue(venue_id)
       response_data = fetch("#{BASE_URI}/venues/#{venue_id}", default_params, CACHE_FOR)
-
-      if response_data['meta']['code'] != 200
-        raise StandardError "Couldn't fetch venue data: #{response_data['meta']['errorDetail']}"
-      end
-
-      response_data['response']['venue']
+      response_data['venue']
     end
 
     private

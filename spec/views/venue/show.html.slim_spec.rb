@@ -17,8 +17,9 @@ RSpec.describe "venue/show", :type => :view do
   it 'displays the venue location' do
     render
 
-    expect(rendered).to have_selector('dd', text: venue.coordinates)
-    expect(rendered).to have_content(venue.street_address)
+    expect(rendered).to have_selector('address', text: venue.street_address)
+    expect(rendered).to have_selector('address', text: venue.city)
+    expect(rendered).to have_selector('address', text: venue.postal_code)
   end
 
 end
