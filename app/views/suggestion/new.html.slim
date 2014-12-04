@@ -9,7 +9,9 @@ div.SuggestionForm
 
   - if @suggestion.persisted?
 
-    p Thank you for your suggestion! We'll check check it out soon.
+    p Thank you for your suggestion! We'll check it out soon.
+
+    p => link_to 'Suggest another venue', controller: 'suggestion', action: 'new'
 
   - else
 

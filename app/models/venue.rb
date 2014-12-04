@@ -19,6 +19,10 @@ class Venue < ActiveRecord::Base
     @fsq_data ||= self.class.foursquare_client.venue(self.foursquare_id)
   end
 
+  def foursquare_images
+    @fsq_images ||= self.class.foursquare_client.venue_photos(self.foursquare_id, group: 'venue')
+  end
+
   def add_location
     location = foursquare_data['location']
 

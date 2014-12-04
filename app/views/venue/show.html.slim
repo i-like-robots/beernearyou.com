@@ -2,7 +2,8 @@
 
 h1 = @venue.name
 
-h2 Venue
+- if @venue.foursquare_images['count'] > 0
+  = render partial: 'venue/partials/photos'
 
 dl
   dt Foursquare ID 
