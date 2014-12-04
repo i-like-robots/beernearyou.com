@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "suggestion/index", :type => :view do
+RSpec.describe "suggestion/new", :type => :view do
 
   let(:suggestion) { build(:suggestion) }
 
@@ -8,11 +8,12 @@ RSpec.describe "suggestion/index", :type => :view do
     assign(:suggestion, suggestion)
   end
 
-  it 'renders inputs for name and URL' do
+  it 'renders inputs for name, URL and Humanizer question' do
     render
 
     expect(rendered).to have_selector('input[name="suggestion[name]"]')
     expect(rendered).to have_selector('input[name="suggestion[url]"]')
+    expect(rendered).to have_selector('input[name="suggestion[humanizer_answer]"]')
   end
 
   context 'with errors' do

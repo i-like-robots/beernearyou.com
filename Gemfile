@@ -24,6 +24,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use HTTParty to wrap requests
 gem 'httparty'
 
+# Use Humanizer to try and avoid spam bots
+gem 'humanizer'
+
 # Use Upmin to create an administration area
 gem 'upmin-admin'
 

@@ -1,0 +1,32 @@
+- content_for(:page_title, 'Suggest a venue')
+
+div.SuggestionForm
+  
+  h1.SuggestionForm-heading Suggest a venue
+
+  - flash.each do |name, message|
+    p.Notice class="Notice--#{name}" = message
+
+  - if @suggestion.persisted?
+
+    p Thank you for your suggestion! We'll check check it out soon.
+
+  - else
+
+    = form_for(@suggestion, url: { action: 'create' }, html: { class: 'SuggestionForm-form t-deca' }) do |f|
+
+      div.SuggestionForm-field.SuggestionForm-field--name
+        = f.label(:name, 'Venue name', class: 'SuggestionForm-label')
+        = f.text_field(:name, required: true, class: 'TextInput TextInput--fill', placeholder: random_venue_name)
+
+      div.SuggestionForm-field.SuggestionForm-field--url
+        = f.label(:url, 'Venue website', class: 'SuggestionForm-label')
+        = f.url_field(:url, required: true, class: 'TextInput TextInput--fill', placeholder: 'http://')
+
+      div.SuggestionForm-field.SuggestionForm-field--humanizer
+        = f.label(:humanizer_answer, @suggestion.humanizer_question, class: 'SuggestionForm-label')
+        = f.text_field(:humanizer_answer, required: true, class: 'TextInput TextInput--fill')
+        = f.hidden_field(:humanizer_question_id)
+
+      div.SuggestionForm-field.SuggestionForm-field--submit
+        = f.submit('Suggest the thing', class: 'Button Button--aqua Button--fill')

@@ -1,0 +1,21 @@
+en:
+  humanizer:
+    validation:
+      error: You're not a human
+    questions:
+      - question: Two plus two?
+        answers: ["4", "four"]
+      - question: Five times two?
+        answers: ["10", "ten"]
+      - question: Fifteen divided by three?
+        answers: ["5", "five"]
+      - question: Which day comes after Monday?
+        answers: ["tuesday"]
+      - question: Which day comes before Friday?
+        answers: ["thursday"]
+      - question: How many minutes are in an hour?
+        answers: ["60", "sixty"]
+      - question: What is the opposite of down?
+        answers: ["up"]
+      - question: What is the opposite of north?
+        answers: ["south"]

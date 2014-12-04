@@ -1,7 +1,18 @@
-.Notice {}
+.Notice {
+  @extend %base-padding-small;
+  @extend %base-border-radius;
+  margin-bottom: base-margin("bottom");
+  border: 2px solid;
+}
 
-.Notice--error {}
+.Notice--error {
+  color: $palette-notice-error;
+}
 
-.Notice--warning {}
+.Notice--warning {
+  color: $palette-notice-warning;
+}
 
-.Notice--success {}
+.Notice--success {
+  color: $palette-notice-success;
+}

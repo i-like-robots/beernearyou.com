@@ -1,0 +1,19 @@
+.SuggestionForm {
+  margin-right: auto;
+  margin-left: auto;
+  padding: $base-padding-small;
+  max-width: 540px;
+
+  @include respond-above("medium") {
+    padding: $base-padding;
+  }
+
+}
+
+.SuggestionForm-field {
+  margin-bottom: base-margin("bottom");
+}
+
+.SuggestionForm-label {
+  display: block;
+}

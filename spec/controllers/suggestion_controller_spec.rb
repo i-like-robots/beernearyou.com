@@ -4,9 +4,14 @@ RSpec.describe SuggestionController, :type => :controller do
 
   describe "#create" do
 
-    let(:mailer)      { double(:mailer) }
-    let(:params)      { attributes_for(:suggestion) }
-    let(:form_data)   { { suggestion: params } }
+    let(:mailer)    { double(:mailer) }
+    let(:mock)      { build(:suggestion) }
+    let(:params)    { attributes_for(:suggestion) }
+    let(:form_data) { { suggestion: params } }
+
+    before(:each) do
+      expect(Suggestion).to receive(:new).and_return(mock)
+    end
 
     context 'with invalid data' do
 
@@ -21,7 +26,8 @@ RSpec.describe SuggestionController, :type => :controller do
 
     context 'with valid data' do
 
-      let(:params) { attributes_for(:suggestion, :with_name, :with_url) }
+      let(:mock)    { build(:suggestion, :with_name, :with_url) }
+      let(:params)  { attributes_for(:suggestion, :with_name, :with_url) }
 
       before(:each) do
         expect(mailer).to receive(:deliver)
@@ -33,6 +39,7 @@ RSpec.describe SuggestionController, :type => :controller do
         suggestion = assigns(:suggestion)
 
         expect(suggestion.name).to be(params[:name])
+        expect(suggestion.url).to be(params[:url])
         expect(suggestion.persisted?).to be(true)
       end
 

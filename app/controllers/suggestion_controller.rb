@@ -1,6 +1,6 @@
 class SuggestionController < ApplicationController
 
-  def index
+  def new
     @suggestion = Suggestion.new
   end
 
@@ -15,13 +15,13 @@ class SuggestionController < ApplicationController
       flash.now[:error] = "Suggestion failed, #{error.last}"
     end
 
-    render :index
+    render :new
   end
 
   private
 
   def suggestion_params
-    params.require(:suggestion).permit(:name, :url)
+    params.require(:suggestion).permit(:name, :url, :humanizer_answer, :humanizer_question_id)
   end
 
 end
