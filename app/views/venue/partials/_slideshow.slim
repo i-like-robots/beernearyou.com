@@ -1,0 +1,8 @@
+div.Slideshow.js-slideshow
+  ul.Slideshow-runner
+    - @venue.foursquare_images['items'].each do |item|
+      li.Slideshow-frame
+
+        figure.Figure
+          img.Figure-content src="#{item['prefix']}800x600#{item['suffix']}" alt="Photo of #{@venue.name}"
+          figcaption.Figure-caption = "Photo by #{item['user']['firstName']} #{item['user']['lastName']}"

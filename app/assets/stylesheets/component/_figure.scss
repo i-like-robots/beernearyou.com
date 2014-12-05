@@ -1,0 +1,23 @@
+.Figure {
+  position: relative;
+}
+
+.Figure-content {
+  display: block;
+  min-width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.Figure-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, rgba($palette-gray-80, .75) 0, rgba($palette-gray-80, 0) 100%);
+  padding: $base-padding;
+  line-height: 24px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: white;
+}

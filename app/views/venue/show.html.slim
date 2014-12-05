@@ -1,9 +1,11 @@
+- content_for(:js_view, 'venueShow')
+
 - content_for(:page_title, @venue.name)
 
 h1 = @venue.name
 
 - if @venue.foursquare_images['count'] > 0
-  = render partial: 'venue/partials/photos'
+  = render partial: 'venue/partials/slideshow'
 
 dl
   dt Foursquare ID 
