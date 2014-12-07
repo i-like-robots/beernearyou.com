@@ -19,7 +19,7 @@ window.app.view.searchResults = function() {
       panel.init();
     }
 
-    $(window).on("resize", function() {
+    $(window).on("resize orientationchange", $.debounce(100, function() {
       var active = panel.$target.hasClass("is-draggable");
 
       if (window.innerWidth > 720 && active) {
@@ -27,7 +27,7 @@ window.app.view.searchResults = function() {
       } else if (window.innerWidth < 720 && !active) {
         panel.init();
       }
-    });
+    }));
 
     // Live result updates
     if ($results.is(".is-live") && window.support.check("geolocation")) {

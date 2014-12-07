@@ -7,7 +7,7 @@ function LiveCompass($target, options) {
 LiveCompass.prototype.init = function() {
   this.$target.on("result:update", $.proxy(this._onUpdate, this));
 
-  this._onOrientationProxy = $.proxy(this._onOrientation, this);
+  this._onOrientationProxy = $.throttle(100, $.proxy(this._onOrientation, this));
   window.addEventListener("deviceorientation", this._onOrientationProxy);
 
   return this;
@@ -25,7 +25,7 @@ LiveCompass.prototype._onOrientation = function(e) {
     // to protect mechanical hard drives but they're
     // useless for accessing direction. Because this
     // can't be detected upfront we'll just cut our losses.
-    window.addEventListener("deviceorientation", this._onOrientationProxy);
+    window.removeEventListener("deviceorientation", this._onOrientationProxy);
   }
 
   if (!isNaN(e.webkitCompassHeading)) {

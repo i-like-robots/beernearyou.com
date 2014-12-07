@@ -1,6 +1,7 @@
 //= require jquery
 //= require ./config
 //= require ./support
+//= require_tree ./utils
 //= require_tree ./components
 //= require_tree ./views
 
