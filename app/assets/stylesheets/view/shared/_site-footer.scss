@@ -1,0 +1,13 @@
+.SiteFooter {
+  @extend %padded-box;
+  border-top: 2px solid $palette-gray-80;
+}
+
+.SiteFooter-nav {
+  margin-bottom: $base-paragraph-spacing / 2;
+}
+
+.SiteFooter-link {
+  display: inline-block;
+  padding: 0 0.25em;
+}

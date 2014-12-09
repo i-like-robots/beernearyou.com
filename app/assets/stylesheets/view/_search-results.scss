@@ -1,7 +1,6 @@
 .SearchResults {
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid $palette-gray-80;
   height: calc(100vh - #{$header-height-small});
 
   @include respond-above("medium") {

@@ -17,20 +17,9 @@ html data-js-view="#{yield(:js_view)}"
   body
 
       - unless current_page?('/')
-        = render partial: 'partials/site_header'
+        = render partial: 'layouts/partials/site_header'
 
       main role='main'
         == yield
 
-      footer role='contentinfo'
-
-        nav role='navigation' aria-label='Helpful links'
-          ul
-            li => link_to 'Suggest a venue', controller: 'suggestion', action: 'new'
-            li => link_to 'View all venues', controller: 'venue', action: 'index'
-            li => link_to 'Colophon'
-
-        p: small
-          => '©'
-          a href='http://maketea.co.uk' Matt Hinchliffe
-          =< Date.current.year
+      = render partial: 'layouts/partials/site_footer'
