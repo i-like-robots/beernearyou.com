@@ -1,7 +1,5 @@
 .SearchBox {
-  max-width: 540px;
-  margin-right: auto;
-  margin-left: auto;
+  @extend %readable-box;
 }
 
 .SearchBox-nearby {

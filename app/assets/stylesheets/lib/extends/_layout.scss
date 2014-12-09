@@ -13,3 +13,22 @@
 %base-padding-small {
   padding: $base-padding-small;
 }
+
+%padded-box {
+  padding: $base-padding-small;
+
+  @include respond-above("medium") {
+    padding: $base-padding;
+  }
+
+  @include respond-above("large") {
+    padding: $base-padding-large;
+  }
+
+}
+
+%readable-box {
+  max-width: 540px;
+  margin-right: auto;
+  margin-left: auto;
+}

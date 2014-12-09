@@ -1,7 +1,6 @@
 .Notice {
   @extend %base-padding-small;
   @extend %base-border-radius;
-  margin-bottom: base-margin("bottom");
   border: 2px solid;
 }
 

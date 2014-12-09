@@ -19,7 +19,7 @@
   height: 100%;
 
   @include respond-above("medium") {
-    width: 60%;
+    width: 50%;
   }
 
   @include respond-above("large") {
@@ -38,7 +38,7 @@
     top: 0;
     right: 0;
     left: auto;
-    width: 40%;
+    width: 50%;
     height: 100%;
   }
 
@@ -49,12 +49,7 @@
 }
 
 .SearchResults-resultsContent {
-  padding: $base-padding-small;
-
-  @include respond-above("medium") {
-    padding: $base-padding;
-  }
-
+  @extend %padded-box;
 }
 
 .SearchResults-list {
@@ -71,6 +66,7 @@
   &:first-child {
     border-top: 0;
   }
+
 }
 
 .SearchResults-itemLink {
@@ -81,6 +77,7 @@
   .is-active & {
     color: $palette-hl-cyan;
   }
+
 }
 
 .SearchResults-itemCompass {

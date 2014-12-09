@@ -19,7 +19,7 @@ window.app.view.searchResults = function() {
       panel.init();
     }
 
-    $(window).on("resize orientationchange", $.debounce(100, function() {
+    $(window).on("resize orientationchange", $.debounce(250, function() {
       var active = panel.$target.hasClass("is-draggable");
 
       if (window.innerWidth > 720 && active) {

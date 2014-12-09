@@ -1,6 +1,8 @@
 - content_for(:page_title, 'All venues')
 
-ul
-  - @venues.each do |venue|
-    li 
-      a href="/venue/#{venue.foursquare_id}" = venue.name
+.ContentArea.ContentArea--padded
+
+  ul
+    - @venues.each do |venue|
+      li 
+        a href="/venue/#{venue.foursquare_id}" = venue.name

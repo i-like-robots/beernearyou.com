@@ -1,11 +1,11 @@
 .ContentArea {
+  @extend %readable-box;
+
   > * + * {
     margin-top: $base-paragraph-spacing;
   }
 }
 
-.ContentArea--readable {
-  max-width: 32em;
-  margin-right: auto;
-  margin-left: auto;
+.ContentArea--padded {
+  @extend %padded-box;
 }
