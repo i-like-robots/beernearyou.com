@@ -31,13 +31,7 @@ window.app.view.searchResults = function() {
 
     // Live result updates
     if ($results.is(".is-live") && window.support.check("geolocation")) {
-      new LiveResults($results).init();
-
-      if (window.support.check("deviceOrientation")) {
-        $results.find(".js-result").each(function() {
-          new LiveCompass($(this)).init();
-        });
-      }
+      new LiveResults($results, { compass: window.support.check("deviceOrientation") }).init();
     }
   }
 

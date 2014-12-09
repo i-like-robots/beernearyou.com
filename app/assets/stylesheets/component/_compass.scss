@@ -15,6 +15,11 @@
     text-align: center;
     color: $palette-gray-80;
   }
+
+  .is-live & {
+    will-change: transform;
+  }
+
 }
 
 .Compass-needle {

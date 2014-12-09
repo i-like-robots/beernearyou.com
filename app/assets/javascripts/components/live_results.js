@@ -1,12 +1,14 @@
 function LiveResults($target, options) {
   var defaults = {
     metric: false,
+    compass: true,
     timeout: 10000,
     frequency: 5000
   };
 
   this.$target = $target;
   this.$results = $target.find(".js-result");
+  this.$compasses = $target.find(".js-compass");
 
   this.options = $.extend({}, defaults, options);
 }
@@ -23,6 +25,11 @@ LiveResults.prototype.init = function() {
     positionOptions
   );
 
+  if (this.options.compass) {
+    this._onOrientationProxy = $.proxy(this._onOrientation, this);
+    window.addEventListener("deviceorientation", this._onOrientationProxy);
+  }
+
   return this;
 };
 
@@ -33,23 +40,42 @@ LiveResults.prototype._onPosition = function(pos) {
   this.$results.each($.proxy(this._updateResult, this));
 };
 
+LiveResults.prototype._onOrientation = function(e) {
+  var direction = window.orientation;
+
+  if (e.alpha == null) {
+    // Devices may have a gyroscope as a safety measure
+    // to protect mechanical hard drives but they're
+    // useless for accessing direction. Because this
+    // can't be detected upfront we'll just cut our losses.
+    window.removeEventListener("deviceorientation", this._onOrientationProxy);
+  }
+
+  if (!isNaN(e.webkitCompassHeading)) {
+    direction += e.webkitCompassHeading;
+  } else {
+    direction += 360 - e.alpha;
+  }
+
+  this.$compasses.css("transform", "rotate(" + -direction + "deg)");
+};
+
 LiveResults.prototype._onError = function(error) {
   window.console && window.console.log(error);
 };
 
 LiveResults.prototype._updateResult = function(i) {
   var $result = this.$results.eq(i);
-  var $bearing = $result.find(".js-bearing");
   var $distance = $result.find(".js-distance");
+  var $compassNeedle = $result.find(".js-compass-needle");
 
   var destination = [$result.data("lat"), $result.data("lng")];
   var bearing = this.calculateBearing(this.position, destination);
   var distance = this.calculateDistance(this.position, destination);
 
-  $bearing.text(bearing.toFixed(1) + "°");
   $distance.text(distance.toFixed(2) + " " + this.units());
 
-  $result.trigger("result:update", [distance, bearing]);
+  $compassNeedle.css("transform", "rotate(" + bearing + "deg)");
 };
 
 LiveResults.prototype._toRadians = function(coordinates) {
