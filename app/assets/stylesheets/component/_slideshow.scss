@@ -1,5 +1,6 @@
 .Slideshow {
   position: relative;
+  overflow: hidden;
 }
 
 .Slideshow-runner {
@@ -39,8 +40,21 @@
   }
 
   &.is-current {
-    transform: translateX(0);
+    position: relative;
     z-index: 1;
+    transform: translateX(0);
+  }
+
+}
+
+.Slideshow-content {
+  background: $palette-gray-20;
+  opacity: 0;
+  transition: opacity 1s ease;
+  will-change: opacity;
+
+  &.is-loaded {
+    opacity: 1;
   }
 
 }

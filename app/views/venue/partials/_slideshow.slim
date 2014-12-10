@@ -1,8 +1,12 @@
 div.Slideshow.js-slideshow
   ul.Slideshow-runner
-    - @venue.foursquare_images['items'].each do |item|
+    - @venue.foursquare_images['items'].slice(0, 10).each_with_index do |item, i|
       li.Slideshow-frame
 
-        figure.Figure
-          img.Figure-content src="#{item['prefix']}800x600#{item['suffix']}" alt="Photo of #{@venue.name}"
+        figure.Figure.Figure--4x3
+          - if i == 0
+            img.Slideshow-content.Figure-content.is-loaded src="#{item['prefix']}800x600#{item['suffix']}" alt="Photo of #{@venue.name}"
+          - else
+            img.Slideshow-content.Figure-content data-src="#{item['prefix']}800x600#{item['suffix']}" data-alt="Photo of #{@venue.name}"
+
           figcaption.Figure-caption = "Photo by #{item['user']['firstName']} #{item['user']['lastName']}"
