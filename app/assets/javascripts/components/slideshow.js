@@ -1,7 +1,6 @@
 function Slideshow($target) {
   this.$target = $target;
-  this.$runner = this.$target.children();
-  this.$frames = this.$runner.children();
+  this.$frames = this.$target.children();
 }
 
 Slideshow.prototype.init = function() {

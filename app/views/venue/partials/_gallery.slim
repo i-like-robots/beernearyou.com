@@ -1,0 +1,11 @@
+div.Gallery role='widget'
+
+  div.Gallery-thumbnails
+    - @venue.foursquare_images['items'].slice(0, 5).each_with_index do |item, i|
+      img.Gallery-thumbnail src="#{item['prefix']}120x120#{item['suffix']}" alt="Small photo of #{@venue.name}"
+    button.Gallery-toggle.Gallery-toggle--open aria-controls='lightbox' Open photos
+
+
+  div.Gallery-lightbox id='lightbox'
+    = render partial: 'venue/partials/slideshow'
+    button.Gallery-toggle.Gallery-toggle--close aria-controls='lightbox' Close photos

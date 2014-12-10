@@ -1,14 +1,16 @@
 .Slideshow {
   position: relative;
   overflow: hidden;
-}
-
-.Slideshow-runner {
-  margin-left: 0;
-  padding-left: 0;
+  height: 100%;
 }
 
 .Slideshow-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
   display: none;
 
   // Only WebKit requires a prefix
@@ -22,15 +24,6 @@
     display: block;
   }
 
-  &.is-next,
-  &.is-prev {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-  }
-
   &.is-next {
     transform: translateX(100%);
   }
@@ -40,15 +33,23 @@
   }
 
   &.is-current {
-    position: relative;
     z-index: 1;
     transform: translateX(0);
   }
 
 }
 
-.Slideshow-content {
-  background: $palette-gray-20;
+.Slideshow-frameContent {
+  position: relative;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.Slideshow-frameImage {
+  display: block;
+  max-width: 100%;
+  max-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease;
   will-change: opacity;
@@ -57,6 +58,19 @@
     opacity: 1;
   }
 
+}
+
+.Slideshow-frameCaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, rgba($palette-gray-80, .75) 0, rgba($palette-gray-80, 0) 100%);
+  padding: $base-padding;
+  padding-top: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: white;
 }
 
 .Slideshow-btn {
