@@ -1,6 +1,6 @@
 function ToggleExpanded($target) {
   this.$target = $target;
-  this.$toggle = $("[aria-controls='#" + $target.attr("id") + "']");
+  this.$toggle = $("[aria-controls='" + $target.attr("id") + "']");
 }
 
 ToggleExpanded.prototype.init = function() {
@@ -14,7 +14,8 @@ ToggleExpanded.prototype._onClick = function() {
 
   this.$target
     .addClass("is-" + (expanded ? "closed" : "open"))
-    .removeClass("is-" + (expanded ? "open" : "closed"));
+    .removeClass("is-" + (expanded ? "open" : "closed"))
+    .trigger("toggle:" + (expanded ? "closed" : "open"));
 
-  this.$toggle.attr("aria-expanded", expanded);
+  this.$toggle.attr("aria-expanded", !expanded);
 };
