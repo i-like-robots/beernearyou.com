@@ -6,7 +6,7 @@ function ResultsMap($target, mapbox) {
 
 ResultsMap.prototype.init = function() {
   this.$target.on("position:update", $.proxy(this._onUpdate, this));
-  this.mapbox.$target.on("mapbox:load", $.proxy(this._onLoad, this));
+  this.mapbox.$target.one("mapbox:load", $.proxy(this._onLoad, this));
   return this;
 };
 
