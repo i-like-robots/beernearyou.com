@@ -4,4 +4,6 @@ div.Slideshow id='slideshow'
 
       figure.Slideshow-frameContent
         img.Slideshow-frameImage data-src="#{item['prefix']}640x640#{item['suffix']}" data-alt="Photo of #{@venue.name}"
-        figcaption.Slideshow-frameCaption = "Photo by #{item['user']['firstName']} #{item['user']['lastName']}"
+        figcaption.Slideshow-frameCaption 
+          = "Photo by #{item['user']['firstName']} #{item['user']['lastName']} via "
+          a href="#{item['source']['url']}" target="_blank" = item['source']['name']

@@ -4,11 +4,23 @@ window.app.view.venueShow = function() {
   var $slideshow = $("#slideshow");
 
   if ($lightbox.length && $slideshow.length) {
+    var slideshow, trigger;
+
     new ToggleExpanded($lightbox).init();
 
-    $(document).one("toggle:open", function() {
-      new Slideshow($slideshow).init();
-    });
+    $(document)
+      .on("toggle:open", function() {
+        if (!slideshow) {
+          slideshow = new Slideshow($slideshow).init();
+        }
+
+        trigger = document.activeElement;
+
+        slideshow.$target.focus();
+      })
+      .on("toggle:closed", function() {
+        trigger.focus();
+      });
   }
 
 };
