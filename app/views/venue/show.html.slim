@@ -2,40 +2,40 @@
 
 - content_for(:page_title, @venue.name)
 
-h1 = @venue.name
+div.VenueShow
 
-- if @venue.foursquare_images['count'] > 0
-  = render partial: 'venue/partials/gallery'
+  h1.VenueShow-heading = @venue.name
 
-dl
-  dt Foursquare ID 
-  dd = @venue.foursquare_id
-  dt Untappd ID
-  dd = @venue.untappd_id
+  - if @venue.foursquare_images['count'] > 0
+    = render partial: 'venue/partials/gallery'
 
-h2 Venue location (from Foursquare)
+  div.VenueShow-details
 
-dl
-  dt Website
-  dd = @venue.foursquare_data['url']
-  dt Status 
-  dd = @venue.foursquare_data['hours']['status']
-  dt Opening hours
-  dd
-    ul
-      - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
-        li
-          = timeframe['days']
-          ul
-            - timeframe['open'].each do |open|
-              li = open['renderedTime']
-  dt Address
-  dd
-    address
-      = @venue.street_address
-      br
-      = @venue.city
-      br
-      = @venue.postal_code
+    div.ContentArea.VenueShow-detail.VenueShow-detail--address
+      h2.VenueShow-detailHeading Address
+      address.VenueShow-address
+        = @venue.street_address
+        br
+        = @venue.city
+        br
+        = @venue.postal_code
+      div.VenueShow-nearestStation
 
-div.VenueShow-map id='map' data-lat="#{@venue.lat}" data-lng="#{@venue.lng}" style="height: 300px;"
+    div.ContentArea.VenueShow-detail.VenueShow-detail--hours
+      h2.VenueShow-detailHeading Opening hours
+      ol.VenueShow-infoList
+        - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
+          li: time = formatted_opening_hours(timeframe)
+      div.VenueShow-phone = @venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')
+
+    div.ContentArea.VenueShow-detail.VenueShow-detail--info
+      h2.VenueShow-detailHeading Further info
+      ul.VenueShow-infoList
+        li: a href="#{@venue.foursquare_data['url']}" target="_blank" Website
+        li: a href="#{@venue.foursquare_data['shortUrl']}" target="_blank" Foursquare
+        li: a href="https://untappd.com/venue/#{@venue.untappd_id}" target="_blank" Untappd
+        - if @venue.foursquare_data['contact']['twitter'].present?
+          li: a href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target="_blank"
+            = "@#{@venue.foursquare_data['contact']['twitter']}"
+
+  div.VenueShow-map id='map' data-lat="#{@venue.lat}" data-lng="#{@venue.lng}"
