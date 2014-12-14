@@ -49,7 +49,7 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    geocoder (1.2.4)
+    geocoder (1.2.6)
     haml (4.0.5)
       tilt
     hike (1.2.3)

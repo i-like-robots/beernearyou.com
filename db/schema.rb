@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923210344) do
+ActiveRecord::Schema.define(version: 20141214125505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stations", force: true do |t|
+    t.string   "name"
+    t.decimal  "lat",        precision: 10, scale: 6
+    t.decimal  "lng",        precision: 10, scale: 6
+    t.integer  "zone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stations", ["lat", "lng"], name: "index_stations_on_lat_and_lng", using: :btree
 
   create_table "suggestions", force: true do |t|
     t.string   "name"

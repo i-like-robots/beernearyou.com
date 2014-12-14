@@ -19,7 +19,8 @@ div.VenueShow
         = @venue.city
         br
         = @venue.postal_code
-      div.VenueShow-nearestStation
+      p.VenueShow-nearestStation
+        = "#{@nearest_station.name}, #{'%.2f' % @nearest_station.distance} miles"
 
     div.ContentArea.VenueShow-detail.VenueShow-detail--hours
       h2.VenueShow-detailHeading Opening hours
@@ -31,11 +32,11 @@ div.VenueShow
     div.ContentArea.VenueShow-detail.VenueShow-detail--info
       h2.VenueShow-detailHeading Further info
       ul.VenueShow-infoList
-        li: a href="#{@venue.foursquare_data['url']}" target="_blank" Website
-        li: a href="#{@venue.foursquare_data['shortUrl']}" target="_blank" Foursquare
-        li: a href="https://untappd.com/venue/#{@venue.untappd_id}" target="_blank" Untappd
+        li: a href="#{@venue.foursquare_data['url']}" target='_blank' Website
+        li: a href="#{@venue.foursquare_data['shortUrl']}" target='_blank' Foursquare
+        li: a href="https://untappd.com/venue/#{@venue.untappd_id}" target='_blank' Untappd
         - if @venue.foursquare_data['contact']['twitter'].present?
-          li: a href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target="_blank"
+          li: a href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target='_blank'
             = "@#{@venue.foursquare_data['contact']['twitter']}"
 
   div.VenueShow-map id='map' data-lat="#{@venue.lat}" data-lng="#{@venue.lng}"

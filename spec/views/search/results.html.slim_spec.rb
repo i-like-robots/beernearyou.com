@@ -3,19 +3,7 @@ require 'rails_helper'
 RSpec.describe "search/results", :type => :view do
 
   let(:origin) { [ 51.514150, -0.227108 ] }
-  let(:result)  do
-    double({
-      name: 'BrewDog Shepherds Bush',
-      foursquare_id:  '529655db11d20a5e5ce7251e',
-      lat: 51.5030784148458,
-      lng: -0.224192154875118,
-      street_address: '15-19 Goldhawk Rd',
-      city: 'Shepherds Bush',
-      postal_code: 'W12 8QQ',
-      distance: 0.675,
-      bearing: 85.1
-    })
-  end
+  let(:result) { double(attributes_for(:venue, :with_location).merge(distance: 0.675, bearing: 85.1)) }
 
   context 'with no location' do
 

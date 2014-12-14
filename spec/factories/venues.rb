@@ -12,11 +12,6 @@ FactoryGirl.define do
       city 'Shepherds Bush'
       postal_code 'W12 8QQ'
     end
-
-    trait :with_distance do
-      distance { 0.625 }
-    end
-
   end
 
 end

@@ -12,7 +12,7 @@ class Venue < ActiveRecord::Base
   end
 
   def coordinates
-    [ lat, lng ].join(', ')
+    [ lat, lng ]
   end
 
   def foursquare_data

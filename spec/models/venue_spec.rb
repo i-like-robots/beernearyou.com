@@ -22,7 +22,7 @@ RSpec.describe Venue, :type => :model do
 
       it 'returns concatenated coordinates' do
         actual = instance.coordinates
-        expected = '51.5030784148458, -0.224192154875118'
+        expected = [51.5030784148458, -0.224192154875118]
 
         expect(actual).to eq(expected)
       end

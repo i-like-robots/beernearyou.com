@@ -5,7 +5,7 @@ module VenueHelper
       open['renderedTime']
     end
 
-    formatted = "#{timeframe['days']}: #{hours.join(', ')}"
+    "#{timeframe['days']}: #{hours.join(', ')}"
   end
 
 end

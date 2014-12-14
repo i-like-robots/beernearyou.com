@@ -19,7 +19,7 @@ RSpec.describe VenueController, :type => :controller do
 
   describe '#show' do
 
-    let(:id) { '1234' }
+    let(:id)                { '1234' }
 
     before(:each) do
       expect(Venue).to receive(:find_by).with(foursquare_id: id).and_return(venue)
@@ -27,11 +27,18 @@ RSpec.describe VenueController, :type => :controller do
 
     context 'when venue exists' do
 
-      let(:venue) { build(:venue, :with_location) }
+      let(:venue)             { build(:venue, :with_location) }
+      let(:station)           { build(:station) }
+      let(:nearest_stations)  { double(:nearest_stations) }
 
       it 'fetches the venue by Foursquare ID' do
+        expect(Station).to receive(:near).with(venue.coordinates).and_return(nearest_stations)
+        expect(nearest_stations).to receive(:limit).and_return([station])
+
         get :show, { id: id }
+
         expect(assigns(:venue)).to eq(venue)
+        expect(assigns(:nearest_station)).to eq(station)
       end
 
     end
