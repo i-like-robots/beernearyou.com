@@ -30,15 +30,10 @@
   @extend %base-shadow-low;
   position: relative;
   z-index: 110;
-  padding: $base-padding-small;
-
-  // Flexbox only req. prefix in Safari
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-align-items: center;
   align-items: center;
+  padding: $base-padding-small;
 
   @include respond-above("medium") {
     padding: $base-padding;
@@ -47,7 +42,6 @@
 }
 
 .SiteHeader-name {
-  -webkit-flex: 1;
   flex: 1;
   text-decoration: none;
   color: inherit;
@@ -98,14 +92,10 @@
 
   &.is-open {
     @extend %base-shadow-low;
-
-    // Animations req. prefix in Chrome and Safari
-    -webkit-animation: slideIn .6s $ease-out-back;
     animation: slideIn .6s $ease-out-back;
   }
 
   &.is-closed {
-    -webkit-animation: slideOut .6s $ease-in-back forwards;
     animation: slideOut .6s $ease-in-back forwards;
   }
 

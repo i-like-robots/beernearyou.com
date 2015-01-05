@@ -12,9 +12,6 @@
   width: 100%;
   height: 100%;
   display: none;
-
-  // Only WebKit requires a prefix
-  -webkit-transition: -webkit-transform 1s ease;
   transition: transform 1s ease;
   will-change: transform;
 
@@ -25,18 +22,15 @@
   }
 
   &.is-next {
-    -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
 
   &.is-prev {
-    -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
 
   &.is-current {
     z-index: 1;
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
 
@@ -48,7 +42,6 @@
   display: table;
   margin-right: auto;
   margin-left: auto;
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 

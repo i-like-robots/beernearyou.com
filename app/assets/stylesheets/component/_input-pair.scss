@@ -10,7 +10,6 @@
 @include respond-above("medium") {
 
   .InputPair {
-    display: -webkit-flex;
     display: flex;
   }
 
@@ -20,7 +19,6 @@
   }
 
   .InputPair-input {
-    -webkit-flex-grow: 2;
     flex-grow: 2;
   }
 

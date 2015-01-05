@@ -17,16 +17,13 @@
 }
 
 .VenueShow-detailList {
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
 .VenueShow-detail {
   box-sizing: border-box;
   width: 100%;
-  -webkit-order: 0;
   order: 0;
 }
 
@@ -36,18 +33,15 @@
   @include respond-above("medium") {
     padding-right: base-padding("right");
     padding-left: base-padding("left");
-    -webkit-flex: 1 50%;
     flex: 1 50%;
   }
 
 }
 
 .VenueShow-detail--map {
-  -webkit-order: 1;
   order: 1;
 
   @include respond-above("medium") {
-    -webkit-order: 0;
     order: 0;
   }
 
@@ -57,7 +51,6 @@
 .VenueShow-detail--location {
 
   @include respond-above("small") {
-    -webkit-flex: 1 50%;
     flex: 1 50%;
   }
 
@@ -66,7 +59,6 @@
 .VenueShow-detail--info {
 
   @include respond-above("small") {
-    -webkit-flex: 1 100%;
     flex: 1 100%;
   }
 
@@ -77,7 +69,6 @@
 .VenueShow-detail--location {
 
   @include respond-above("medium") {
-    -webkit-flex: 1 32%;
     flex: 1 32%;
   }
 
