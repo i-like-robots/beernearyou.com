@@ -24,6 +24,8 @@ div.VenueShow
         br
         = @venue.postal_code
       p.VenueShow-nearestStation
+        = image_tag 'lu.svg', alt: 'London Underground roundel', width: '24', class: 'VenueShow-stationRoundel'
+        span.u-hidden Nearest London Underground station
         = "#{@nearest_station.name}, #{'%.2f' % @nearest_station.distance} miles"
 
     div.VenueShow-detail.VenueShow-detail--hours.ContentArea
