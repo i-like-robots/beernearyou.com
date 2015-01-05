@@ -71,7 +71,7 @@
 }
 
 .SiteHeader-searchPanel {
-  @extend %padded-box;
+  @extend %base-padding;
   position: absolute;
   top: 100%;
   right: 0;

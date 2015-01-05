@@ -6,13 +6,17 @@ div.VenueShow
 
   h1.VenueShow-heading = @venue.name
 
-  - if @venue.foursquare_images['count'] > 0
-    = render partial: 'venue/partials/gallery'
+  div.VenueShow-detailList
 
-  div.VenueShow-details
+    div.VenueShow-detail.VenueShow-detail--gallery
+      = render partial: 'venue/partials/gallery'
 
-    div.ContentArea.VenueShow-detail.VenueShow-detail--address
-      h2.VenueShow-detailHeading Address
+    div.VenueShow-detail.VenueShow-detail--map
+      div.VenueShow-mapContainer.AspectRatio.AspectRatio--16x9
+        div.AspectRatio-content id='map' data-lat="#{@venue.lat}" data-lng="#{@venue.lng}"
+
+    div.VenueShow-detail.VenueShow-detail--location.ContentArea
+      h2.VenueShow-detailHeading Location
       address.VenueShow-address
         = @venue.street_address
         br
@@ -22,14 +26,16 @@ div.VenueShow
       p.VenueShow-nearestStation
         = "#{@nearest_station.name}, #{'%.2f' % @nearest_station.distance} miles"
 
-    div.ContentArea.VenueShow-detail.VenueShow-detail--hours
+    div.VenueShow-detail.VenueShow-detail--hours.ContentArea
       h2.VenueShow-detailHeading Opening hours
       ol.VenueShow-infoList
         - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
           li: time = formatted_opening_hours(timeframe)
-      div.VenueShow-phone = @venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')
+      - if @venue.foursquare_data['contact']['formattedPhone'].present?
+        div.VenueShow-phone 
+          = "Call #{@venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')}"
 
-    div.ContentArea.VenueShow-detail.VenueShow-detail--info
+    div.VenueShow-detail.VenueShow-detail--info.ContentArea
       h2.VenueShow-detailHeading Further info
       ul.VenueShow-infoList
         li: a href="#{@venue.foursquare_data['url']}" target='_blank' Website
@@ -38,5 +44,3 @@ div.VenueShow
         - if @venue.foursquare_data['contact']['twitter'].present?
           li: a href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target='_blank'
             = "@#{@venue.foursquare_data['contact']['twitter']}"
-
-  div.VenueShow-map id='map' data-lat="#{@venue.lat}" data-lng="#{@venue.lng}"

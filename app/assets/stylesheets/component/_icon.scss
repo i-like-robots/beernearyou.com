@@ -18,50 +18,42 @@
   margin-left: 16px;
 }
 
-.Icon--link::after {
+.Icon--search::after {
   background-position-x: 0;
 }
 
-.Icon--wifi::after {
+.Icon--address::after {
   background-position-x: -1em;
 }
 
-.Icon--clock::after {
+.Icon--position::after {
   background-position-x: -2em;
 }
 
-.Icon--search::after {
+.Icon--left::after {
   background-position-x: -3em;
 }
 
-.Icon--address::after {
+.Icon--right::after {
   background-position-x: -4em;
 }
 
-.Icon--position::after {
+.Icon--up::after {
   background-position-x: -5em;
 }
 
-.Icon--left::after {
+.Icon--down::after {
   background-position-x: -6em;
 }
 
-.Icon--right::after {
+.Icon--maximise::after {
   background-position-x: -7em;
 }
 
-.Icon--up::after {
+.Icon--close::after {
   background-position-x: -8em;
 }
 
-.Icon--down::after {
-  background-position-x: -9em;
-}
-
 .Icon--move::after {
-  background-position-x: -10em;
-}
-
-.Icon--open::after {
-  background-position-x: -11em;
+  background-position-x: -9em;
 }

@@ -1,20 +1,17 @@
 %base-margin {
-  margin: $base-margin;
-}
-
-%base-margin-small {
   margin: $base-margin-small;
+
+  @include respond-above("medium") {
+    margin: $base-margin;
+  }
+
+  @include respond-above("large") {
+    margin: $base-margin-large;
+  }
+
 }
 
 %base-padding {
-  padding: $base-padding;
-}
-
-%base-padding-small {
-  padding: $base-padding-small;
-}
-
-%padded-box {
   padding: $base-padding-small;
 
   @include respond-above("medium") {

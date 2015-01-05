@@ -1,7 +1,7 @@
 .Notice {
-  @extend %base-padding-small;
   @extend %base-border-radius;
   border: 2px solid;
+  padding: $base-padding-small;
 }
 
 .Notice--error {

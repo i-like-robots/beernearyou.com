@@ -1,11 +1,17 @@
-function Slideshow($target) {
+function Slideshow($target, options) {
+  var defaults = {
+    nextText: 'Next',
+    prevText: 'Prev'
+  };
+
   this.$target = $target;
   this.$frames = this.$target.children();
+  this.options = $.extend({}, defaults, options);
 }
 
 Slideshow.prototype.init = function() {
-  this.$btnPrev = $("<button class='Slideshow-btn Slideshow-btn--prev'>Prev slide</button>");
-  this.$btnNext = $("<button class='Slideshow-btn Slideshow-btn--next'>Next slide</button>");
+  this.$btnPrev = $("<button class='Slideshow-btn Slideshow-btn--prev'>" + this.options.prevText + "</button>");
+  this.$btnNext = $("<button class='Slideshow-btn Slideshow-btn--next'>" + this.options.nextText + "</button>");
 
   this.$btnPrev.on("click", $.proxy(this.prev, this)).appendTo(this.$target);
   this.$btnNext.on("click", $.proxy(this.next, this)).appendTo(this.$target);

@@ -1,47 +1,92 @@
-.VenueShow-details {
+.VenueShow {
+  @extend %base-padding;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1080px;
+  text-align: center;
+}
 
-  @include respond-above("small") {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-align-items: center;
-    align-items: center;
+.VenueShow-detail,
+.VenueShow-heading {
+  margin-bottom: base-margin("bottom");
+
+  @include respond-above("large") {
+    margin-bottom: directional-value($base-margin-large, "bottom");
   }
 
+}
+
+.VenueShow-detailList {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .VenueShow-detail {
-  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  -webkit-order: 0;
+  order: 0;
+}
 
-  @include respond-above("small") {
-    -webkit-flex: 1 auto;
-    flex: 1 auto;
+.VenueShow-detail--map,
+.VenueShow-detail--gallery {
+
+  @include respond-above("medium") {
+    padding-right: base-padding("right");
+    padding-left: base-padding("left");
+    -webkit-flex: 1 50%;
+    flex: 1 50%;
   }
 
 }
 
-.VenueShow-detail--address {}
-
-.VenueShow-detail--hours {
-
-  @include respond-above("small") {
-    -webkit-flex: 1 100%;
-    flex: 1 100%;
-    -webkit-order: 1;
-    order: 1;
-  }
+.VenueShow-detail--map {
+  -webkit-order: 1;
+  order: 1;
 
   @include respond-above("medium") {
-    -webkit-flex: 1 auto;
-    flex: 1 auto;
     -webkit-order: 0;
     order: 0;
   }
 
 }
 
-.VenueShow-detail--info {}
+.VenueShow-detail--hours,
+.VenueShow-detail--location {
+
+  @include respond-above("small") {
+    -webkit-flex: 1 50%;
+    flex: 1 50%;
+  }
+
+}
+
+.VenueShow-detail--info {
+
+  @include respond-above("small") {
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+  }
+
+}
+
+.VenueShow-detail--info,
+.VenueShow-detail--hours,
+.VenueShow-detail--location {
+
+  @include respond-above("medium") {
+    -webkit-flex: 1 32%;
+    flex: 1 32%;
+  }
+
+}
+
+.VenueShow-mapContainer {
+  position: relative;
+  z-index: 0;
+}
 
 .VenueShow-address {
   font-style: normal;
@@ -51,11 +96,4 @@
   margin-left: 0;
   padding-left: 0;
   list-style: none;
-}
-
-.VenueShow-map {
-  position: relative;
-  z-index: 0;
-  height: 360px;
-  max-height: 50vh;
 }

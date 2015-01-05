@@ -48,7 +48,7 @@
 }
 
 .SearchResults-resultsContent {
-  @extend %padded-box;
+  @extend %base-padding;
 }
 
 .SearchResults-list {

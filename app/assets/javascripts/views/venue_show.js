@@ -31,21 +31,32 @@ window.app.view.venueShow = function() {
   var $slideshow = $("#slideshow");
 
   if ($lightbox.length && $slideshow.length) {
-    var slideshow, trigger;
+    var trigger;
 
     new ToggleExpanded($lightbox).init();
 
-    $(document)
-      .on("toggle:open", function() {
-        if (!slideshow) {
-          slideshow = new Slideshow($slideshow).init();
-        }
+    $lightbox
+      .one("toggle:open", function() {
+        var options = {
+          prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
+          nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>"
+        };
 
+        new Slideshow($slideshow, options).init();
+      })
+      .on("toggle:open", function() {
         trigger = document.activeElement;
 
-        slideshow.$target.focus();
+        $slideshow.focus();
+
+        $(window).on("keyup.lightbox", function(e) {
+          if (e.keyCode == 27) {
+            $(window).off(".lightbox");
+            $lightbox.find("[aria-controls='lightbox']").click();
+          }
+        });
       })
-      .on("toggle:closed", function() {
+      .on("toggle:close", function() {
         trigger.focus();
       });
   }

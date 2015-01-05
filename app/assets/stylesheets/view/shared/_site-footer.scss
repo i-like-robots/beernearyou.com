@@ -1,5 +1,5 @@
 .SiteFooter {
-  @extend %padded-box;
+  @extend %base-padding;
   border-top: 2px solid $palette-gray-80;
 }
 

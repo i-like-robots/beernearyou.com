@@ -15,7 +15,7 @@ ToggleExpanded.prototype._onClick = function() {
   this.$target
     .addClass("is-" + (expanded ? "closed" : "open"))
     .removeClass("is-" + (expanded ? "open" : "closed"))
-    .trigger("toggle:" + (expanded ? "closed" : "open"));
+    .trigger("toggle:" + (expanded ? "close" : "open"));
 
   this.$toggle.attr("aria-expanded", !expanded);
 };
