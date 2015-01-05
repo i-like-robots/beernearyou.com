@@ -1,15 +1,23 @@
-@function base-margin($direction: null) {
-  @if $direction != null {
-    @return directional-value($base-margin, $direction);
+@function base-margin($direction: null, $size: null) {
+  @if $size == "small" {
+    @return directional-value($base-margin-small, $direction);
   }
 
-  @return $base-margin;
+  @if $size == "large" {
+    @return directional-value($base-margin-large, $direction);
+  }
+
+  @return directional-value($base-margin, $direction);
 }
 
-@function base-padding($direction: null) {
-  @if $direction != null {
-    @return directional-value($base-padding, $direction);
+@function base-padding($direction: null, $size: null) {
+  @if $size == "small" {
+    @return directional-value($base-padding-small, $direction);
   }
 
-  @return $base-padding;
+  @if $size == "large" {
+    @return directional-value($base-padding-large, $direction);
+  }
+
+  @return directional-value($base-padding, $direction);
 }

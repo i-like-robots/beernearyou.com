@@ -11,7 +11,7 @@
   margin-bottom: base-margin("bottom");
 
   @include respond-above("large") {
-    margin-bottom: directional-value($base-margin-large, "bottom");
+    margin-bottom: base-margin("bottom");
   }
 
 }
