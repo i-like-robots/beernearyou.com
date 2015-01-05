@@ -34,7 +34,7 @@ div.VenueShow
         - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
           li: time = formatted_opening_hours(timeframe)
       - if @venue.foursquare_data['contact']['formattedPhone'].present?
-        div.VenueShow-phone 
+        p.VenueShow-phone 
           = "Call #{@venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')}"
 
     div.VenueShow-detail.VenueShow-detail--info.ContentArea

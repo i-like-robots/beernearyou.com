@@ -28,22 +28,37 @@ RSpec.describe "venue/show", :type => :view do
     expect(rendered).to have_selector('address', text: venue.postal_code)
   end
 
+  it 'displays the venue phone number' do
+    render
+
+    expect(rendered).to have_selector('p', text: 'Call 020 8749 8094')
+  end
+
   it 'displays the nearest tube station' do
     render
 
     expect(rendered).to have_selector('p', text: "#{nearest_station.name}, #{nearest_station.distance} miles")
   end
 
-  it 'display the venue opening times' do
+  it 'displays the venue opening times' do
     render
 
     expect(rendered).to have_selector('time', text: 'Mon–Sat: Noon–Midnight')
   end
 
-  it 'displays gallery thumbnail images' do
+  it 'displays links to further information' do
     render
 
-    expect(rendered).to have_selector('.Gallery-thumbnail', count: 5)
+    expect(rendered).to have_selector("a[href='#{foursquare_data['url']}']")
+    expect(rendered).to have_selector('a[href^="https://twitter.com"]')
+    expect(rendered).to have_selector("a[href='#{foursquare_data['shortUrl']}']")
+    expect(rendered).to have_selector("a[href='https://untappd.com/venue/#{venue.untappd_id}']")
+  end
+
+  it 'displays gallery preview image' do
+    render
+
+    expect(rendered).to have_selector('.Gallery-preview')
   end
 
   it 'renders gallery slideshow' do
