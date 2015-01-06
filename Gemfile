@@ -41,17 +41,6 @@ group :development, :test do
   # Use Pry for simpler debugging
   gem 'pry'
 
-end
-
-group :development do
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-end
-
-group :test do
-
   # Use Rspec instead of Test::Unit
   gem 'rspec-rails'
 
@@ -60,5 +49,12 @@ group :test do
 
   # Use Factory Girl for database fixtures
   gem 'factory_girl_rails'
+
+end
+
+group :development do
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 
 end

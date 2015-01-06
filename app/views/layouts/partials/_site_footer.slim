@@ -1,9 +1,9 @@
 footer.SiteFooter.t-center role='contentinfo'
 
   nav.SiteFooter-nav role='navigation' aria-label='Helpful links'
-    => link_to 'Suggest a venue', suggestion_path, class: 'SiteFooter-link'
-    => link_to 'View all venues', venue_path, class: 'SiteFooter-link'
-    => link_to 'Colophon', '#', class: 'SiteFooter-link'
+    => link_to('Suggest a venue', suggestion_path, class: 'SiteFooter-link')
+    => link_to('View all venues', venue_path, class: 'SiteFooter-link')
+    => link_to('Colophon', { controller: 'static_page', action: 'colophon' }, class: 'SiteFooter-link')
 
   p.SiteFooter-smallPrint
     small
