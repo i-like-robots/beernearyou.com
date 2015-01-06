@@ -4,6 +4,9 @@ window.app.view.searchResults = function() {
 
   if ($map.length && $results.length) {
     var options = {
+      mapOptions: {
+        scrollWheelZoom: false
+      },
       mapboxURL: window.app.config.MAPBOX_URL,
       projectID: window.app.config.MAPBOX_PROJECT,
       accessToken: window.app.config.MAPBOX_TOKEN

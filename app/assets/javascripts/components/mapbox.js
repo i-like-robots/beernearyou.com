@@ -1,8 +1,9 @@
 function Mapbox($target, options) {
   var defaults = {
+    mapOptions: {},
     mapboxURL: null,
     projectID: null,
-    accessToken: null
+    accessToken: null,
   };
 
   this.$target = $target;
@@ -23,7 +24,7 @@ Mapbox.prototype._onLoad = function() {
 };
 
 Mapbox.prototype._createMap = function() {
-  return window.L.mapbox.map(this.$target.get(0), this.options.projectID);
+  return window.L.mapbox.map(this.$target.get(0), this.options.projectID, this.options.mapOptions);
 };
 
 Mapbox.prototype.createFeatureGroup = function(features) {

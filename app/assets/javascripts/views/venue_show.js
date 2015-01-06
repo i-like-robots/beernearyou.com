@@ -4,9 +4,12 @@ window.app.view.venueShow = function() {
   var $map = $("#map");
 
   if ($map.length) {
-    var origin = [$map.data("lat"), $map.data("lng")];
+    var origin = [ $map.data("lat"), $map.data("lng") ];
 
     var options = {
+      mapOptions: {
+        scrollWheelZoom: false
+      },
       mapboxURL: window.app.config.MAPBOX_URL,
       projectID: window.app.config.MAPBOX_PROJECT,
       accessToken: window.app.config.MAPBOX_TOKEN
@@ -51,12 +54,12 @@ window.app.view.venueShow = function() {
 
         $(window).on("keyup.lightbox", function(e) {
           if (e.keyCode == 27) {
-            $(window).off(".lightbox");
             $lightbox.find("[aria-controls='lightbox']").click();
           }
         });
       })
       .on("toggle:close", function() {
+        $(window).off(".lightbox");
         trigger.focus();
       });
   }
