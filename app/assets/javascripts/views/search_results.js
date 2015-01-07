@@ -3,16 +3,7 @@ window.app.view.searchResults = function() {
   var $results = $("#results");
 
   if ($map.length && $results.length) {
-    var options = {
-      mapOptions: {
-        scrollWheelZoom: false
-      },
-      mapboxURL: window.app.config.MAPBOX_URL,
-      projectID: window.app.config.MAPBOX_PROJECT,
-      accessToken: window.app.config.MAPBOX_TOKEN
-    };
-
-    var mapbox = new Mapbox($map, options).init();
+    var mapbox = new Mapbox($map, window.app.mapbox).init();
     new ResultsMap($results, mapbox).init();
 
     // Draggable results panel for small screens

@@ -5,17 +5,7 @@ window.app.view.venueShow = function() {
 
   if ($map.length) {
     var origin = [ $map.data("lat"), $map.data("lng") ];
-
-    var options = {
-      mapOptions: {
-        scrollWheelZoom: false
-      },
-      mapboxURL: window.app.config.MAPBOX_URL,
-      projectID: window.app.config.MAPBOX_PROJECT,
-      accessToken: window.app.config.MAPBOX_TOKEN
-    };
-
-    var mapbox = new Mapbox($map, options).init();
+    var mapbox = new Mapbox($map, window.app.mapbox).init();
 
     $map.one("mapbox:load", function() {
       var origin = [$map.data("lat"), $map.data("lng")];

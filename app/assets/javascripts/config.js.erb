@@ -1,9 +1,12 @@
 window.app = window.app || {};
 
-window.app.config = {
-  MAPBOX_URL: "<%= ENV['MAPBOX_URL'] %>",
-  MAPBOX_TOKEN: "<%= ENV['MAPBOX_TOKEN'] %>",
-  MAPBOX_PROJECT: "<%= ENV['MAPBOX_PROJECT'] %>"
+window.app.mapbox = {
+  mapOptions: {
+    scrollWheelZoom: false
+  },
+  mapboxURL: "<%= ENV['MAPBOX_URL'] %>",
+  projectID: "<%= ENV['MAPBOX_PROJECT'] %>",
+  accessToken: "<%= ENV['MAPBOX_TOKEN'] %>"
 };
 
 window.app.view = {};
