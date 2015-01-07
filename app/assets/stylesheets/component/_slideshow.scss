@@ -87,10 +87,20 @@
 
 .Slideshow-btn--next {
   right: 0;
+
+  &:hover {
+    animation: bounceRight 0.75s ease-out infinite;
+  }
+
 }
 
 .Slideshow-btn--prev {
   left: 0;
+
+  &:hover {
+    animation: bounceLeft 0.75s ease-out infinite;
+  }
+
 }
 
 .Slideshow-progress {
@@ -104,8 +114,7 @@
 
   // Avoid clashing with image caption
   @media screen and (max-height: 640px) {
-    top: 10px;
-    bottom: auto;
+    display: none;
   }
 
 }

@@ -26,3 +26,16 @@
     transform: scale(1);
   }
 }
+
+@keyframes bounceLeft {
+  50% {
+    transform: translateX(-10px)
+  }
+}
+
+
+@keyframes bounceRight {
+  50% {
+    transform: translateX(10px)
+  }
+}

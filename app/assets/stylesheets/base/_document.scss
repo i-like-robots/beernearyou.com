@@ -19,6 +19,7 @@ body {
 a {
   text-decoration: underline;
   color: $palette-hl-cyan;
+  transition: color 0.25s;
 
   &:hover {
     color: $palette-hl-aqua;

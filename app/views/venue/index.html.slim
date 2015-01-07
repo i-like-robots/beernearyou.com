@@ -6,4 +6,4 @@
   ul
     - @venues.each do |venue|
       li 
-        a href="/venue/#{venue.foursquare_id}" = venue.name
+        a.FancyLink href="/venue/#{venue.foursquare_id}" = venue.name
