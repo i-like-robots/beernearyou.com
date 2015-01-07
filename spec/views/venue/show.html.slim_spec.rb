@@ -65,7 +65,7 @@ RSpec.describe "venue/show", :type => :view do
     render
 
     expect(rendered).to have_selector('.Slideshow')
-    expect(rendered).to have_selector('.Slideshow-frame', count: 30)
+    expect(rendered).to have_selector('.Slideshow-frame', count: 20)
   end
 
 end

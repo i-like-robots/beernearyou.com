@@ -10,13 +10,24 @@ function Slideshow($target, options) {
 }
 
 Slideshow.prototype.init = function() {
+  var i, len;
+
   this.$btnPrev = $("<button class='Slideshow-btn Slideshow-btn--prev'>" + this.options.prevText + "</button>");
   this.$btnNext = $("<button class='Slideshow-btn Slideshow-btn--next'>" + this.options.nextText + "</button>");
 
   this.$btnPrev.on("click", $.proxy(this.prev, this)).appendTo(this.$target);
   this.$btnNext.on("click", $.proxy(this.next, this)).appendTo(this.$target);
 
-  this.$target.attr("tabindex", 0).on("keyup", $.proxy(this._keypress, this));
+  this.$progress = $("<ul class='Slideshow-progress' />");
+
+  for (i = 0, len = this.$frames.length; i < len; i++) {
+    this.$progress.append("<li class='Slideshow-progressStep' />");
+  }
+
+  this.$target
+    .attr("tabindex", 0)
+    .append(this.$progress)
+    .on("keyup", $.proxy(this._keypress, this));
 
   this.to(0);
 
@@ -33,6 +44,8 @@ Slideshow.prototype.to = function(x) {
   this._preload(this.$frames.eq(current).addClass("is-current"));
   this._preload(this.$frames.eq(prev).addClass("is-prev"));
   this._preload(this.$frames.eq(next).addClass("is-next"));
+
+  this.$progress.children().removeClass("is-current").eq(current).addClass("is-current");
 };
 
 Slideshow.prototype.prev = function() {

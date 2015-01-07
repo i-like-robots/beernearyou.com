@@ -1,9 +1,9 @@
 div.Slideshow id='slideshow'
-  - @venue.foursquare_images['items'].each_with_index do |item, i|
+  - @venue.foursquare_images['items'].slice(0, 20).each_with_index do |item, i|
     div.Slideshow-frame
 
       figure.Slideshow-frameContent
         img.Slideshow-frameImage data-src="#{item['prefix']}640x640#{item['suffix']}" data-alt="Photo of #{@venue.name}"
-        figcaption.Slideshow-frameCaption 
+        figcaption.Slideshow-frameCaption.t-deci
           = "Photo by #{item['user']['firstName']} #{item['user']['lastName']} via "
           a href="#{item['source']['url']}" target="_blank" = item['source']['name']

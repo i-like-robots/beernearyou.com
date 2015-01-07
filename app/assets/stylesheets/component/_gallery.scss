@@ -25,6 +25,7 @@
 
   &.is-open {
     display: block;
+    animation: scaleUp 0.25s;
   }
 
 }
