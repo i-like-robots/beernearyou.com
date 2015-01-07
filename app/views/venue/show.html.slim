@@ -40,9 +40,9 @@ div.VenueShow
     div.VenueShow-detail.VenueShow-detail--info.ContentArea
       h2.VenueShow-detailHeading Further info
       ul.VenueShow-infoList
-        li: a href="#{@venue.foursquare_data['url']}" target='_blank' Website
-        li: a href="#{@venue.foursquare_data['shortUrl']}" target='_blank' Foursquare
-        li: a href="https://untappd.com/venue/#{@venue.untappd_id}" target='_blank' Untappd
+        li: a.FancyLink href="#{@venue.foursquare_data['url']}" target='_blank' Website
+        li: a.FancyLink href="#{@venue.foursquare_data['shortUrl']}" target='_blank' Foursquare
+        li: a.FancyLink href="https://untappd.com/venue/#{@venue.untappd_id}" target='_blank' Untappd
         - if @venue.foursquare_data['contact']['twitter'].present?
-          li: a href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target='_blank'
+          li: a.FancyLink href="https://twitter.com/#{@venue.foursquare_data['contact']['twitter']}" target='_blank'
             = "@#{@venue.foursquare_data['contact']['twitter']}"

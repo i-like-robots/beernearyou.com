@@ -1,0 +1,42 @@
+.FancyLink {
+  position: relative;
+  display: inline-block;
+  margin: 0 0.25em;
+  padding: 0 0.25em;
+
+  &::after,
+  &::before {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.25s, left 0.25s, right 0.25s;
+  }
+
+  &::after {
+    content: "]";
+    right: 0;
+  }
+
+  &::before {
+    content: "[";
+    left: 0;
+  }
+
+  &:hover {
+
+    &::after,
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      right: -0.5em;
+    }
+
+    &::before {
+      left: -0.5em;
+    }
+
+  }
+
+}
