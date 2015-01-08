@@ -16,7 +16,7 @@
   }
 }
 
-@keyframes scaleUp {
+@keyframes scaleIn {
   0% {
     opacity: 0;
     transform: scale(0.75);
@@ -27,15 +27,13 @@
   }
 }
 
-@keyframes bounceLeft {
-  50% {
-    transform: translateX(-10px)
+@keyframes scaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
   }
-}
-
-
-@keyframes bounceRight {
-  50% {
-    transform: translateX(10px)
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
   }
 }

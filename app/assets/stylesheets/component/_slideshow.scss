@@ -81,15 +81,16 @@
   border: 0;
   background: none;
   padding: $base-padding-small;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1;
+  transition: left 0.25s, right 0.25s;
 }
 
 .Slideshow-btn--next {
   right: 0;
 
   &:hover {
-    animation: bounceRight 0.75s ease-out infinite;
+    right: -10px;
   }
 
 }
@@ -98,7 +99,7 @@
   left: 0;
 
   &:hover {
-    animation: bounceLeft 0.75s ease-out infinite;
+    left: -10px;
   }
 
 }
@@ -147,6 +148,12 @@
       transform: scale(1);
     }
 
+  }
+
+  @include respond-above("large") {
+    width: 16px;
+    height: 16px;
+    margin: 0 8px;
   }
 
 }

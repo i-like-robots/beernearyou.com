@@ -26,7 +26,7 @@ window.app.view.venueShow = function() {
   if ($lightbox.length && $slideshow.length) {
     var trigger;
 
-    new ToggleExpanded($lightbox).init();
+    new ToggleExpanded($lightbox, { animated: true }).init();
 
     $lightbox
       .one("toggle:open", function() {
