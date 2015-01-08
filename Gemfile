@@ -58,3 +58,10 @@ group :development do
   gem 'spring'
 
 end
+
+group :production do
+
+  # Use Unicorn for serving app as a rack service
+  gem 'unicorn'
+
+end

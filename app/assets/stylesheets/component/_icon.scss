@@ -1,7 +1,7 @@
 .Icon::after {
   content: "";
   display: inline-block;
-  background: image-url("sprites.svg") no-repeat;
+  background: url(image_path("sprites.svg")) no-repeat;
   // Size background vertically, each row of icons is 100%
   background-size: auto 200%;
   width: 1em;

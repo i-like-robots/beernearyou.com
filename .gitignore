@@ -16,3 +16,6 @@
 .ruby-version
 .ruby-gemset
 config/database.yml
+
+# Ignore precompile assets
+public/assets
