@@ -18,10 +18,14 @@ ToggleExpanded.prototype.init = function() {
 ToggleExpanded.prototype._onClick = function() {
   var expanded = this.$target.hasClass("is-open");
 
-  if (this.options.animated && (window.onanimationend !== undefined || window.onwebkitanimationend !== undefined)) {
-    this.$target
-      .addClass("is-animating")
-      .one("animationend webkitAnimationEnd", $.proxy(this._onAnimationEnd, this));
+  if (this.options.animated) {
+    if (window.onanimationend !== undefined || window.onwebkitanimationend !== undefined) {
+      this.$target
+        .addClass("is-animating")
+        .one("animationend webkitAnimationEnd", $.proxy(this._onAnimationEnd, this));
+    } else {
+      this._onAnimationEnd();
+    }
   }
 
   this.$target
