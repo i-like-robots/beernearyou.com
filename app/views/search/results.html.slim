@@ -4,20 +4,23 @@
 
   - content_for(:page_title, 'Search error')
 
-  h1 Search error
+  div.ContentArea.ContentArea--page.ContentArea--padded
 
-  div.Notice.Notice--error
-    | Your location was not provided or could not be found
+    h1 Search error
+
+    div.Notice.Notice--error
+      | Your location was not provided or could not be found.
 
 - elsif @venues.length == 0
 
-  - content_for(:page_title, 'No results')
+  - content_for(:page_title, 'No results found')
 
-  h1 No results
+  div.ContentArea.ContentArea--page.ContentArea--padded
 
-  div.Notice.Notice--warning
-    | No results were found for your search, 
-    a href="/search" Try again?
+    h1 No results found
+
+    div.Notice.Notice--warning
+      | No results could be found for your search.
 
 - else
 

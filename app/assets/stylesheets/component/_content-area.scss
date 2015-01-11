@@ -9,3 +9,7 @@
 .ContentArea--padded {
   @extend %base-padding;
 }
+
+.ContentArea--page {
+  margin-bottom: base-margin("bottom");
+}
