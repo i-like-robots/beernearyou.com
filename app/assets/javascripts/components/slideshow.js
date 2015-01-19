@@ -1,7 +1,8 @@
 function Slideshow($target, options) {
   var defaults = {
     nextText: "Next",
-    prevText: "Prev"
+    prevText: "Prev",
+    transition: false
   };
 
   this.$target = $target;
@@ -50,10 +51,10 @@ Slideshow.prototype.to = function(x) {
 
   this.$progress.children().removeClass("is-current").eq(current).addClass("is-current");
 
-  if (window.ontransitionend !== undefined || window.onwebkittransitionend !== undefined) {
+  if (this.options.transition) {
     this.$target
       .addClass("is-transitioning")
-      .one("transitionend webkitTransitionEnd", $.proxy(this._onTransitionEnd, this));
+      .one(this.options.transition, $.proxy(this._onTransitionEnd, this));
   } else {
     this._onTransitionEnd();
   }

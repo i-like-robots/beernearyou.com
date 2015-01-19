@@ -24,34 +24,18 @@ window.app.view.venueShow = function() {
   var $slideshow = $("#slideshow");
 
   if ($lightbox.length && $slideshow.length) {
-    var trigger;
+    new Lightbox($lightbox).init();
+    new ToggleExpanded($lightbox, { animation: window.support.prefix("animationEnd") }).init();
 
-    new ToggleExpanded($lightbox, { animated: true }).init();
+    $lightbox.one("toggle:open", function() {
+      var options = {
+        prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
+        nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>",
+        transition: window.support.prefix("transitionEnd")
+      };
 
-    $lightbox
-      .one("toggle:open", function() {
-        var options = {
-          prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
-          nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>"
-        };
-
-        new Slideshow($slideshow, options).init();
-      })
-      .on("toggle:open", function() {
-        trigger = document.activeElement;
-
-        $slideshow.focus();
-
-        $(window).on("keyup.lightbox", function(e) {
-          if (e.keyCode == 27) {
-            $lightbox.find("[aria-controls='lightbox']").click();
-          }
-        });
-      })
-      .on("toggle:close", function() {
-        $(window).off(".lightbox");
-        trigger.focus();
-      });
+      new Slideshow($slideshow, options).init();
+    });
   }
 
 };

@@ -24,8 +24,8 @@ window.app.view.searchResults = function() {
     }));
 
     // Live result updates
-    if ($results.is(".is-live") && window.support.check("geolocation")) {
-      new LiveResults($results, { compass: window.support.check("deviceOrientation") }).init();
+    if ($results.is(".is-live") && window.support.feature("geolocation")) {
+      new LiveResults($results, { compass: window.support.feature("deviceOrientation") }).init();
     }
   }
 

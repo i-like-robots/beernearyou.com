@@ -10,7 +10,7 @@ window.app.view.global = function() {
   // Search nearby geolocation
   var $nearby = $("#search-nearby");
 
-  if ($nearby.length && window.support.check("geolocation")) {
+  if ($nearby.length && window.support.feature("geolocation")) {
     new Nearby($nearby).init();
   }
 };

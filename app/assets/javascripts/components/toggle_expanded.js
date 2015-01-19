@@ -1,6 +1,6 @@
 function ToggleExpanded($target, options) {
   var defaults = {
-    animated: false
+    animation: false
   };
 
   this.$target = $target;
@@ -18,14 +18,10 @@ ToggleExpanded.prototype.init = function() {
 ToggleExpanded.prototype._onClick = function() {
   var expanded = this.$target.hasClass("is-open");
 
-  if (this.options.animated) {
-    if (window.onanimationend !== undefined || window.onwebkitanimationend !== undefined) {
-      this.$target
-        .addClass("is-animating")
-        .one("animationend webkitAnimationEnd", $.proxy(this._onAnimationEnd, this));
-    } else {
-      this._onAnimationEnd();
-    }
+  if (this.options.animation) {
+    this.$target
+      .addClass("is-animating")
+      .one(this.options.animation, $.proxy(this._onAnimationEnd, this));
   }
 
   this.$target
@@ -38,6 +34,5 @@ ToggleExpanded.prototype._onClick = function() {
 
 ToggleExpanded.prototype._onAnimationEnd = function(e) {
   if (e.target != this.$target.get(0)) return;
-
   this.$target.removeClass("is-animating");
 };

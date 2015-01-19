@@ -9,27 +9,64 @@ function Support(options) {
 }
 
 Support.prototype.init = function() {
-  var test, result, prefix;
-
-  this.results = {};
-
-  for (test in this.tests) {
-    result = this.results[test] = this.tests[test]();
-    prefix = result ? this.options.supportPrefix : this.options.noSupportPrefix;
-
-    if (this.options.addClassNames) {
-      document.documentElement.className += " " + prefix + "-" + test;
-    }
-  }
+  this.features = this._runFeatures();
+  this.prefixes = this._runPrefixes();
 
   return this;
 };
 
-Support.prototype.check = function(feature) {
-  return this.results[feature];
+Support.prototype._runFeatures = function() {
+  var test;
+  var results = {};
+
+  for (test in this.featureTests) {
+    results[test] = this.featureTests[test]();
+
+    if (this.options.addClassNames) {
+      this._addClass(test, results[test]);
+    }
+  }
+
+  return results;
 };
 
-Support.prototype.tests = {
+Support.prototype._runPrefixes = function() {
+  var test, prefixes, prefix;
+  var el = document.createElement("div");
+  var results = {};
+
+  for (test in this.prefixTests) {
+    prefixes = this.prefixTests[test]();
+
+    for (prefix in prefixes) {
+      if (el.style[prefix] !== undefined) {
+        results[test] = prefixes[prefix];
+        break;
+      }
+    }
+
+    if (this.options.addClassNames) {
+      this._addClass(test, results[test]);
+    }
+  }
+
+  return results;
+};
+
+Support.prototype._addClass = function(test, supported) {
+  var prefix = supported ? this.options.supportPrefix : this.options.noSupportPrefix;
+  document.documentElement.className += " " + prefix + "-" + test;
+};
+
+Support.prototype.feature = function(feature) {
+  return this.features[feature];
+};
+
+Support.prototype.prefix = function(feature) {
+  return this.prefixes[feature];
+};
+
+Support.prototype.featureTests = {
 
   svg: function() {
     return "SVGAngle" in window;
@@ -41,6 +78,26 @@ Support.prototype.tests = {
 
   deviceOrientation: function() {
     return "DeviceOrientationEvent" in window && "orientation" in window;
+  }
+
+};
+
+Support.prototype.prefixTests = {
+
+  transitionEnd: function() {
+    return {
+      transition: "transition",
+      MozTransition: "transitionend",
+      WebkitTransition: "webkitTransitionEnd"
+    };
+  },
+
+  animationEnd: function() {
+    return {
+      animation: "animationend",
+      MozAnimation: "animationend",
+      webkitAnimation: "webkitAnimationEnd"
+    };
   }
 
 };
