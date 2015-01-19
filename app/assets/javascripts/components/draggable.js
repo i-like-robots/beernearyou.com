@@ -21,7 +21,7 @@ Draggable.prototype.teardown = function() {
 };
 
 Draggable.prototype.reset = function() {
-  this.$target.css(this._prop("css"), "").removeClass("is-active");
+  this.$target.css("transform", "").removeClass("is-active");
 };
 
 Draggable.prototype._onStart = function(e) {
@@ -38,7 +38,7 @@ Draggable.prototype._onStart = function(e) {
 
   this.$target
     .addClass("is-active")
-    .css(this._prop("css"), this._calcRelativePosition(pointerPosition));
+    .css("transform", this._translate(this._calcRelativePosition(pointerPosition)));
 
   $(window)
     .on("mouseup.drag touchend.drag", $.proxy(this._onEnd, this))
@@ -55,7 +55,7 @@ Draggable.prototype._onMove = function(e) {
     this._startGesture(pointerPosition, direction);
   }
 
-  this.$target.css(this._prop("css"), this._calcRelativePosition(this.currentPosition = pointerPosition));
+  this.$target.css("transform", this._translate(this._calcRelativePosition(this.currentPosition = pointerPosition)));
 };
 
 Draggable.prototype._onEnd = function(e) {
@@ -74,8 +74,8 @@ Draggable.prototype._onEnd = function(e) {
 };
 
 Draggable.prototype._startInteraction = function(position) {
-  var targetOffset = this.$target.offsetParent().offset()[this._prop("css")];
-  var pointerOffset = position - this.$target.offset()[this._prop("css")];
+  var targetOffset = this.$target.offsetParent().offset()[this._prop("offsetDirection")];
+  var pointerOffset = position - this.$target.offset()[this._prop("offsetDirection")];
 
   this.interaction = {
     offset: targetOffset + pointerOffset,
@@ -92,11 +92,11 @@ Draggable.prototype._startGesture = function(position, direction) {
 };
 
 Draggable.prototype._getPosition = function(e) {
-  return (e.originalEvent.touches ? e.originalEvent.touches[0] : e)[this._prop("position")];
+  return (e.originalEvent.touches ? e.originalEvent.touches[0] : e)[this._prop("pageAxis")];
 };
 
 Draggable.prototype._calcVelocity = function(startGesture, endGesture) {
-  var percentage = 100 / window[this._prop("viewport")];
+  var percentage = 100 / window[this._prop("innerDimension")];
   var distance = percentage * (startGesture.position - endGesture.position);
   var time = endGesture.time - startGesture.time;
   return Math.abs(distance / time);
@@ -106,21 +106,27 @@ Draggable.prototype._calcRelativePosition = function(position) {
   return position - this.interaction.offset;
 };
 
-Draggable.prototype._prop = function(prop) {
+Draggable.prototype._translate = function(value) {
+  return this._prop("translateAxis").replace("*", value);
+};
+
+Draggable.prototype._prop = function(prop, axis) {
   var props = {
     vertical: {
-      css: "top",
-      position: "pageY",
-      viewport: "innerHeight",
+      pageAxis: "pageY",
+      offsetDirection: "top",
+      translateAxis: "translateY(*px)",
+      innerDimension: "innerHeight",
       directions: ["up", "down"]
     },
     horizontal: {
-      css: "left",
-      position: "pageX",
-      viewport: "innerWidth",
+      pageAxis: "pageX",
+      offsetDirection: "left",
+      translateAxis: "translateX(*px)",
+      innerDimension: "innerWidth",
       directions: ["left", "right"]
     }
   };
 
-  return props[this.options.axis][prop];
+  return props[axis || this.options.axis][prop];
 };

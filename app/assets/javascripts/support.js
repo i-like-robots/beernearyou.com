@@ -86,7 +86,7 @@ Support.prototype.prefixTests = {
 
   transitionEnd: function() {
     return {
-      transition: "transition",
+      transition: "transitionend",
       MozTransition: "transitionend",
       WebkitTransition: "webkitTransitionEnd"
     };

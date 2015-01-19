@@ -34,6 +34,10 @@
     transform: translateX(0);
   }
 
+  &.is-active {
+    transition: none;
+  }
+
 }
 
 .Slideshow-frameContent {

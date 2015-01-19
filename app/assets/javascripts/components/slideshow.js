@@ -1,5 +1,6 @@
 function Slideshow($target, options) {
   var defaults = {
+    touch: false,
     nextText: "Next",
     prevText: "Prev",
     transition: false
@@ -26,24 +27,21 @@ Slideshow.prototype.init = function() {
   }
 
   this.$target
+    .attr("tabindex", 0)
     .append(this.$progress)
     .on("keyup", $.proxy(this._onKeyup, this));
 
-  this.to(0);
-
-  if (window.ontouchstart !== undefined) {
-    this.draggable = this._draggable(this.$frames.eq(0));
-  }
+  this.to(0, true);
 
   return this;
 };
 
-Slideshow.prototype.to = function(x) {
+Slideshow.prototype.to = function(x, firstRun) {
   var current = this._loop(x);
   var prev = this._loop(current - 1);
   var next = this._loop(current + 1);
 
-  this.$frames.removeClass("is-next is-prev is-current");
+  !firstRun && this.$frames.removeClass("is-next is-prev is-current") && this._lock();
 
   this._preload(this.$frames.eq(current).addClass("is-current"));
   this._preload(this.$frames.eq(prev).addClass("is-prev"));
@@ -51,21 +49,25 @@ Slideshow.prototype.to = function(x) {
 
   this.$progress.children().removeClass("is-current").eq(current).addClass("is-current");
 
-  if (this.options.transition) {
+  if (!firstRun && this.options.transition) {
     this.$target
       .addClass("is-transitioning")
-      .one(this.options.transition, $.proxy(this._onTransitionEnd, this));
+      .on(this.options.transition, $.proxy(this._onTransitionend, this));
   } else {
-    this._onTransitionEnd();
+    this._unlock();
   }
 };
 
 Slideshow.prototype.prev = function() {
-  this.to(this._current() - 1);
+  this.to(this.current() - 1);
 };
 
 Slideshow.prototype.next = function() {
-  this.to(this._current() + 1);
+  this.to(this.current() + 1);
+};
+
+Slideshow.prototype.current = function() {
+  return this.$frames.filter(".is-current").index();
 };
 
 Slideshow.prototype._onKeyup = function(e) {
@@ -86,21 +88,13 @@ Slideshow.prototype._onTouchend = function(position, direction, time, velocity) 
   if (velocity > 0.05 || (direction == "left" && quadrant < 25) || (direction == "right" && quadrant > 75)) {
     this[action]();
   } else {
-    this.draggable.reset();
+    this._draggable.reset();
   }
 };
 
-Slideshow.prototype._onTransitionEnd = function() {
-  this.$target.removeClass("is-transitioning");
-
-  if (this.draggable) {
-    this.draggable.teardown();
-    this.draggable = this._draggable(this.$frames.eq(this._current()));
-  }
-};
-
-Slideshow.prototype._current = function() {
-  return this.$frames.filter(".is-current").index();
+Slideshow.prototype._onTransitionend = function(e) {
+  this.$frames.is(e.target) && this.$target.removeClass("is-transitioning").off(this.options.transition);
+  this._unlock();
 };
 
 Slideshow.prototype._loop = function(x) {
@@ -108,12 +102,9 @@ Slideshow.prototype._loop = function(x) {
   return x > maximum ? 0 : (x < 0 ? maximum : x);
 };
 
-Slideshow.prototype._draggable = function($frame) {
-  this.draggable = new Draggable($frame, {
-    callbackEnd: $.proxy(this._onTouchend, this)
-  });
-
-  return this.draggable.init();
+Slideshow.prototype._initDraggable = function($frame) {
+  var options = { callbackEnd: $.proxy(this._onTouchend, this) };
+  this._draggable = new Draggable($frame, options).init();
 };
 
 Slideshow.prototype._preload = function($frame) {
@@ -126,4 +117,14 @@ Slideshow.prototype._preload = function($frame) {
     .attr("alt", $img.attr("data-alt"))
     .removeAttr("data-src data-alt")
     .addClass("is-loaded");
+};
+
+Slideshow.prototype._lock = function() {
+  this.$btnPrev.add(this.$btnNext).prop("disabled", true);
+  this._draggable && this._draggable.teardown();
+};
+
+Slideshow.prototype._unlock = function() {
+  this.$btnPrev.add(this.$btnNext).prop("disabled", false);
+  this.options.touch && this._initDraggable(this.$frames.eq(this.current()));
 };

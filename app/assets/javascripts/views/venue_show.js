@@ -31,7 +31,8 @@ window.app.view.venueShow = function() {
       var options = {
         prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
         nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>",
-        transition: window.support.prefix("transitionEnd")
+        transition: window.support.prefix("transitionEnd"),
+        touch: window.ontouchstart !== undefined
       };
 
       new Slideshow($slideshow, options).init();
