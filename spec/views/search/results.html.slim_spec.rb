@@ -27,8 +27,7 @@ RSpec.describe "search/results", :type => :view do
       render
 
       expect(rendered).to have_selector('.Notice--warning')
-      expect(rendered).to have_content(/No results were found/)
-      expect(rendered).to have_link('Try again?')
+      expect(rendered).to have_content(/No results could be found for your search/)
     end
 
   end

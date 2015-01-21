@@ -8,14 +8,18 @@ class SuggestionController < ApplicationController
     @suggestion = Suggestion.new(suggestion_params)
 
     if @suggestion.save
-      flash.now[:success] = 'Suggestion saved'
-      SuggestionMailer.new_suggestion_email(@suggestion).deliver
-    else
-      error = @suggestion.errors.first
-      flash.now[:error] = "Suggestion failed, #{error.last}"
-    end
+      mail = SuggestionMailer.new_suggestion_email(@suggestion)
+      mail.deliver
 
-    render :new
+      flash.now[:success] = 'Suggestion saved'
+      redirect_to(action: 'success')
+    else
+      flash.now[:error] = "Suggestion failed, #{@suggestion.errors.first.last}"
+      render :new
+    end
+  end
+
+  def success
   end
 
   private

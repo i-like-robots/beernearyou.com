@@ -30,19 +30,4 @@ RSpec.describe "suggestion/new", :type => :view do
 
   end
 
-  context 'on success' do
-
-    let(:persisted?) { true }
-
-    it 'displays the flash[:success] message' do
-      flash.now[:success] = 'Success'
-
-      render
-
-      expect(rendered).to have_selector('.Notice--success')
-      expect(rendered).to have_content(/Thank you for your suggestion!/)
-    end
-
-  end
-
 end

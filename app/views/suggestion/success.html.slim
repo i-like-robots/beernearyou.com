@@ -1,0 +1,12 @@
+- content_for(:page_title, 'Suggestion saved')
+
+div.ContentArea.ContentArea--page.ContentArea--padded
+  
+  h1 Suggestion saved
+
+  - flash.each do |name, message|
+    p.Notice class="Notice--#{name}" = message
+
+  p Thank you for your suggestion! We'll check it out as soon as we can.
+
+  p => link_to('Suggest another venue', controller: 'suggestion', action: 'new')

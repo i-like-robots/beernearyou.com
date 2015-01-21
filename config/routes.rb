@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'suggestion', to: 'suggestion#new'
   post 'suggestion', to: 'suggestion#create'
+  get 'suggestion/success', to: 'suggestion#success'
 
   get 'search', to: 'search#results'
 
