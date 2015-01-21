@@ -25,11 +25,7 @@ Draggable.prototype.reset = function() {
 };
 
 Draggable.prototype._onStart = function(e) {
-  var touches = e.originalEvent.touches;
-
-  if (touches && touches.length > 1) return;
-
-  e.preventDefault();
+  if (e.originalEvent.touches && e.originalEvent.touches.length > 1) return;
 
   var pointerPosition = this._getPosition(e);
 
@@ -45,6 +41,8 @@ Draggable.prototype._onStart = function(e) {
     .on("mousemove.drag touchmove.drag", $.proxy(this._onMove, this));
 
   this.options.callbackStart(this.currentPosition);
+
+  e.preventDefault();
 };
 
 Draggable.prototype._onMove = function(e) {
@@ -70,7 +68,7 @@ Draggable.prototype._onEnd = function(e) {
 
   this.options.callbackEnd(this.currentPosition, this.gesture.direction, now - this.interaction.time, velocity);
   this.$target.removeClass("is-active");
-  this.interaction = this.gesture = null;
+  this.interaction = this.gesture = undefined;
 };
 
 Draggable.prototype._startInteraction = function(position) {
