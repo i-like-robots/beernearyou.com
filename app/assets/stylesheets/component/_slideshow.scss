@@ -8,7 +8,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
   display: none;
@@ -30,7 +29,6 @@
   }
 
   &.is-current {
-    z-index: 1;
     transform: translateX(0);
   }
 
@@ -80,7 +78,7 @@
 .Slideshow-btn {
   position: absolute;
   top: 50%;
-  z-index: 3;
+  z-index: 1;
   margin-top: -25px;
   border: 0;
   background: none;
@@ -111,7 +109,7 @@
 .Slideshow-progress {
   position: absolute;
   bottom: 10px;
-  z-index: 4;
+  z-index: 2;
   margin-left: 0;
   padding-left: 0;
   width: 100%;

@@ -7,25 +7,41 @@ window.app.view.searchResults = function() {
     new ResultsMap($results, mapbox).init();
 
     // Draggable results panel for small screens
+    var breakpoint = 720;
     var panel = new DraggablePanel($results);
 
-    if (window.innerWidth < 720) {
+    if (window.innerWidth < breakpoint) {
       panel.init();
     }
 
-    $(window).on("resize orientationchange", $.debounce(250, function() {
-      var active = panel.$target.hasClass("is-draggable");
+    $(window).on("resize orientationchange", $.debounce(100, function() {
+      var active = $results.hasClass("is-draggable");
 
-      if (window.innerWidth > 720 && active) {
+      if (window.innerWidth > breakpoint && active) {
         panel.teardown();
-      } else if (window.innerWidth < 720 && !active) {
+      } else if (window.innerWidth < breakpoint && !active) {
         panel.init();
       }
     }));
 
     // Live result updates
     if ($results.is(".is-live") && window.support.feature("geolocation")) {
-      new LiveResults($results, { compass: window.support.feature("deviceOrientation") }).init();
+      var liveResults = new LiveResults($results, {
+        compass: window.support.feature("deviceOrientation")
+      });
+
+      if (window.innerWidth > breakpoint) {
+        liveResults.init();
+      }
+
+      // If the panel is active, only live update results when it is open
+      $results
+        .on("panel:dragstart", function() {
+          panel.isOpen && liveResults.stop();
+        })
+        .on("panel:dragend", function() {
+          panel.isOpen && liveResults.init();
+        });
     }
   }
 

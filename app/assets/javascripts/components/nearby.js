@@ -14,7 +14,7 @@ function Nearby($target, options) {
 }
 
 Nearby.prototype.init = function() {
-  this.$target.one("submit", $.proxy(this._onSubmit, this));
+  this.$target.one("submit", this._onSubmit.bind(this));
   return this;
 };
 
@@ -29,8 +29,8 @@ Nearby.prototype._onSubmit = function(e) {
   };
 
   window.navigator.geolocation.watchPosition(
-    $.proxy(this._onPosition, this),
-    $.proxy(this._onError, this),
+    this._onPosition.bind(this),
+    this._onError.bind(this),
     positionOptions
   );
 };

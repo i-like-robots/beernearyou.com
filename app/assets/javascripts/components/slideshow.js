@@ -17,8 +17,8 @@ Slideshow.prototype.init = function() {
   this.$btnPrev = $("<button class='Slideshow-btn Slideshow-btn--prev'>" + this.options.prevText + "</button>");
   this.$btnNext = $("<button class='Slideshow-btn Slideshow-btn--next'>" + this.options.nextText + "</button>");
 
-  this.$btnPrev.on("click", $.proxy(this.prev, this)).appendTo(this.$target);
-  this.$btnNext.on("click", $.proxy(this.next, this)).appendTo(this.$target);
+  this.$btnPrev.on("click", this.prev.bind(this));
+  this.$btnNext.on("click", this.next.bind(this));
 
   this.$progress = $("<ul class='Slideshow-progress' />");
 
@@ -28,8 +28,8 @@ Slideshow.prototype.init = function() {
 
   this.$target
     .attr("tabindex", 0)
-    .append(this.$progress)
-    .on("keyup", $.proxy(this._onKeyup, this));
+    .on("keyup", this._onKeyup.bind(this))
+    .append(this.$btnPrev, this.$btnNext, this.$progress);
 
   this.to(0, true);
 
@@ -52,7 +52,7 @@ Slideshow.prototype.to = function(x, firstRun) {
   if (!firstRun && this.options.transition) {
     this.$target
       .addClass("is-transitioning")
-      .on(this.options.transition, $.proxy(this._onTransitionend, this));
+      .on(this.options.transition, this._onTransitionend.bind(this));
   } else {
     this._unlock();
   }
@@ -103,7 +103,7 @@ Slideshow.prototype._loop = function(x) {
 };
 
 Slideshow.prototype._initDraggable = function($frame) {
-  var options = { callbackEnd: $.proxy(this._onTouchend, this) };
+  var options = { callbackEnd: this._onTouchend.bind(this) };
   this._draggable = new Draggable($frame, options).init();
 };
 

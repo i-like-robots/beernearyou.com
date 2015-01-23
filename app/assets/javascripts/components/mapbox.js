@@ -12,7 +12,7 @@ function Mapbox($target, options) {
 
 Mapbox.prototype.init = function() {
   $("head").append("<link rel='stylesheet' href='" + this.options.mapboxURL + ".css' />");
-  $.getScript(this.options.mapboxURL + ".js", $.proxy(this._onLoad, this));
+  $.getScript(this.options.mapboxURL + ".js", this._onLoad.bind(this));
   return this;
 };
 

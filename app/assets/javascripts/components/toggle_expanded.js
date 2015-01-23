@@ -12,7 +12,7 @@ function ToggleExpanded($target, options) {
 ToggleExpanded.prototype.init = function() {
   this.$toggle
     .attr("aria-expanded", false)
-    .on("click", $.proxy(this._onClick, this));
+    .on("click", this._onClick.bind(this));
 };
 
 ToggleExpanded.prototype._onClick = function() {
@@ -21,7 +21,7 @@ ToggleExpanded.prototype._onClick = function() {
   if (this.options.animation) {
     this.$target
       .addClass("is-animating")
-      .one(this.options.animation, $.proxy(this._onAnimationEnd, this));
+      .one(this.options.animation, this._onAnimationEnd.bind(this));
   }
 
   this.$target

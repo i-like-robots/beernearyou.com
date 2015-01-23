@@ -11,7 +11,7 @@ function Draggable($target, options) {
 }
 
 Draggable.prototype.init = function() {
-  this.$target.on("mousedown.drag touchstart.drag", this.options.dragTarget, $.proxy(this._onStart, this));
+  this.$target.on("mousedown.drag touchstart.drag", this.options.dragTarget, this._onStart.bind(this));
   return this;
 };
 
@@ -37,8 +37,8 @@ Draggable.prototype._onStart = function(e) {
     .css("transform", this._translate(this._calcRelativePosition(pointerPosition)));
 
   $(window)
-    .on("mouseup.drag touchend.drag", $.proxy(this._onEnd, this))
-    .on("mousemove.drag touchmove.drag", $.proxy(this._onMove, this));
+    .on("mouseup.drag touchend.drag", this._onEnd.bind(this))
+    .on("mousemove.drag touchmove.drag", this._onMove.bind(this));
 
   this.options.callbackStart(this.currentPosition);
 

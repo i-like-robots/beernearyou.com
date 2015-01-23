@@ -11,8 +11,8 @@ Lightbox.prototype.init = function() {
       tabindex: 0,
       role: "dialog"
     })
-    .on("toggle:open", $.proxy(this._onOpen, this))
-    .on("toggle:close", $.proxy(this._onClose, this));
+    .on("toggle:open", this._onOpen.bind(this))
+    .on("toggle:close", this._onClose.bind(this));
 };
 
 Lightbox.prototype._onOpen = function() {
@@ -21,8 +21,8 @@ Lightbox.prototype._onOpen = function() {
   // Firefox doesn't support focusin or focusout
   // https://bugzilla.mozilla.org/show_bug.cgi?id=687787
   $(window)
-    .on("keyup.lightbox", $.proxy(this._onKeyup, this))
-    .on("focusout.lightbox", $.proxy(this._onFocusout, this));
+    .on("keyup.lightbox", this._onKeyup.bind(this))
+    .on("focusout.lightbox", this._onFocusout.bind(this));
 
   this.$target.focus();
 };

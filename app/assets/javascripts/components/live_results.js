@@ -19,25 +19,30 @@ LiveResults.prototype.init = function() {
     timeout: this.options.timeout
   };
 
-  this.watch = window.navigator.geolocation.watchPosition(
-    $.proxy(this._onPosition, this),
-    $.proxy(this._onError, this),
+  this._positionWatcher = window.navigator.geolocation.watchPosition(
+    this._onPosition.bind(this),
+    this._onError.bind(this),
     positionOptions
   );
 
   if (this.options.compass) {
-    this._onOrientationProxy = $.proxy(this._onOrientation, this);
-    window.addEventListener("deviceorientation", this._onOrientationProxy);
+    this._orientationHandler = this._onOrientation.bind(this);
+    window.addEventListener("deviceorientation", $.throttle(10, this._orientationHandler));
   }
 
   return this;
+};
+
+LiveResults.prototype.stop = function() {
+  this._positionWatcher && navigator.geolocation.clearWatch(this._positionWatcher);
+  this._orientationHandler && window.removeEventListener("deviceorientation", this._orientationHandler);
 };
 
 LiveResults.prototype._onPosition = function(pos) {
   this.position = [pos.coords.latitude, pos.coords.longitude];
 
   this.$target.trigger("position:update", [this.position]);
-  this.$results.each($.proxy(this._updateResult, this));
+  this.$results.each(this._updateResult.bind(this));
 };
 
 LiveResults.prototype._onOrientation = function(e) {
@@ -48,7 +53,8 @@ LiveResults.prototype._onOrientation = function(e) {
     // to protect mechanical hard drives but they're
     // useless for accessing direction. Because this
     // can't be detected upfront we'll just cut our losses.
-    window.removeEventListener("deviceorientation", this._onOrientationProxy);
+    window.removeEventListener("deviceorientation", this._onOrientationHandler);
+    return this.options.compass = false;
   }
 
   if (!isNaN(e.webkitCompassHeading)) {
@@ -66,16 +72,12 @@ LiveResults.prototype._onError = function(error) {
 
 LiveResults.prototype._updateResult = function(i) {
   var $result = this.$results.eq(i);
-  var $distance = $result.find(".js-distance");
-  var $compassNeedle = $result.find(".js-compass-needle");
-
-  var destination = [$result.data("lat"), $result.data("lng")];
+  var destination = [ $result.data("lat"), $result.data("lng") ];
   var bearing = this.calculateBearing(this.position, destination);
   var distance = this.calculateDistance(this.position, destination);
 
-  $distance.text(distance.toFixed(2) + " " + this.units());
-
-  $compassNeedle.css("transform", "rotate(" + bearing + "deg)");
+  $result.find(".js-distance").text(distance.toFixed(2) + " " + this.units());
+  $result.find(".js-compass-needle").css("transform", "rotate(" + bearing + "deg)");
 };
 
 LiveResults.prototype._toRadians = function(coordinates) {
