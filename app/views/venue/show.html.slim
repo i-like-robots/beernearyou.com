@@ -26,7 +26,9 @@ div.VenueShow
       p.VenueShow-nearestStation
         = image_tag 'lu.svg', alt: 'London Underground roundel', width: '24', class: 'VenueShow-stationRoundel'
         span.u-hidden Nearest London Underground station
-        = "#{@nearest_station.name}, #{'%.2f' % @nearest_station.distance} miles"
+        = "#{@nearest_station.name} (Zone #{@nearest_station.zone})"
+        br
+        = "#{'%.2f' % @nearest_station.distance} miles"
 
     div.VenueShow-detail.VenueShow-detail--hours.ContentArea
       h2.VenueShow-detailHeading Opening hours
@@ -34,8 +36,9 @@ div.VenueShow
         - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
           li: time = formatted_opening_hours(timeframe)
       - if @venue.foursquare_data['contact']['formattedPhone'].present?
-        p.VenueShow-phone 
-          = "Call #{@venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')}"
+        p.VenueShow-phone
+          a href="tel:#{@venue.foursquare_data['contact']['formattedPhone']}"
+            = "Call #{@venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')}"
 
     div.VenueShow-detail.VenueShow-detail--info.ContentArea
       h2.VenueShow-detailHeading Further info
