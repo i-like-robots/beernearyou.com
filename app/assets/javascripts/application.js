@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery2
 //= require ./config
 //= require ./support
 //= require_tree ./utils

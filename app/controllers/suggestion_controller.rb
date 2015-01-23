@@ -9,7 +9,7 @@ class SuggestionController < ApplicationController
 
     if @suggestion.save
       mail = SuggestionMailer.new_suggestion_email(@suggestion)
-      mail.deliver
+      mail.deliver_now
 
       flash.now[:success] = 'Suggestion saved'
       redirect_to(action: 'success')

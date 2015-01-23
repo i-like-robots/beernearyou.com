@@ -10,7 +10,7 @@ RSpec.describe SuggestionMailer, :type => :mailer do
   end
 
   it 'sends an email' do
-    mail.deliver
+    mail.deliver_now
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 

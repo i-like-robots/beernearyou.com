@@ -18,7 +18,7 @@ RSpec.describe SuggestionController, :type => :controller do
 
       it 'does not save the suggestion' do
         subject
-        expect(assigns(:suggestion).persisted?).to be(false)
+        expect(assigns(:suggestion).persisted?).to eq(false)
       end
 
       it 'renders the new suggestion form' do
@@ -35,15 +35,15 @@ RSpec.describe SuggestionController, :type => :controller do
 
       before(:each) do
         expect(SuggestionMailer).to receive(:new_suggestion_email).and_return(mailer)
-        expect(mailer).to receive(:deliver)
+        expect(mailer).to receive(:deliver_now)
       end
 
       it 'saves the suggestion' do
         subject
 
-        expect(assigns(:suggestion).name).to be(form_data[:name])
-        expect(assigns(:suggestion).url).to be(form_data[:url])
-        expect(assigns(:suggestion).persisted?).to be(true)
+        expect(assigns(:suggestion).name).to eq(form_data[:name])
+        expect(assigns(:suggestion).url).to eq(form_data[:url])
+        expect(assigns(:suggestion).persisted?).to eq(true)
       end
 
       it 'redirects to the success page' do

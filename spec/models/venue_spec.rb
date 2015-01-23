@@ -24,7 +24,8 @@ RSpec.describe Venue, :type => :model do
         actual = instance.coordinates
         expected = [51.5030784148458, -0.224192154875118]
 
-        expect(actual).to eq(expected)
+        expect(actual.first).to be_within(0.01).of(expected.first)
+        expect(actual.last).to be_within(0.01).of(expected.last)
       end
 
     end

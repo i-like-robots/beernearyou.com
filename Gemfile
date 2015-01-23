@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.9'
+gem 'rails', '4.2.0'
 
 # Use Postgres as the database for Active Record
 gem 'pg'
@@ -10,7 +10,7 @@ gem 'pg'
 gem 'geocoder'
 
 # Use Sass for stylesheets
-gem 'sass-rails', '>= 5.0.0'
+gem 'sass-rails', '~> 5.0.0'
 
 # Use autoprefixer for stylesheets
 gem 'autoprefixer-rails'
@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'slim-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 1.3.0'
 
 # Use HTTParty to wrap requests
 gem 'httparty'
@@ -37,9 +37,6 @@ gem 'upmin-admin'
 gem 'dotenv-rails'
 
 group :development, :test do
-
-  # Use Pry for simpler debugging
-  gem 'pry'
 
   # Use Rspec instead of Test::Unit
   gem 'rspec-rails'
@@ -57,11 +54,17 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # Use Pry for simpler debugging
+  gem 'pry'
+
+  # Access an IRB console on exception pages or by using <%%= console %> in views
+  gem 'web-console', '~> 2.0.0'
+
 end
 
 group :production do
 
-  # Use Unicorn for serving app as a rack service
+  # Use Unicorn as the app server
   gem 'unicorn'
 
 end
