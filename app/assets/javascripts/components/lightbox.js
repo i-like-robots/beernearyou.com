@@ -24,17 +24,21 @@ Lightbox.prototype._onOpen = function() {
     .on("keyup.lightbox", this._onKeyup.bind(this))
     .on("focusout.lightbox", this._onFocusout.bind(this));
 
+  // Prevent the document scrolling
+  $("html, body").css("overflow", "hidden");
+
   this.$target.focus();
 };
 
 Lightbox.prototype._onClose = function() {
+  $("html, body").css("overflow", "");
   $(window).off(".lightbox");
   this.trigger.focus();
 };
 
 Lightbox.prototype._onKeyup = function(e) {
   if (e.keyCode == 27) {
-    this.$target.find("[aria-controls='" + this.$target.attr("id") + "']").click();
+    this.$target.find("[aria-controls='" + this.$target.attr("id") + "']").eq(0).click();
   }
 };
 

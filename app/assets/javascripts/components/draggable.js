@@ -1,22 +1,23 @@
 function Draggable($target, options) {
   var defaults = {
-    dragTarget: ".js-draggable",
     callbackStart: $.noop,
     callbackEnd: $.noop,
     axis: "horizontal"
   };
 
   this.$target = $target;
+  this.$dragTarget = $target.find(".js-draggable");
+
   this.options = $.extend({}, defaults, options);
 }
 
 Draggable.prototype.init = function() {
-  this.$target.on("mousedown.drag touchstart.drag", this.options.dragTarget, this._onStart.bind(this));
+  this.$dragTarget.on("mousedown.drag touchstart.drag", this._onStart.bind(this));
   return this;
 };
 
 Draggable.prototype.teardown = function() {
-  $(window).add(this.$target).off(".drag");
+  $(window).add(this.$dragTarget).off(".drag");
   this.reset();
 };
 
