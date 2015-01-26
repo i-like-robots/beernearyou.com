@@ -66,6 +66,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  display: none;
   overflow: hidden;
   background: linear-gradient(to top, rgba($palette-gray-80, .85) 0, rgba($palette-gray-80, 0) 100%);
   padding: $base-padding;
@@ -73,6 +74,11 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: white;
+
+  .is-loaded + & {
+    display: block;
+  }
+
 }
 
 .Slideshow-btn {

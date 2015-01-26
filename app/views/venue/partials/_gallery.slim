@@ -6,12 +6,12 @@ div.Gallery id='gallery' role='widget'
     div.AspectRatio.AspectRatio--16x9
       img.AspectRatio-content src="#{thumb['prefix']}640x360#{thumb['suffix']}" alt="Photo of #{@venue.name}"
 
-      button.Gallery-toggle.Gallery-toggle--open.u-unstyle aria-controls='lightbox' title='Open slideshow'
+      button.Gallery-toggle.u-unstyle aria-controls='lightbox' title='Open slideshow'
         span.Icon.Icon--white.Icon--maximise
           span.u-hidden Open slideshow
 
-  div.Gallery-lightbox id='lightbox'
+  div.Lightbox id='lightbox'
     = render partial: 'venue/partials/slideshow'
-    button.Gallery-toggle.Gallery-toggle--close.u-unstyle aria-controls='lightbox' title='Close slideshow'
+    button.Lightbox-close.u-unstyle aria-controls='lightbox' title='Close slideshow'
       span.Icon.Icon--white.Icon--close
         span.u-hidden Close slideshow

@@ -2,6 +2,7 @@
 @import "config/grid";
 @import "config/layout";
 @import "config/responsive";
+@import "config/style";
 @import "config/typography";
 
 @import "lib/animation";
@@ -25,6 +26,7 @@
 @import "component/gallery";
 @import "component/icon";
 @import "component/input-pair";
+@import "component/lightbox";
 @import "component/notice";
 @import "component/search-box";
 @import "component/slideshow";
