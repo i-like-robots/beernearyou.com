@@ -6,18 +6,26 @@ function Draggable($target, options) {
   };
 
   this.$target = $target;
-  this.$dragTarget = $target.find(".js-draggable");
+  this.draggable = $target.find(".js-draggable").get(0);
 
   this.options = $.extend({}, defaults, options);
 }
 
 Draggable.prototype.init = function() {
-  this.$dragTarget.on("mousedown.drag touchstart.drag", this._onStart.bind(this));
+  // Native event API is ~50% faster than .on()/.off()
+  this._touchcancelHandler = this._onTouchcancel.bind(this);
+  this._touchstartHandler = this._onTouchstart.bind(this);
+  this._touchmoveHandler = this._onTouchmove.bind(this);
+  this._touchendHandler = this._onTouchend.bind(this);
+
+  this.draggable.addEventListener("touchstart", this._touchstartHandler);
+
   return this;
 };
 
 Draggable.prototype.teardown = function() {
-  $(window).add(this.$dragTarget).off(".drag");
+  this.draggable.removeEventListener("touchstart", this._touchstartHandler);
+  this.$target.hasClass("is-active") && this._onTouchcancel();
   this.reset();
 };
 
@@ -25,8 +33,8 @@ Draggable.prototype.reset = function() {
   this.$target.css("transform", "").removeClass("is-active");
 };
 
-Draggable.prototype._onStart = function(e) {
-  if (e.originalEvent.touches && e.originalEvent.touches.length > 1) return;
+Draggable.prototype._onTouchstart = function(e) {
+  if (e.touches && e.touches.length > 1) return;
 
   var pointerPosition = this._getPosition(e);
 
@@ -37,16 +45,16 @@ Draggable.prototype._onStart = function(e) {
     .addClass("is-active")
     .css("transform", this._translate(this._calcRelativePosition(pointerPosition)));
 
-  $(window)
-    .on("mouseup.drag touchend.drag", this._onEnd.bind(this))
-    .on("mousemove.drag touchmove.drag", this._onMove.bind(this));
+  window.addEventListener("touchcancel", this._touchcancelHandler);
+  window.addEventListener("touchmove", this._touchmoveHandler);
+  window.addEventListener("touchend", this._touchendHandler);
 
-  this.options.callbackStart(this.currentPosition);
+  this.options.callbackStart();
 
   e.preventDefault();
 };
 
-Draggable.prototype._onMove = function(e) {
+Draggable.prototype._onTouchmove = function(e) {
   var pointerPosition = this._getPosition(e);
   var direction = this._prop("directions")[+(pointerPosition > this.currentPosition)];
 
@@ -54,22 +62,29 @@ Draggable.prototype._onMove = function(e) {
     this._startGesture(pointerPosition, direction);
   }
 
-  this.$target.css("transform", this._translate(this._calcRelativePosition(this.currentPosition = pointerPosition)));
+  this.$target.css("transform", this._translate(
+    this._calcRelativePosition(this.currentPosition = pointerPosition)
+  ));
 };
 
-Draggable.prototype._onEnd = function(e) {
+Draggable.prototype._onTouchend = function() {
   var now = Date.now();
-
   var velocity = this._calcVelocity(this.gesture, {
     position: this.currentPosition,
     time: now
   });
 
-  $(window).off(".drag");
-
   this.options.callbackEnd(this.currentPosition, this.gesture.direction, now - this.interaction.time, velocity);
-  this.$target.removeClass("is-active");
+
+  this._onTouchcancel();
+};
+
+Draggable.prototype._onTouchcancel = function() {
+  window.removeEventListener("touchmove", this._touchmoveHandler);
+  window.removeEventListener("touchend", this._touchendHandler);
+
   this.interaction = this.gesture = undefined;
+  this.$target.removeClass("is-active");
 };
 
 Draggable.prototype._startInteraction = function(position) {
@@ -91,7 +106,7 @@ Draggable.prototype._startGesture = function(position, direction) {
 };
 
 Draggable.prototype._getPosition = function(e) {
-  return (e.originalEvent.touches ? e.originalEvent.touches[0] : e)[this._prop("pageAxis")];
+  return (e.touches ? e.touches[0] : e)[this._prop("pageAxis")];
 };
 
 Draggable.prototype._calcVelocity = function(startGesture, endGesture) {
