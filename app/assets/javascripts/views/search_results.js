@@ -25,7 +25,7 @@ window.app.view.searchResults = function() {
     }));
 
     // Live result updates
-    if ($results.is(".is-live") && window.support.feature("geolocation")) {
+    $results.is(".is-live") && window.support.feature("geolocation") && $map.one("mapbox:load", function() {
       var liveResults = new LiveResults($results, {
         compass: window.support.feature("deviceOrientation")
       });
@@ -42,7 +42,7 @@ window.app.view.searchResults = function() {
         .on("panel:dragend", function() {
           panel.isOpen && liveResults.init();
         });
-    }
+    });
   }
 
 };

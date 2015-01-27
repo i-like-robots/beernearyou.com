@@ -27,16 +27,28 @@ window.app.view.venueShow = function() {
     new Lightbox($lightbox).init();
     new ToggleExpanded($lightbox, { animation: window.support.prefix("animationEnd") }).init();
 
-    $lightbox.one("toggle:open", function() {
-      var options = {
-        prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
-        nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>",
-        transition: window.support.prefix("transitionEnd"),
-        touch: window.ontouchstart !== undefined
-      };
-
-      new Slideshow($slideshow, options).init();
+    var slideshow = new Slideshow($slideshow, {
+      prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
+      nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>",
+      transition: window.support.prefix("transitionEnd"),
+      touch: window.support.feature("touch")
     });
+
+    $lightbox
+      .one("toggle:open", function() {
+        slideshow.init();
+      })
+      .on("toggle:open", function() {
+        $(window).on("keyup.slideshow", function(e) {
+          if (slideshow.$target.hasClass("is-transitioning")) return;
+
+          e.keyCode == 37 && slideshow.prev();
+          e.keyCode == 39 && slideshow.next();
+        });
+      })
+      .on("toggle:close", function() {
+        $(window).off("keyup.slideshow");
+      });
   }
 
 };

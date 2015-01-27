@@ -7,7 +7,7 @@ function Slideshow($target, options) {
   };
 
   this.$target = $target;
-  this.$frames = this.$target.children();
+  this.$frames = $target.children();
   this.options = $.extend({}, defaults, options);
 }
 
@@ -26,10 +26,7 @@ Slideshow.prototype.init = function() {
     this.$progress.append("<li class='Slideshow-progressStep' />");
   }
 
-  this.$target
-    .attr("tabindex", 0)
-    .on("keyup", this._onKeyup.bind(this))
-    .append(this.$btnPrev, this.$btnNext, this.$progress);
+  this.$target.append(this.$btnPrev, this.$btnNext, this.$progress);
 
   this.to(0, true);
 
@@ -68,17 +65,6 @@ Slideshow.prototype.next = function() {
 
 Slideshow.prototype.current = function() {
   return this.$frames.filter(".is-current").index();
-};
-
-Slideshow.prototype._onKeyup = function(e) {
-  switch (e.keyCode) {
-    case 37:
-      this.prev();
-      break;
-    case 39:
-      this.next();
-      break;
-  }
 };
 
 Slideshow.prototype._onTouchend = function(position, direction, time, velocity) {

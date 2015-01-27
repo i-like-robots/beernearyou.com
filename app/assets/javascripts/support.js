@@ -72,6 +72,10 @@ Support.prototype.featureTests = {
     return "SVGAngle" in window;
   },
 
+  touch: function() {
+    return window.ontouchstart !== undefined;
+  },
+
   geolocation: function() {
     return "geolocation" in window.navigator;
   },
