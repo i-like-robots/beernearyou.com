@@ -1,9 +1,7 @@
 function LiveResults($target, options) {
   var defaults = {
     metric: false,
-    compass: true,
-    timeout: 10000,
-    frequency: 5000
+    compass: true
   };
 
   this.$target = $target;
@@ -14,15 +12,10 @@ function LiveResults($target, options) {
 }
 
 LiveResults.prototype.init = function() {
-  var positionOptions = {
-    enableHighAccuracy: true,
-    timeout: this.options.timeout
-  };
-
-  this._positionWatcher = window.navigator.geolocation.watchPosition(
+  window.navigator.geolocation.watchPosition(
     this._onPosition.bind(this),
     this._onError.bind(this),
-    positionOptions
+    window.app.geolocation
   );
 
   if (this.options.compass) {
@@ -34,7 +27,6 @@ LiveResults.prototype.init = function() {
 };
 
 LiveResults.prototype.stop = function() {
-  this._positionWatcher && navigator.geolocation.clearWatch(this._positionWatcher);
   this._orientationHandler && window.removeEventListener("deviceorientation", this._orientationHandler);
 };
 

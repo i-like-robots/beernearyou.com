@@ -9,4 +9,10 @@ window.app.mapbox = {
   accessToken: "<%= ENV['MAPBOX_TOKEN'] %>"
 };
 
+window.app.geolocation = {
+  enableHighAccuracy: true,
+  maximumAge: 10000,
+  timeout: 10000
+};
+
 window.app.view = {};
