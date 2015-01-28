@@ -1,12 +1,10 @@
 function LiveResults($target, options) {
   var defaults = {
-    metric: false,
-    compass: true
+    metric: false
   };
 
   this.$target = $target;
   this.$results = $target.find(".js-result");
-  this.$compasses = $target.find(".js-compass");
 
   this.options = $.extend({}, defaults, options);
 }
@@ -18,16 +16,7 @@ LiveResults.prototype.init = function() {
     window.app.geolocation
   );
 
-  if (this.options.compass) {
-    this._orientationHandler = this._onOrientation.bind(this);
-    window.addEventListener("deviceorientation", this._orientationHandler);
-  }
-
   return this;
-};
-
-LiveResults.prototype.stop = function() {
-  this._orientationHandler && window.removeEventListener("deviceorientation", this._orientationHandler);
 };
 
 LiveResults.prototype._onPosition = function(pos) {
@@ -35,24 +24,6 @@ LiveResults.prototype._onPosition = function(pos) {
 
   this.$target.trigger("position:update", [this.position]);
   this.$results.each(this._updateResult.bind(this));
-};
-
-LiveResults.prototype._onOrientation = function(e) {
-  if (e.alpha === null) {
-    // Devices may have a gyroscope as a safety measure
-    // to protect mechanical hard drives but they're
-    // useless for accessing direction. Because this
-    // can't be detected upfront we'll just cut our losses.
-    window.removeEventListener("deviceorientation", this._orientationHandler);
-    return this.options.compass = false;
-  }
-
-  var direction = window.orientation + (!isNaN(e.webkitCompassHeading) ? e.webkitCompassHeading : (360 - e.alpha));
-
-  if (!this._lastDirection || Math.abs(this._lastDirection - direction) > 1) {
-    this.$compasses.css("transform", "rotate(" + -direction + "deg)");
-    this._lastDirection = direction;
-  }
 };
 
 LiveResults.prototype._onError = function(error) {

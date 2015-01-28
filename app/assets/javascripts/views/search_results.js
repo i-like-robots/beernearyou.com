@@ -1,4 +1,5 @@
 window.app.view.searchResults = function() {
+  var breakpoint = 720;
   var $map = $("#map");
   var $results = $("#results");
 
@@ -7,12 +8,9 @@ window.app.view.searchResults = function() {
     new ResultsMap($results, mapbox).init();
 
     // Draggable results panel for small screens
-    var breakpoint = 720;
     var panel = new DraggablePanel($results);
 
-    if (window.innerWidth < breakpoint) {
-      panel.init();
-    }
+    window.innerWidth < breakpoint && panel.init();
 
     $(window).on("resize orientationchange", $.debounce(100, function() {
       var active = $results.hasClass("is-draggable");
@@ -26,21 +24,21 @@ window.app.view.searchResults = function() {
 
     // Live result updates
     $results.is(".is-live") && window.support.feature("geolocation") && $map.one("mapbox:load", function() {
-      var liveResults = new LiveResults($results, {
-        compass: window.support.feature("deviceOrientation")
-      });
+      new LiveResults($results).init();
 
-      if (window.innerWidth > breakpoint) {
-        liveResults.init();
-      }
+      if (!window.support.feature("deviceOrientation")) return;
+
+      var orientation = new Orientation($results)
+
+      window.innerWidth > breakpoint && orientation.init();
 
       // If the panel is active, only live update results when it is open
       $results
         .on("panel:dragstart", function() {
-          panel.isOpen && liveResults.stop();
+          panel.isOpen && orientation.teardown();
         })
         .on("panel:dragend", function() {
-          panel.isOpen && liveResults.init();
+          panel.isOpen && orientation.init();
         });
     });
   }
