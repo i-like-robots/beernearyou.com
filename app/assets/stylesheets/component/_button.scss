@@ -3,6 +3,7 @@
   display: inline-block;
   transition: color 0.25s, background 0.25s, border 0.25s;
   background-color: transparent;
+  white-space: nowrap;
   text-decoration: none;
 
   &::-moz-focus-inner {

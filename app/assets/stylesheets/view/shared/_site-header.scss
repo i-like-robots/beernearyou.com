@@ -6,6 +6,8 @@
   z-index: 100;
 
   + * {
+    // IE10 doesn't recognise the main element
+    display: block;
     margin-top: $header-height-small;
   }
 

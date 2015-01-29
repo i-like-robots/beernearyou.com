@@ -7,6 +7,10 @@
     background: white;
   }
 
+  &::placeholder {
+    color: $palette-gray-40;
+  }
+
 }
 
 .TextInput--fill {

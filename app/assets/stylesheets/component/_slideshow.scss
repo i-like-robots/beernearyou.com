@@ -1,3 +1,5 @@
+$slideshow-img-size: 640px;
+
 .Slideshow {
   position: relative;
   overflow: hidden;
@@ -41,10 +43,15 @@
 .Slideshow-frameContent {
   position: relative;
   top: 50%;
-  display: table;
-  margin-right: auto;
-  margin-left: auto;
   transform: translateY(-50%);
+
+  // IE10 baulks at the display: table shrink-wrap hack
+  @media screen and (min-width: $slideshow-img-size) {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
 }
 
 .Slideshow-frameImage {
@@ -122,7 +129,7 @@
   text-align: center;
 
   // Avoid clashing with image caption
-  @media screen and (max-height: 640px) {
+  @media screen and (max-height: $slideshow-img-size) {
     display: none;
   }
 
