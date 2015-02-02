@@ -11,11 +11,13 @@
   }
 
   &.is-closed {
+    overflow: hidden;
     transform: translateY(80%);
     transform: translateY(calc(100% - 46px));
   }
 
   &.is-active {
+    overflow: auto;
     transition: none;
   }
 
@@ -23,7 +25,7 @@
 
 .DraggablePanel-toggle {
   display: none;
-  margin-bottom: base-margin("bottom");
+  margin-bottom: base-margin("bottom", "small");
   padding: $base-padding-small;
   border-bottom: 1px solid $palette-gray-20;
 

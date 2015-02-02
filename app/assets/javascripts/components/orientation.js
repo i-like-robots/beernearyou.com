@@ -11,6 +11,7 @@ Orientation.prototype.init = function() {
 
 Orientation.prototype.teardown = function() {
   window.removeEventListener("deviceorientation", this._orientationHandler);
+  this._animationFrame && window.cancelAnimationFrame(this._animationFrame);
   this.$rotate.css("transform", "");
   this._lastDirection = undefined;
 };
@@ -27,6 +28,14 @@ Orientation.prototype._onOrientation = function(e) {
   var direction = window.orientation + (!isNaN(e.webkitCompassHeading) ? e.webkitCompassHeading : (360 - e.alpha));
 
   if (!this._lastDirection || Math.abs(this._lastDirection - direction) > 1) {
-    this.$rotate.css("transform", "rotate(" + -(this._lastDirection = direction) + "deg)");
+    this._setRotation(-(this._lastDirection = direction));
   }
+};
+
+Orientation.prototype._setRotation = function(rotation) {
+  var callback = function() {
+    this.$rotate.css("transform", "rotate(" + rotation + "deg)");
+  }.bind(this);
+
+  "requestAnimationFrame" in window ? (this._animationFrame = window.requestAnimationFrame(callback)) : callback();
 };

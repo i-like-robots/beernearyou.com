@@ -1,49 +1,48 @@
 function Draggable($target, options) {
   var defaults = {
+    handle: ".js-draggable",
     callbackStart: $.noop,
     callbackEnd: $.noop,
-    axis: "horizontal"
+    axis: "horizontal",
   };
 
-  this.$target = $target;
-  this.draggable = $target.find(".js-draggable").get(0);
-
   this.options = $.extend({}, defaults, options);
-}
 
-Draggable.prototype.init = function() {
+  this.$target = $target;
+  this.$handle = $target.find(this.options.handle);
+
   // Native event API is ~50% faster than .on()/.off()
   this._touchcancelHandler = this._onTouchcancel.bind(this);
   this._touchstartHandler = this._onTouchstart.bind(this);
   this._touchmoveHandler = this._onTouchmove.bind(this);
   this._touchendHandler = this._onTouchend.bind(this);
+}
 
-  this.draggable.addEventListener("touchstart", this._touchstartHandler);
-
+Draggable.prototype.init = function() {
+  this.$handle[0].addEventListener("touchstart", this._touchstartHandler);
   return this;
 };
 
 Draggable.prototype.teardown = function() {
-  this.draggable.removeEventListener("touchstart", this._touchstartHandler);
+  this.$handle[0].removeEventListener("touchstart", this._touchstartHandler);
   this.$target.hasClass("is-active") && this._onTouchcancel();
   this.reset();
 };
 
 Draggable.prototype.reset = function() {
+  this._animationFrame && window.cancelAnimationFrame(this._animationFrame);
   this.$target.css("transform", "").removeClass("is-active");
 };
 
 Draggable.prototype._onTouchstart = function(e) {
   if (e.touches && e.touches.length > 1) return;
 
-  var pointerPosition = this._getPosition(e);
+  var pointerPosition = this.currentPosition = this._getPosition(e);
 
   this._startInteraction(pointerPosition);
-  this._startGesture(pointerPosition);
 
-  this.$target
-    .addClass("is-active")
-    .css("transform", this._translate(this._calcRelativePosition(pointerPosition)));
+  this.$target.addClass("is-active");
+  this._setPosition(this._calcRelativePosition(pointerPosition));
 
   window.addEventListener("touchcancel", this._touchcancelHandler);
   window.addEventListener("touchmove", this._touchmoveHandler);
@@ -58,13 +57,11 @@ Draggable.prototype._onTouchmove = function(e) {
   var pointerPosition = this._getPosition(e);
   var direction = this._prop("directions")[+(pointerPosition > this.currentPosition)];
 
-  if (direction != this.gesture.direction) {
+  if (!this.gesture || direction != this.gesture.direction) {
     this._startGesture(pointerPosition, direction);
   }
 
-  this.$target.css("transform", this._translate(
-    this._calcRelativePosition(this.currentPosition = pointerPosition)
-  ));
+  this._setPosition(this._calcRelativePosition(this.currentPosition = pointerPosition));
 };
 
 Draggable.prototype._onTouchend = function() {
@@ -88,8 +85,9 @@ Draggable.prototype._onTouchcancel = function() {
 };
 
 Draggable.prototype._startInteraction = function(position) {
-  var targetOffset = this.$target.offsetParent().offset()[this._prop("offsetDirection")];
-  var pointerOffset = position - this.$target.offset()[this._prop("offsetDirection")];
+  var offsetDirection = this._prop("offsetDirection");
+  var pointerOffset = position - this.$target.offset()[offsetDirection];
+  var targetOffset = this.$target.offsetParent().offset()[offsetDirection];
 
   this.interaction = {
     offset: targetOffset + pointerOffset,
@@ -107,6 +105,14 @@ Draggable.prototype._startGesture = function(position, direction) {
 
 Draggable.prototype._getPosition = function(e) {
   return (e.touches ? e.touches[0] : e)[this._prop("pageAxis")];
+};
+
+Draggable.prototype._setPosition = function(pos) {
+  var callback = function() {
+    this.$target.css("transform", this._translate(pos));
+  }.bind(this);
+
+  "requestAnimationFrame" in window ? (this._animationFrame = window.requestAnimationFrame(callback)) : callback();
 };
 
 Draggable.prototype._calcVelocity = function(startGesture, endGesture) {

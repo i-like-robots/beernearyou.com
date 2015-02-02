@@ -29,7 +29,6 @@
 
 .SearchResults-results {
   @extend %base-shadow-low;
-  overflow: auto;
   background: white;
 
   @include respond-above("medium") {
@@ -39,6 +38,7 @@
     left: auto;
     width: 50%;
     height: 100%;
+    overflow: auto;
   }
 
   @include respond-above("large") {
