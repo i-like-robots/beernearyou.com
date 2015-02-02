@@ -31,7 +31,7 @@ gem 'httparty'
 gem 'humanizer'
 
 # Use Upmin to create an administration area
-gem 'upmin-admin'
+gem 'upmin-admin', github: 'upmin/upmin-admin-ruby'
 
 # Use .env file for local configuration
 gem 'dotenv-rails'
