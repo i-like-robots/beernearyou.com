@@ -16,6 +16,8 @@ function Draggable($target, options) {
   this._touchstartHandler = this._onTouchstart.bind(this);
   this._touchmoveHandler = this._onTouchmove.bind(this);
   this._touchendHandler = this._onTouchend.bind(this);
+
+  this._animationFrameQueue = new AnimationFrameQueue;
 }
 
 Draggable.prototype.init = function() {
@@ -30,7 +32,7 @@ Draggable.prototype.teardown = function() {
 };
 
 Draggable.prototype.reset = function() {
-  this._animationFrame && window.cancelAnimationFrame(this._animationFrame);
+  this._animationFrameQueue.clear();
   this.$target.css("transform", "").removeClass("is-active");
 };
 
@@ -108,11 +110,9 @@ Draggable.prototype._getPosition = function(e) {
 };
 
 Draggable.prototype._setPosition = function(pos) {
-  var callback = function() {
+  this._animationFrameQueue.add(function() {
     this.$target.css("transform", this._translate(pos));
-  }.bind(this);
-
-  "requestAnimationFrame" in window ? (this._animationFrame = window.requestAnimationFrame(callback)) : callback();
+  }.bind(this));
 };
 
 Draggable.prototype._calcVelocity = function(startGesture, endGesture) {

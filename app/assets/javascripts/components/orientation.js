@@ -4,6 +4,7 @@ function Orientation($target) {
 }
 
 Orientation.prototype.init = function() {
+  this._animationFrameQueue = new AnimationFrameQueue;
   this._orientationHandler = this._onOrientation.bind(this);
   window.addEventListener("deviceorientation", this._orientationHandler);
   return this;
@@ -11,8 +12,8 @@ Orientation.prototype.init = function() {
 
 Orientation.prototype.teardown = function() {
   window.removeEventListener("deviceorientation", this._orientationHandler);
-  this._animationFrame && window.cancelAnimationFrame(this._animationFrame);
   this.$rotate.css("transform", "");
+  this._animationFrameQueue.clear();
   this._lastDirection = undefined;
 };
 
@@ -33,9 +34,7 @@ Orientation.prototype._onOrientation = function(e) {
 };
 
 Orientation.prototype._setRotation = function(rotation) {
-  var callback = function() {
+  this._animationFrameQueue.add(function() {
     this.$rotate.css("transform", "rotate(" + rotation + "deg)");
-  }.bind(this);
-
-  "requestAnimationFrame" in window ? (this._animationFrame = window.requestAnimationFrame(callback)) : callback();
+  }.bind(this));
 };

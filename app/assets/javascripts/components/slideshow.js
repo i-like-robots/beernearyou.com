@@ -79,8 +79,10 @@ Slideshow.prototype._onTouchend = function(position, direction, time, velocity) 
 };
 
 Slideshow.prototype._onTransitionend = function(e) {
-  this.$frames.is(e.target) && this.$target.removeClass("is-transitioning").off(this.options.transition);
-  this._unlock();
+  if (this.$frames.is(e.target)) {
+    this.$target.removeClass("is-transitioning").off(this.options.transition);
+    this._unlock();
+  }
 };
 
 Slideshow.prototype._loop = function(x) {
@@ -88,9 +90,16 @@ Slideshow.prototype._loop = function(x) {
   return x > maximum ? 0 : (x < 0 ? maximum : x);
 };
 
-Slideshow.prototype._initDraggable = function($frame) {
+Slideshow.prototype._initDraggable = function() {
+  if (this._draggable) return;
+
+  var $frame = this.$frames.eq(this.current());
   var options = { callbackEnd: this._onTouchend.bind(this) };
   this._draggable = new Draggable($frame, options).init();
+};
+
+Slideshow.prototype._teardownDraggable = function() {
+  this._draggable = this._draggable.teardown();
 };
 
 Slideshow.prototype._preload = function($frame) {
@@ -107,10 +116,10 @@ Slideshow.prototype._preload = function($frame) {
 
 Slideshow.prototype._lock = function() {
   this.$btnPrev.add(this.$btnNext).prop("disabled", true);
-  this._draggable && this._draggable.teardown();
+  this.options.touch && this._teardownDraggable();
 };
 
 Slideshow.prototype._unlock = function() {
   this.$btnPrev.add(this.$btnNext).prop("disabled", false);
-  this.options.touch && this._initDraggable(this.$frames.eq(this.current()));
+  this.options.touch && this._initDraggable();
 };
