@@ -37,7 +37,9 @@ RSpec.describe "venue/show", :type => :view do
   it 'displays the nearest tube station' do
     render
 
-    expect(rendered).to have_selector('p', text: "#{nearest_station.name}, #{nearest_station.distance} miles")
+    expect(rendered).to have_selector('p', text: "#{nearest_station.name}")
+    expect(rendered).to have_selector('p', text: "Zone #{nearest_station.zone}")
+    expect(rendered).to have_selector('p', text: "#{nearest_station.distance} miles")
   end
 
   it 'displays the venue opening times' do
