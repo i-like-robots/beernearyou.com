@@ -32,8 +32,19 @@ Draggable.prototype.teardown = function() {
 };
 
 Draggable.prototype.reset = function() {
-  this._animationFrameQueue.clear();
-  this.$target.css("transform", "").removeClass("is-active");
+  this.$target.css("transform", "");
+};
+
+Draggable.prototype._addListeners = function() {
+  window.addEventListener("touchcancel", this._touchcancelHandler);
+  window.addEventListener("touchmove", this._touchmoveHandler);
+  window.addEventListener("touchend", this._touchendHandler);
+};
+
+Draggable.prototype._removeListeners = function() {
+  window.removeEventListener("touchcancel", this._touchcancelHandler);
+  window.removeEventListener("touchmove", this._touchmoveHandler);
+  window.removeEventListener("touchend", this._touchendHandler);
 };
 
 Draggable.prototype._onTouchstart = function(e) {
@@ -41,14 +52,13 @@ Draggable.prototype._onTouchstart = function(e) {
 
   var pointerPosition = this.currentPosition = this._getPosition(e);
 
-  this._startInteraction(pointerPosition);
-
   this.$target.addClass("is-active");
-  this._setPosition(this._calcRelativePosition(pointerPosition));
 
-  window.addEventListener("touchcancel", this._touchcancelHandler);
-  window.addEventListener("touchmove", this._touchmoveHandler);
-  window.addEventListener("touchend", this._touchendHandler);
+  this.gesture = this._createGesture(pointerPosition, null);
+  this.interaction = this._createInteraction(pointerPosition);
+
+  this._setPosition(this._calcRelativePosition(pointerPosition));
+  this._addListeners();
 
   this.options.callbackStart();
 
@@ -59,8 +69,8 @@ Draggable.prototype._onTouchmove = function(e) {
   var pointerPosition = this._getPosition(e);
   var direction = this._prop("directions")[+(pointerPosition > this.currentPosition)];
 
-  if (!this.gesture || direction != this.gesture.direction) {
-    this._startGesture(pointerPosition, direction);
+  if (direction != this.gesture.direction) {
+    this.gesture = this._createGesture(pointerPosition, direction);
   }
 
   this._setPosition(this._calcRelativePosition(this.currentPosition = pointerPosition));
@@ -68,37 +78,42 @@ Draggable.prototype._onTouchmove = function(e) {
 
 Draggable.prototype._onTouchend = function() {
   var now = Date.now();
+
   var velocity = this._calcVelocity(this.gesture, {
     position: this.currentPosition,
     time: now
   });
 
-  this.options.callbackEnd(this.currentPosition, this.gesture.direction, now - this.interaction.time, velocity);
+  var totalTime = now - this.interaction.time;
+
+  this.options.callbackEnd(this.currentPosition, this.gesture.direction, totalTime, velocity);
 
   this._onTouchcancel();
 };
 
 Draggable.prototype._onTouchcancel = function() {
-  window.removeEventListener("touchmove", this._touchmoveHandler);
-  window.removeEventListener("touchend", this._touchendHandler);
-
   this.interaction = this.gesture = undefined;
+
   this.$target.removeClass("is-active");
+
+  this._animationFrameQueue.clear();
+
+  this._removeListeners();
 };
 
-Draggable.prototype._startInteraction = function(position) {
+Draggable.prototype._createInteraction = function(position) {
   var offsetDirection = this._prop("offsetDirection");
   var pointerOffset = position - this.$target.offset()[offsetDirection];
   var targetOffset = this.$target.offsetParent().offset()[offsetDirection];
 
-  this.interaction = {
+  return {
     offset: targetOffset + pointerOffset,
     time: Date.now()
   };
 };
 
-Draggable.prototype._startGesture = function(position, direction) {
-  this.gesture = {
+Draggable.prototype._createGesture = function(position, direction) {
+  return {
     direction: direction,
     position: position,
     time: Date.now()
@@ -109,28 +124,25 @@ Draggable.prototype._getPosition = function(e) {
   return (e.touches ? e.touches[0] : e)[this._prop("pageAxis")];
 };
 
-Draggable.prototype._setPosition = function(pos) {
+Draggable.prototype._setPosition = function(position) {
+  var value = this._prop("translateAxis").replace("*", position);
+
   this._animationFrameQueue.add(function() {
-    this.$target.css("transform", this._translate(pos));
+    this.$target.css("transform", value);
   }.bind(this));
 };
 
-Draggable.prototype._calcVelocity = function(startGesture, endGesture) {
+Draggable.prototype._calcVelocity = function(start, end) {
   var percentage = 100 / window[this._prop("innerDimension")];
-  var distance = percentage * (startGesture.position - endGesture.position);
-  var time = endGesture.time - startGesture.time;
-  return Math.abs(distance / time);
+  var distance = percentage * (start.position - end.position);
+  return Math.abs(distance / (end.time - start.time));
 };
 
 Draggable.prototype._calcRelativePosition = function(position) {
   return position - this.interaction.offset;
 };
 
-Draggable.prototype._translate = function(value) {
-  return this._prop("translateAxis").replace("*", value);
-};
-
-Draggable.prototype._prop = function(prop, axis) {
+Draggable.prototype._prop = function(prop) {
   var props = {
     vertical: {
       pageAxis: "pageY",
@@ -148,5 +160,5 @@ Draggable.prototype._prop = function(prop, axis) {
     }
   };
 
-  return props[axis || this.options.axis][prop];
+  return props[this.options.axis][prop];
 };
