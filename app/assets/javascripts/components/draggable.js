@@ -9,7 +9,7 @@ function Draggable($target, options) {
   this.options = $.extend({}, defaults, options);
 
   this.$target = $target;
-  this.$handle = $target.find(this.options.handle);
+  this.$handle = $target.is(this.options.handle) ? $target : $target.find(this.options.handle);
 
   // Native event API is ~50% faster than .on()/.off()
   this._touchcancelHandler = this._onTouchcancel.bind(this);
@@ -74,6 +74,8 @@ Draggable.prototype._onTouchmove = function(e) {
   }
 
   this._setPosition(this._calcRelativePosition(this.currentPosition = pointerPosition));
+
+  e.preventDefault();
 };
 
 Draggable.prototype._onTouchend = function() {

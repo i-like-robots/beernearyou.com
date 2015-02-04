@@ -1,8 +1,5 @@
-function Lightbox($target, options) {
-  var defaults = {};
-
+function Lightbox($target) {
   this.$target = $target;
-  this.options = $.extend({}, defaults, options);
 }
 
 Lightbox.prototype.init = function() {
