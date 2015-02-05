@@ -16,8 +16,12 @@
     transform: translateY(calc(100% - 46px));
   }
 
-  &.is-active {
+  &.is-open {
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &.is-active {
     transition: none;
   }
 

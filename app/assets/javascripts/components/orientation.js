@@ -4,17 +4,24 @@ function Orientation($target) {
 }
 
 Orientation.prototype.init = function() {
-  this._animationFrameQueue = new AnimationFrameQueue;
+  this._paintPipeline = new PaintPipeline;
   this._orientationHandler = this._onOrientation.bind(this);
+
   window.addEventListener("deviceorientation", this._orientationHandler);
+
+  function callback() {
+    this.$rotate.css("transform", "rotate(" + this.rotation + "deg)");
+  }
+
+  this._paintPipeline.start(callback.bind(this));
+
   return this;
 };
 
 Orientation.prototype.teardown = function() {
-  window.removeEventListener("deviceorientation", this._orientationHandler);
+  this._paintPipeline.stop();
   this.$rotate.css("transform", "");
-  this._animationFrameQueue.clear();
-  this._lastDirection = undefined;
+  window.removeEventListener("deviceorientation", this._orientationHandler);
 };
 
 Orientation.prototype._onOrientation = function(e) {
@@ -26,15 +33,6 @@ Orientation.prototype._onOrientation = function(e) {
     return this.teardown();
   }
 
-  var direction = window.orientation + (!isNaN(e.webkitCompassHeading) ? e.webkitCompassHeading : (360 - e.alpha));
-
-  if (!this._lastDirection || Math.abs(this._lastDirection - direction) > 1) {
-    this._setRotation(-(this._lastDirection = direction));
-  }
-};
-
-Orientation.prototype._setRotation = function(rotation) {
-  this._animationFrameQueue.add(function() {
-    this.$rotate.css("transform", "rotate(" + rotation + "deg)");
-  }.bind(this));
+  var direction = !isNaN(e.webkitCompassHeading) ? e.webkitCompassHeading : (360 - e.alpha);
+  this.rotation = -(window.orientation + direction);
 };

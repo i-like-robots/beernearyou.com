@@ -72,8 +72,8 @@
   text-decoration: none;
   color: inherit;
 
-  &:hover,
-  .is-active & {
+  :hover > &,
+  .is-active > & {
     color: $palette-hl-cyan;
   }
 
