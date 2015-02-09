@@ -8,7 +8,7 @@ DraggablePanel.prototype.init = function() {
   this.draggable = new Draggable(this.$target, {
     callbackStart: this._onStart.bind(this),
     callbackEnd: this._onEnd.bind(this),
-    axis: "vertical"
+    horizontal: false
   });
 
   this.draggable.init();
@@ -25,13 +25,13 @@ DraggablePanel.prototype._onStart = function() {
   this.$target.removeClass("is-open is-closed").trigger("panel:dragstart");
 };
 
-DraggablePanel.prototype._onEnd = function(position, direction, time, velocity) {
-  if (time < 150) {
+DraggablePanel.prototype._onEnd = function(e) {
+  if (e.time < 150) {
     this.isOpen = !this.isOpen;
-  } else if (velocity > 0.05) {
-    this.isOpen = direction == "up";
+  } else if (e.velocity[1] > 0.05) {
+    this.isOpen = e.direction == "up";
   } else {
-    this.isOpen = position < (window.innerHeight / 2);
+    this.isOpen = e.position[1] < (window.innerHeight / 2);
   }
 
   this.$target.addClass("is-" + (this.isOpen ? "open" : "closed")).trigger("panel:dragend");

@@ -67,11 +67,13 @@ Slideshow.prototype.current = function() {
   return this.$frames.filter(".is-current").index();
 };
 
-Slideshow.prototype._onTouchend = function(position, direction, time, velocity) {
-  var action = direction == "left" ? "next" : "prev";
-  var quadrant = (100 / this.$target.width()) * position;
+Slideshow.prototype._onTouchend = function(e) {
+  var action = e.direction == "left" ? "next" : "prev";
+  var quadrant = (100 / this.$target.width()) * e.position[0];
+  var goLeft = e.direction == "left" && quadrant < 25;
+  var goRight = e.direction == "right" && quadrant > 75;
 
-  if (velocity > 0.05 || (direction == "left" && quadrant < 25) || (direction == "right" && quadrant > 75)) {
+  if (e.velocity[0] > 0.05 || goLeft || goRight) {
     this[action]();
   } else {
     this._draggable.reset();
@@ -94,8 +96,13 @@ Slideshow.prototype._initDraggable = function() {
   if (this._draggable) return;
 
   var $frame = this.$frames.eq(this.current());
-  var options = { callbackEnd: this._onTouchend.bind(this) };
-  this._draggable = new Draggable($frame, options).init();
+
+  this._draggable = new Draggable($frame, {
+    callbackEnd: this._onTouchend.bind(this),
+    vertical: false
+  });
+
+  this._draggable.init();
 };
 
 Slideshow.prototype._teardownDraggable = function() {
