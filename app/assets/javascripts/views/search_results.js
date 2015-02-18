@@ -12,7 +12,7 @@ window.app.view.searchResults = function() {
 
     window.innerWidth < breakpoint && panel.init();
 
-    $(window).on("resize orientationchange", $.debounce(100, function() {
+    $(window).on("resize orientationchange", debounce(100, function() {
       var active = $results.hasClass("is-draggable");
 
       if (window.innerWidth > breakpoint && active) {
