@@ -19,6 +19,3 @@ config/database.yml
 
 # Ignore precompile assets
 public/assets
-
-# Ignore installed Bower packages
-vendor/assets/javascripts/
