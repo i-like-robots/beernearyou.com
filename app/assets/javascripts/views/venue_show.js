@@ -8,8 +8,6 @@ window.app.view.venueShow = function() {
     var mapbox = new Mapbox($map, window.app.mapbox).init();
 
     $map.one("mapbox:load", function() {
-      var origin = [$map.data("lat"), $map.data("lng")];
-
       var marker = mapbox.createMarker(origin, {
         "marker-symbol": "beer",
         "marker-color": "#3CA0D3"

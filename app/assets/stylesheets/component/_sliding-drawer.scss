@@ -29,16 +29,9 @@
 
 .SlidingDrawer-toggle {
   display: none;
-  margin-bottom: base-margin("bottom", "small");
-  padding: $base-padding-small;
-  border-bottom: 1px solid $palette-gray-20;
 
   .is-draggable & {
     display: block;
-  }
-
-  .is-active & {
-    background: $palette-gray-05;
   }
 
 }
