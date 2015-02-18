@@ -1,28 +1,61 @@
-== README
+# Beer Near You
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Beer Near You][site] is an application to help users find decent beers in London. It uses data from Foursquare, London Datastore and Nominatim.
 
-Things you may want to cover:
+## Cool front-end stuff
 
-* Ruby version
+- Able to use a device's location and orientation to provide live distance and direction.
+- Draggable and swipey widgets for touch-enabled devices.
+- Lots of performance enhancements for the browser.
 
-* System dependencies
+## System dependencies
 
-* Configuration
+- Ruby 2.1.0+
+- PostgreSQL 9+
+- Bundler
 
-* Database creation
+## Local project setup and configuration
 
-* Database initialization
+```sh
+# Clone this Git repo
+git clone https://github.com/i-like-robots/beer-near-you.git && cd beer-near-you
 
-* How to run the test suite
+# Set the Ruby version if you use RVM or rbenv
+cp .ruby-version.example .ruby-version && cd .
 
-* Services (job queues, cache servers, search engines, etc.)
+# Add database configuration
+cp config/database.yml.example config/database.yml && open config/database.yml
 
-* Deployment instructions
+# Add environment configuration
+cp .env.example .env && open .env
 
-* ...
+# Install application dependencies
+bundle install
 
+# Setup database and import London Underground station data
+bundle exec rake db:setup stations:import
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+# Run the specs to ensure that everything has been setup correctly
+bundle exec rake spec
+
+# Run the development server
+bundle exec rails s
+```
+
+## Deployment instructions
+
+```sh
+# Stop currently running Unicorn process
+[ -f tmp/unicorn.pid ] && kill -QUIT `cat tmp/unicorn.pid`
+
+# Install required dependencies and lock the bundle
+bundle install --deployment
+
+# Clear temporary files, run any database migrations and recompile assets
+RAILS_ENV=production bundle exec rake tmp:clear db:migrate assets:clean assets:precompile
+
+# Start Unicorn server daemon
+bundle exec unicorn -E production -c config/unicorn.rb -D
+```
+
+[site]: http://beernearyou.com
