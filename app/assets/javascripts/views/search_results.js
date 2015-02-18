@@ -7,8 +7,8 @@ window.app.view.searchResults = function() {
     var mapbox = new Mapbox($map, window.app.mapbox).init();
     new ResultsMap($results, mapbox).init();
 
-    // Draggable results panel for small screens
-    var panel = new DraggablePanel($results);
+    // Sliding results panel for small screens
+    var panel = new SlidingDrawer($results);
 
     window.innerWidth < breakpoint && panel.init();
 

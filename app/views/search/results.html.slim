@@ -30,14 +30,14 @@
 
     div.SearchResults-map id='map'
 
-    div.SearchResults-results.DraggablePanel id='results' data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
+    div.SearchResults-results.SlidingDrawer id='results' data-lat="#{@origin.first}" data-lng="#{@origin.last}" class="#{'is-live' if @live}"
 
-      div.SearchResults-toggle.DraggablePanel-toggle.t-heading.t-base.js-draggable 
-        span.DraggablePanel-toggleClosed
+      div.SearchResults-toggle.SlidingDrawer-toggle.t-heading.t-base.js-draggable 
+        span.SlidingDrawer-toggleClosed
           span.Icon.Icon--text.Icon--up List results
-        span.DraggablePanel-toggleOpen
+        span.SlidingDrawer-toggleOpen
           span.Icon.Icon--text.Icon--down Close list
-        span.DraggablePanel-toggleActive
+        span.SlidingDrawer-toggleActive
           span.Icon.Icon--text.Icon--move …
 
       div.SearchResults-resultsContent

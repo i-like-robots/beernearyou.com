@@ -1,4 +1,4 @@
-.DraggablePanel {
+.SlidingDrawer {
 
   &.is-draggable {
     position: absolute;
@@ -27,7 +27,7 @@
 
 }
 
-.DraggablePanel-toggle {
+.SlidingDrawer-toggle {
   display: none;
   margin-bottom: base-margin("bottom", "small");
   padding: $base-padding-small;
@@ -43,9 +43,9 @@
 
 }
 
-.DraggablePanel-toggleOpen,
-.DraggablePanel-toggleClosed,
-.DraggablePanel-toggleActive {
+.SlidingDrawer-toggleOpen,
+.SlidingDrawer-toggleClosed,
+.SlidingDrawer-toggleActive {
   display: none;
   overflow: hidden;
 
@@ -55,7 +55,7 @@
 
 }
 
-.DraggablePanel-toggleOpen {
+.SlidingDrawer-toggleOpen {
 
   .is-open & {
     display: block;
@@ -63,7 +63,7 @@
 
 }
 
-.DraggablePanel-toggleClosed {
+.SlidingDrawer-toggleClosed {
 
   .is-closed & {
     display: block;
@@ -72,7 +72,7 @@
 }
 
 
-.DraggablePanel-toggleActive {
+.SlidingDrawer-toggleActive {
 
   .is-active & {
     display: block;

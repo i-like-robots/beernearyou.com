@@ -1,8 +1,8 @@
-function DraggablePanel($target) {
+function SlidingDrawer($target) {
   this.$target = $target;
 }
 
-DraggablePanel.prototype.init = function() {
+SlidingDrawer.prototype.init = function() {
   this.$target.addClass("is-draggable is-closed");
 
   this.draggable = new Draggable(this.$target, {
@@ -16,18 +16,18 @@ DraggablePanel.prototype.init = function() {
   return this;
 };
 
-DraggablePanel.prototype.teardown = function() {
+SlidingDrawer.prototype.teardown = function() {
   this.draggable.teardown();
   this.$target.removeClass("is-draggable is-closed is-open");
 };
 
-DraggablePanel.prototype._onStart = function() {
+SlidingDrawer.prototype._onStart = function() {
   fastdom.write(function() {
     this.$target.removeClass("is-open is-closed").trigger("panel:dragstart");
   }, this);
 };
 
-DraggablePanel.prototype._onEnd = function(e) {
+SlidingDrawer.prototype._onEnd = function(e) {
   if (e.time < 150) {
     this.isOpen = !this.isOpen;
   } else if (e.velocity[1] > 0.05) {
