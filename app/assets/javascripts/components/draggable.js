@@ -55,7 +55,7 @@ Draggable.prototype._onTouchstart = function(e) {
   };
 
   this._handleEventData(e);
-  this._startAnimation();
+  this._requestFrame(true);
   this._addListeners();
 
   this.options.callbackStart();
@@ -65,6 +65,7 @@ Draggable.prototype._onTouchstart = function(e) {
 
 Draggable.prototype._onTouchmove = function(e) {
   this._handleEventData(e);
+  this._requestFrame();
   e.preventDefault();
 };
 
@@ -89,8 +90,7 @@ Draggable.prototype._onTouchcancel = function() {
   this.session = undefined;
 
   this._removeListeners();
-  this._stopAnimation();
-
+  fastdom.clear(this._fastDomID);
   this.$target.removeClass("is-active");
 };
 
@@ -125,21 +125,13 @@ Draggable.prototype._handleIntervalData = function(data) {
   return data;
 };
 
-Draggable.prototype._startAnimation = function() {
-  var firstRun = true;
-
-  this._animationPipeline = new PaintPipeline;
-
+Draggable.prototype._requestFrame = function(firstRun) {
   function callback() {
     firstRun && this.$target.addClass("is-active") && (firstRun = false);
     this.$target.css("transform", this._cssTranslate(this.session.last));
   }
 
-  this._animationPipeline.start(callback.bind(this));
-};
-
-Draggable.prototype._stopAnimation = function() {
-  this._animationPipeline.stop();
+  this._fastDomID = fastdom.write(callback, this);
 };
 
 Draggable.prototype._calculateOffset = function(e) {

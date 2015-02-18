@@ -22,7 +22,9 @@ DraggablePanel.prototype.teardown = function() {
 };
 
 DraggablePanel.prototype._onStart = function() {
-  this.$target.removeClass("is-open is-closed").trigger("panel:dragstart");
+  fastdom.write(function() {
+    this.$target.removeClass("is-open is-closed").trigger("panel:dragstart");
+  }, this);
 };
 
 DraggablePanel.prototype._onEnd = function(e) {
@@ -34,7 +36,9 @@ DraggablePanel.prototype._onEnd = function(e) {
     this.isOpen = e.position[1] < (window.innerHeight / 2);
   }
 
-  this.$target.addClass("is-" + (this.isOpen ? "open" : "closed")).trigger("panel:dragend");
+  fastdom.write(function() {
+    this.$target.addClass("is-" + (this.isOpen ? "open" : "closed")).trigger("panel:dragend");
+  }, this);
 
   this.draggable.reset();
 };

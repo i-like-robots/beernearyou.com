@@ -2,5 +2,6 @@
   "name": "BeerNearYou",
   "private": true,
   "dependencies": {
+    "fastdom": "~0.8.5"
   }
 }

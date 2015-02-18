@@ -4,22 +4,14 @@ function Orientation($target) {
 }
 
 Orientation.prototype.init = function() {
-  this._paintPipeline = new PaintPipeline;
   this._orientationHandler = this._onOrientation.bind(this);
-
   window.addEventListener("deviceorientation", this._orientationHandler);
-
-  function callback() {
-    this.$rotate.css("transform", "rotate(" + this.rotation + "deg)");
-  }
-
-  this._paintPipeline.start(callback.bind(this));
 
   return this;
 };
 
 Orientation.prototype.teardown = function() {
-  this._paintPipeline.stop();
+  fastdom.clear(this._fastDomID);
   this.$rotate.css("transform", "");
   window.removeEventListener("deviceorientation", this._orientationHandler);
 };
@@ -35,4 +27,11 @@ Orientation.prototype._onOrientation = function(e) {
 
   var direction = !isNaN(e.webkitCompassHeading) ? e.webkitCompassHeading : (360 - e.alpha);
   this.rotation = -(window.orientation + direction);
+
+  fastdom.clear(this._fastDomID);
+  this._fastDomID = fastdom.write(this._onDomWrite, this);
+};
+
+Orientation.prototype._onDomWrite = function() {
+  this.$rotate.css("transform", "rotate(" + this.rotation + "deg)");
 };
