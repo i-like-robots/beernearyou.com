@@ -13,7 +13,7 @@ Nearby.prototype.init = function() {
 Nearby.prototype._onSubmit = function(e) {
   e.preventDefault();
 
-  this.$submit.text("Requesting location…").prop("disabled", true);
+  this.$submit.text("Finding location…").prop("disabled", true);
 
   window.navigator.geolocation.watchPosition(
     this._onPosition.bind(this),

@@ -10,15 +10,19 @@ window.support = new Support().init();
 
 document.documentElement.classList.remove("no-js");
 
-$(document).ready(function() {
-  var views = $("html").data("jsView").split(" ").concat("global");
+if (navigator.userAgent.match(/iP(hone|od)/i)) {
+  document.documentElement.classList.add("iDevice");
+}
 
-  // Clean out any blank or repeat values
-  views = $.grep(views, function(view, i) {
-    return view && $.inArray(view, views) == i;
-  });
+window.addEventListener("DOMContentLoaded", function() {
+  var views = [ document.documentElement.dataset.jsView, "global" ];
 
-  $.each(views, function(i, view) {
-    window.app.view[view].call(window);
-  });
-});
+  views
+    .filter(function(item, i) {
+      return item && views.indexOf(item) == i;
+    })
+    .forEach(function(item) {
+      window.app.view[item].call(window);
+    });
+
+}, false);

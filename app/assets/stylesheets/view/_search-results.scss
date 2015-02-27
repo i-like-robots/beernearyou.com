@@ -1,6 +1,7 @@
 .SearchResults {
   position: relative;
   overflow: hidden;
+  height: 80%;
   height: calc(100vh - #{$header-height-small});
 
   @include respond-above("medium") {
@@ -10,6 +11,11 @@
 
   .no-js & {
     height: auto !important;
+  }
+
+  .iDevice & {
+    // Avoid content being hidden by Safari's button bar
+    height: calc(100vh - #{$header-height-small} - 70px);
   }
 
 }

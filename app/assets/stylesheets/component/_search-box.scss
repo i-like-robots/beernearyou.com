@@ -4,6 +4,11 @@
 
 .SearchBox-nearby {
   margin-bottom: 40px;
+
+  .no-js & {
+    display: none;
+  }
+
 }
 
 .SearchBox-label {

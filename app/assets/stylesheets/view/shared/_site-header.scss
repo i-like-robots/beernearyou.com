@@ -1,23 +1,9 @@
 .SiteHeader {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100;
+  position: relative;
 
   + * {
     // IE10 doesn't recognise the main element
     display: block;
-    margin-top: $header-height-small;
-  }
-
-
-  @include respond-above("medium") {
-    position: relative;
-
-    + * {
-      margin-top: 0;
-    }
   }
 
 }
@@ -31,7 +17,7 @@
 .SiteHeader-nav {
   @extend %base-shadow-low;
   position: relative;
-  z-index: 110;
+  z-index: 10;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -72,7 +58,7 @@
   top: 100%;
   right: 0;
   left: 0;
-  z-index: 105;
+  z-index: 5;
   // Hide the panel on first page load
   display: none;
 
