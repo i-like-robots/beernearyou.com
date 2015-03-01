@@ -32,13 +32,22 @@ div.VenueShow
 
     div.VenueShow-detail.VenueShow-detail--hours.ContentArea
       h2.VenueShow-detailHeading Opening hours
-      ol.VenueShow-infoList
-        - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
-          li: time = formatted_opening_hours(timeframe)
+      - if @venue.foursquare_data['hours'].present?
+        ol.VenueShow-infoList
+          - @venue.foursquare_data['hours']['timeframes'].each do |timeframe|
+            li: time = formatted_opening_hours(timeframe)
+
+      - elsif @venue.foursquare_data['contact']['formattedPhone'].present?
+        p Sorry, but no opening hours have been found. Why not give them a call?   
+
+      - else
+        p Sorry, we don't have any details at all for this venue =(
+
       - if @venue.foursquare_data['contact']['formattedPhone'].present?
         p.VenueShow-phone
+          => 'Call'
           a href="tel:#{@venue.foursquare_data['contact']['formattedPhone']}"
-            = "Call #{@venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')}"
+            = @venue.foursquare_data['contact']['formattedPhone'].sub('+44 ', '0')
 
     div.VenueShow-detail.VenueShow-detail--info.ContentArea
       h2.VenueShow-detailHeading Further info
