@@ -1,6 +1,7 @@
 function ToggleExpanded($target, options) {
   var defaults = {
-    animation: false
+    animation: false,
+    transition: false
   };
 
   this.$target = $target;
@@ -17,11 +18,12 @@ ToggleExpanded.prototype.init = function() {
 
 ToggleExpanded.prototype._onClick = function() {
   var expanded = this.$target.hasClass("is-open");
+  var shifting = this.options.animation || this.options.transition;
 
-  if (this.options.animation) {
+  if (shifting) {
     this.$target
-      .addClass("is-animating")
-      .one(this.options.animation, this._onAnimationEnd.bind(this));
+      .one(shifting, this._onShiftEnd.bind(this))
+      .addClass("is-" + (this.options.animation ? "animating" : "transitioning"));
   }
 
   this.$target
@@ -32,7 +34,7 @@ ToggleExpanded.prototype._onClick = function() {
   this.$toggle.attr("aria-expanded", !expanded);
 };
 
-ToggleExpanded.prototype._onAnimationEnd = function(e) {
+ToggleExpanded.prototype._onShiftEnd = function(e) {
   if (e.target != this.$target.get(0)) return;
-  this.$target.removeClass("is-animating");
+  this.$target.removeClass("is-animating is-transitioning");
 };

@@ -25,9 +25,21 @@ window.app.view.venueShow = function() {
     new Lightbox($lightbox).init();
     new ToggleExpanded($lightbox, { animation: window.support.prefix("animationEnd") }).init();
 
+    var prevButton = [
+      "<span class='Icon Icon--white Icon--left'>",
+        "<span class='u-hidden'>Previous</span>",
+      "</span>"
+    ];
+
+    var nextButton = [
+      "<span class='Icon Icon--white Icon--right'>",
+        "<span class='u-hidden'>Next</span>",
+      "</span>"
+    ];
+
     var slideshow = new Slideshow($slideshow, {
-      prevText: "<span class='Icon Icon--white Icon--left'><span class='u-hidden'>Previous</span></span>",
-      nextText: "<span class='Icon Icon--white Icon--right'><span class='u-hidden'>Next</span></span>",
+      prevText: prevButton.join(""),
+      nextText: nextButton.join(""),
       transition: window.support.prefix("transitionEnd"),
       touch: window.support.feature("touch")
     });

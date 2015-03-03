@@ -4,7 +4,7 @@ window.app.view.global = function() {
   var $search = $("#search");
 
   if ($search.length) {
-    new ToggleExpanded($search).init();
+    new ToggleExpanded($search, { animation: window.support.prefix("animationEnd") }).init();
   }
 
   // Search nearby geolocation

@@ -55,12 +55,12 @@
 .SiteHeader-searchPanel {
   @extend %base-padding;
   position: absolute;
-  top: 100%;
   right: 0;
+  bottom: 0;
   left: 0;
   z-index: 5;
-  // Hide the panel on first page load
-  display: none;
+  box-sizing: border-box;
+  width: 100%;
 
   // This mask covers any bleed-through caused by animation easing
   &::before {
@@ -73,18 +73,24 @@
     background: white;
   }
 
-  &.is-open,
-  &.is-closed {
-    display: block;
-  }
-
   &.is-open {
     @extend %base-shadow-low;
-    animation: slideIn .6s $ease-out-back;
+    animation: slideOut .6s $ease-out-back forwards;
   }
 
   &.is-closed {
-    animation: slideOut .6s $ease-in-back forwards;
+    animation: slideIn .6s $ease-in-back;
+  }
+
+
+  // The panel will display above the header when the document is
+  // scrolled past its boundary on iOS Safari so it needs to be
+  // hidden without using display: none which prevents transitions.
+  left: -9999px;
+
+  &.is-open,
+  &.is-animating {
+    left: 0;
   }
 
 }
