@@ -7,7 +7,7 @@ RSpec.describe VenueController, :type => :controller do
     let(:venues) { build_list(:venue, 5, :with_location) }
 
     before(:each) do
-      expect(Venue).to receive(:all).and_return(venues)
+      expect(Venue).to receive(:order).with(:name).and_return(venues)
     end
 
     it 'populates all venues' do
