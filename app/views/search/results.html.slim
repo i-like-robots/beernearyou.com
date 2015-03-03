@@ -1,5 +1,3 @@
-- content_for(:js_view, 'searchResults')
-
 - if @origin.nil? || @venues.nil?
 
   - content_for(:page_title, 'Search error')
@@ -13,6 +11,8 @@
 
 - elsif @venues.length == 0
 
+  - content_for(:js_view, 'searchNoResults')
+
   - content_for(:page_title, 'No results found')
 
   div.ContentArea.ContentArea--page.ContentArea--padded
@@ -22,7 +22,12 @@
     div.Notice.Notice--warning
       | No results could be found for your search.
 
+    div.AspectRatio.AspectRatio--16x9 style='z-index: 0;'
+      div.AspectRatio-content id='map' data-lat="#{@origin.first}" data-lng="#{@origin.last}"
+
 - else
+
+  - content_for(:js_view, 'searchResults')
 
   - content_for(:page_title, "Search found #{pluralize(@venues.length, 'result')}")
 
