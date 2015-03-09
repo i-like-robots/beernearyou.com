@@ -1,6 +1,7 @@
 class Venue < ActiveRecord::Base
 
   validates :name, presence: true
+  validates :untappd_id, presence: true
   validates :foursquare_id, presence: true
 
   before_create :add_location

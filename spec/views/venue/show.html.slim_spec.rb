@@ -42,10 +42,40 @@ RSpec.describe "venue/show", :type => :view do
     expect(rendered).to have_selector('p', text: "#{nearest_station.distance} miles")
   end
 
-  it 'displays the venue opening times' do
-    render
+  describe 'opening hours' do
 
-    expect(rendered).to have_selector('time', text: 'Mon–Sat: Noon–Midnight')
+    context 'without data' do
+      let(:foursquare_data) { super().merge(overrides) }
+
+      context 'with phone number' do
+        let(:overrides) { { 'hours' => nil } }
+
+        it 'displays apology and but  phone number' do
+          render
+
+          expect(rendered).to have_selector('p', text: 'Sorry, but no opening hours have been found')
+        end
+      end
+
+      context 'without phone number' do
+        let(:overrides) { { 'hours' => nil, 'contact' => { 'formattedPhone' => nil } } }
+
+        it 'displays apology only' do
+          render
+
+          expect(rendered).to have_selector('p', text: 'Sorry, we don\'t have any details at all')
+        end
+      end
+    end
+
+    context 'with data' do
+      it 'displays the venue opening times' do
+        render
+
+        expect(rendered).to have_selector('time', text: 'Mon–Sat: Noon–Midnight')
+      end
+    end
+
   end
 
   it 'displays links to further information' do
