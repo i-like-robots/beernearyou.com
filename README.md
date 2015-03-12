@@ -1,5 +1,7 @@
 # Beer Near You
 
+[ ![Codeship Status for i-like-robots/beernearyou.com](https://codeship.com/projects/f3cc2280-aad4-0132-d616-42094b33273a/status?branch=master)](https://codeship.com/projects/68104)
+
 [Beer Near You][site] is an application to help users find decent beers in London. It uses data from Foursquare, London Datastore and Nominatim.
 
 ## Cool front-end stuff
