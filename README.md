@@ -37,11 +37,27 @@ bundle install
 # Setup database and import London Underground station data
 bundle exec rake db:setup stations:import
 
-# Run the specs to ensure that everything has been setup correctly
-bundle exec rake spec
-
 # Run the development server
 bundle exec rails s
+```
+
+## Continuous delivery
+
+```sh
+# Install application dependencies
+bundle install --without=development
+
+# Add example environment configuration
+cp .env.example .env
+
+# Set the environment to test
+export RAILS_ENV=test
+
+# Setup empty database
+bundle exec rake db:create db:schema:load
+
+# Run the specs
+bundle exec rake spec
 ```
 
 ## Deployment instructions
@@ -53,8 +69,11 @@ bundle exec rails s
 # Install required dependencies and lock the bundle
 bundle install --deployment
 
+# Set the environment to production
+export RAILS_ENV=production
+
 # Clear temporary files, run any database migrations and recompile assets
-RAILS_ENV=production bundle exec rake tmp:clear db:migrate assets:clean assets:precompile
+bundle exec rake tmp:clear db:migrate assets:clean assets:precompile
 
 # Start Unicorn server daemon
 bundle exec unicorn -E production -c config/unicorn.rb -D
