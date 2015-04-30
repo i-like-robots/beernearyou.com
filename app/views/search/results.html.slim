@@ -11,6 +11,8 @@
 
 - elsif @within_bounds == false
 
+  - content_for(:js_view, 'searchNoResults')
+
   - content_for(:page_title, 'Search out of bounds')
 
   div.ContentArea.ContentArea--page.ContentArea--padded
@@ -18,7 +20,11 @@
     h1 Search out of bounds
 
     div.Notice.Notice--warning
-      | Your location was outside the area covered by this application.
+      | Your search location was outside of the area covered by Beer Near You. Please
+      =<> link_to('try again', search_path(postcode: random_postcode))
+      | using an address within London.
+
+    = render partial: 'search/partials/no_results_map'
 
 - elsif @venues.length == 0
 
@@ -33,8 +39,7 @@
     div.Notice.Notice--warning
       | No results could be found for your search.
 
-    div.AspectRatio.AspectRatio--16x9 style='z-index: 0;'
-      div.AspectRatio-content id='map' data-lat="#{@origin.first}" data-lng="#{@origin.last}"
+    = render partial: 'search/partials/no_results_map'
 
 - else
 
@@ -65,7 +70,7 @@
             li.SearchResults-item.js-result data-lat="#{venue.lat}" data-lng="#{venue.lng}"
               a.SearchResults-itemLink href="/venue/#{venue.foursquare_id}" title="#{venue.name}"
                 div.SearchResults-itemCompass
-                  = render partial: 'partials/compass', locals: { bearing: venue.bearing }
+                  = render partial: 'search/partials/compass', locals: { bearing: venue.bearing }
                 h2.SearchResults-itemHeading.t-heading.t-base = venue.name
                 address.SearchResults-itemAddress = venue.street_address
                 div.SearchResults-itemDistance = "#{'%.2f' % venue.distance} miles"
