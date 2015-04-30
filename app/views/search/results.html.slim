@@ -1,4 +1,4 @@
-- if @origin.nil? || @venues.nil?
+- if @origin.nil?
 
   - content_for(:page_title, 'Search error')
 
@@ -8,6 +8,17 @@
 
     div.Notice.Notice--error
       | Your location was not provided or could not be found.
+
+- elsif @within_bounds == false
+
+  - content_for(:page_title, 'Search out of bounds')
+
+  div.ContentArea.ContentArea--page.ContentArea--padded
+
+    h1 Search out of bounds
+
+    div.Notice.Notice--warning
+      | Your location was outside the area covered by this application.
 
 - elsif @venues.length == 0
 
