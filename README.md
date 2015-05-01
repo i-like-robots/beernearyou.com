@@ -28,8 +28,8 @@ cp .ruby-version.example .ruby-version && cd .
 # Add database configuration
 cp config/database.yml.example config/database.yml && open config/database.yml
 
-# Add environment configuration
-cp .env.example .env && open .env
+# Add application configuration
+cp config/application.yml.example config/application.yml && open config/application.yml
 
 # Install application dependencies
 bundle install
@@ -47,8 +47,8 @@ bundle exec rails s
 # Install application dependencies
 bundle install --without=development
 
-# Add example environment configuration
-cp .env.example .env
+# Add example application configuration
+cp config/application.yml.example config/application.yml
 
 # Set the environment to test
 export RAILS_ENV=test
