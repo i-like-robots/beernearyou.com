@@ -4,8 +4,8 @@ module Upmin
     before_filter :is_authorized?
 
     def is_authorized?
-      authenticate_or_request_with_http_basic('Admin') do |user, pass|
-        user == ENV['ADMIN_USERNAME'] && pass == ENV['ADMIN_PASSWORD']
+      authenticate_or_request_with_http_basic('Admin') do |username, password|
+        username == APP_CONFIG['admin_username'] && password == APP_CONFIG['admin_password']
       end
     end
 

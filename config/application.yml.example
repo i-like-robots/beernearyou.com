@@ -1,0 +1,24 @@
+defaults: &defaults
+
+  foursquare_client_id:
+  foursquare_client_secret:
+
+  mapbox_api_url: https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox
+  mapbox_token:
+  mapbox_project: username.project_id
+
+  admin_username: admin
+  admin_password: admin123
+  admin_email: admin@example.com
+
+  locale_center: [ 51.5081, -0.1281 ]
+  locale_distance: 10.0
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -9,11 +9,7 @@ class SearchController < ApplicationController
     @origin = create_origin_with_params(params)
     @live = true unless params[:postcode]
 
-    # vars loaded from .env are always strings
-    center = ENV['LOCALE_CENTER'].split(',').map(&:to_f)
-    distance = ENV['LOCALE_DISTANCE'].to_f
-
-    if @origin && is_origin_within_locale(@origin, center, distance)
+    if @origin && is_origin_within_locale(@origin, APP_CONFIG['locale_center'], APP_CONFIG['locale_distance'])
       @venues = find_venues_with_origin(@origin)
     end
   end
