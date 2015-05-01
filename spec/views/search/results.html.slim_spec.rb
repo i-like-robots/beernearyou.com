@@ -16,6 +16,22 @@ RSpec.describe "search/results", :type => :view do
 
   end
 
+  context 'out of bounds' do
+
+    before(:each) do
+      assign(:within_bounds, false)
+      assign(:origin, origin)
+    end
+
+    it 'displays an out of bounds notice' do
+      render
+
+      expect(rendered).to have_selector('.Notice--warning')
+      expect(rendered).to have_content(/Your search location was outside of the area covered/)
+    end
+
+  end
+
   context 'with no results' do
 
     before(:each) do

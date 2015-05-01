@@ -9,7 +9,11 @@ class SearchController < ApplicationController
     @origin = create_origin_with_params(params)
     @live = true unless params[:postcode]
 
-    if @origin
+    # vars loaded from .env are always strings
+    center = ENV['LOCALE_CENTER'].split(',').map(&:to_f)
+    distance = ENV['LOCALE_DISTANCE'].to_f
+
+    if @origin && is_origin_within_locale(@origin, center, distance)
       @venues = find_venues_with_origin(@origin)
     end
   end
@@ -22,6 +26,11 @@ class SearchController < ApplicationController
     elsif params[:postcode]
       Geocoder.coordinates(params[:postcode])
     end
+  end
+
+  def is_origin_within_locale(origin, locale, max_distance)
+    actual_distance = Geocoder::Calculations.distance_between(origin, locale)
+    @within_bounds = actual_distance <= max_distance
   end
 
   def find_venues_with_origin(origin)
