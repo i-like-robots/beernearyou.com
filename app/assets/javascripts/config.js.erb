@@ -4,9 +4,9 @@ window.app.mapbox = {
   mapOptions: {
     scrollWheelZoom: false
   },
-  mapboxURL: "<%= ENV['MAPBOX_URL'] %>",
-  projectID: "<%= ENV['MAPBOX_PROJECT'] %>",
-  accessToken: "<%= ENV['MAPBOX_TOKEN'] %>"
+  mapboxURL: "<%= APP_CONFIG['mapbox_api_url'] %>",
+  projectID: "<%= APP_CONFIG['mapbox_project'] %>",
+  accessToken: "<%= APP_CONFIG['mapbox_token'] %>"
 };
 
 window.app.geolocation = {
