@@ -54,10 +54,21 @@ $slideshow-img-size: 640px;
 
 }
 
+.Slideshow-frameWrapper {
+  width: $slideshow-img-size;
+  background: $palette-gray-80;
+
+  @media screen and (orientation: portrait) and (max-width: $slideshow-img-size) {
+    max-width: 100%;
+  }
+
+  @media screen and (orientation: landscape) and (max-height: $slideshow-img-size) {
+    max-width: 100vh;
+  }
+
+}
+
 .Slideshow-frameImage {
-  display: block;
-  max-width: 100%;
-  max-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease;
   will-change: opacity;
@@ -90,21 +101,15 @@ $slideshow-img-size: 640px;
 
 .Slideshow-btn {
   position: absolute;
-  bottom: 0;
+  top: 50%;
   z-index: 1;
+  margin-top: -25px;
   border: 0;
   background: none;
   padding: $base-padding-small;
   font-size: 32px;
   line-height: 1;
   transition: left 0.25s, right 0.25s;
-
-  @media screen and (min-width: $slideshow-img-size) {
-    top: 50%;
-    bottom: auto;
-    margin-top: -25px;
-  }
-
 }
 
 .Slideshow-btn--next {
@@ -133,6 +138,7 @@ $slideshow-img-size: 640px;
   padding-left: 0;
   width: 100%;
   text-align: center;
+  white-space: nowrap;
 
   // Avoid clashing with image caption
   @media screen and (max-height: $slideshow-img-size) {
