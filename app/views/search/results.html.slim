@@ -9,6 +9,9 @@
     div.Notice.Notice--error
       | Your location was not provided or could not be found.
 
+  javascript:
+    ga('send', 'event', 'search', 'no results', 'search error', @search_term)
+
 - elsif @within_bounds == false
 
   - content_for(:js_view, 'searchNoResults')
@@ -26,6 +29,9 @@
 
     = render partial: 'search/partials/no_results_map'
 
+  javascript:
+    ga('send', 'event', 'search', 'no results', 'search out of bounds', @search_term)
+
 - elsif @venues.length == 0
 
   - content_for(:js_view, 'searchNoResults')
@@ -40,6 +46,9 @@
       | No results could be found for your search.
 
     = render partial: 'search/partials/no_results_map'
+
+  javascript:
+    ga('send', 'event', 'search', 'no results', 'no results found', @search_term)
 
 - else
 
