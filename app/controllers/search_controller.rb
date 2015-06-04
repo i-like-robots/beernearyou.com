@@ -8,6 +8,7 @@ class SearchController < ApplicationController
   def results
     @origin = create_origin_with_params(params)
     @live = true unless params[:postcode]
+    @search_term = (params[:postcode] || @origin).to_s
 
     if @origin && is_origin_within_locale(@origin, APP_CONFIG['locale_center'], APP_CONFIG['locale_distance'])
       @venues = find_venues_with_origin(@origin)

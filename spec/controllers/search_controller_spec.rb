@@ -26,6 +26,7 @@ RSpec.describe SearchController, :type => :controller do
           expect(assigns(:venues)).to eq(venues)
           expect(assigns(:origin)).to eq(origin)
           expect(assigns(:within_bounds)).to eq(true)
+          expect(assigns(:search_term)).to eq("[#{origin.first}, #{origin.last}]")
         end
 
       end
@@ -44,6 +45,7 @@ RSpec.describe SearchController, :type => :controller do
           expect(assigns(:venues)).to eq(venues)
           expect(assigns(:origin)).to eq(origin)
           expect(assigns(:within_bounds)).to eq(true)
+          expect(assigns(:search_term)).to eq(query[:postcode])
         end
 
       end
