@@ -13,8 +13,9 @@ $slideshow-img-size: 640px;
   width: 100%;
   height: 100%;
   display: none;
-  transition: transform 1s ease;
+  transition: transform 0.75s ease;
   will-change: transform;
+  user-select: none;
 
   &.is-next,
   &.is-prev,
@@ -103,6 +104,7 @@ $slideshow-img-size: 640px;
   position: absolute;
   top: 50%;
   z-index: 1;
+  display: none;
   margin-top: -25px;
   border: 0;
   background: none;
@@ -110,6 +112,12 @@ $slideshow-img-size: 640px;
   font-size: 32px;
   line-height: 1;
   transition: left 0.25s, right 0.25s;
+
+  // They don't offer anything on a small screen
+  @media screen and (min-height: $slideshow-img-size) {
+    display: block;
+  }
+
 }
 
 .Slideshow-btn--next {
@@ -134,6 +142,7 @@ $slideshow-img-size: 640px;
   position: absolute;
   bottom: 10px;
   z-index: 2;
+  display: none;
   margin-left: 0;
   padding-left: 0;
   width: 100%;
@@ -141,8 +150,8 @@ $slideshow-img-size: 640px;
   white-space: nowrap;
 
   // Avoid clashing with image caption
-  @media screen and (max-height: $slideshow-img-size) {
-    display: none;
+  @media screen and (min-height: $slideshow-img-size) {
+    display: block;
   }
 
 }
