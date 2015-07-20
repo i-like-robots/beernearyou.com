@@ -1,25 +1,25 @@
 %base-margin {
-  margin: $base-margin-small;
+  margin: map-get($base-margins, 'small');
 
-  @include respond-above("medium") {
-    margin: $base-margin;
+  @include respond-above('medium') {
+    margin: map-get($base-margins, 'medium');
   }
 
-  @include respond-above("large") {
-    margin: $base-margin-large;
+  @include respond-above('large') {
+    margin: map-get($base-margins, 'large');
   }
 
 }
 
 %base-padding {
-  padding: $base-padding-small;
+  padding: map-get($base-padding, 'small');
 
-  @include respond-above("medium") {
-    padding: $base-padding;
+  @include respond-above('medium') {
+    padding: map-get($base-padding, 'medium');
   }
 
-  @include respond-above("large") {
-    padding: $base-padding-large;
+  @include respond-above('large') {
+    padding: map-get($base-padding, 'large');
   }
 
 }

@@ -21,10 +21,10 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  padding: $base-padding-small;
+  padding: map-get($base-padding, 'small');
 
   @include respond-above("medium") {
-    padding: $base-padding;
+    padding: map-get($base-padding, 'medium');
   }
 
 }
