@@ -18,7 +18,7 @@
   @extend %base-font;
   @extend %base-border-radius;
   border: 2px solid;
-  padding: map-get($base-padding, 'small');
+  padding: map-get($base-padding, "small");
   line-height: 1.625;
   font-size: 100%;
   color: $palette-gray-80;

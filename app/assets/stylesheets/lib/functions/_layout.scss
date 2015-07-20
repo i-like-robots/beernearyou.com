@@ -1,4 +1,4 @@
-@function base-padding($direction, $size: 'medium') {
+@function base-padding($direction, $size: "medium") {
   $margin-values: map-get($base-margins, $size);
 
   @if $margin-values {
@@ -8,7 +8,7 @@
   @warn "Margin size '#{$size}' does not exist in $base-margins";
 }
 
-@function base-padding($direction, $size: 'medium') {
+@function base-padding($direction, $size: "medium") {
   $padding-values: map-get($base-padding, $size);
 
   @if $padding-values {

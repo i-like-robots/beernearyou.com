@@ -1,7 +1,7 @@
 .Notice {
   @extend %base-border-radius;
   border: 2px solid;
-  padding: map-get($base-padding, 'small');
+  padding: map-get($base-padding, "small");
 }
 
 .Notice--error {
