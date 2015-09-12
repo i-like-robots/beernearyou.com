@@ -32,7 +32,7 @@ cp config/database.yml.example config/database.yml && open config/database.yml
 cp config/application.yml.example config/application.yml && open config/application.yml
 
 # Install application dependencies
-bundle install
+bundle install --without=production
 
 # Setup database and import London Underground station data
 bundle exec rake db:setup stations:import
@@ -63,8 +63,8 @@ bundle exec rake spec
 ## Deployment instructions
 
 ```sh
-# Stop currently running Unicorn process
-[ -f tmp/unicorn.pid ] && kill -QUIT `cat tmp/unicorn.pid`
+# Stop any currently running Puma process
+[ -f tmp/pids/puma.pid ] && kill -QUIT `cat tmp/pids/puma.pid`
 
 # Install required dependencies and lock the bundle
 bundle install --deployment
@@ -75,8 +75,8 @@ export RAILS_ENV=production
 # Clear temporary files, run any database migrations and recompile assets
 bundle exec rake tmp:clear db:migrate assets:clean assets:precompile
 
-# Start Unicorn server daemon
-bundle exec unicorn -E production -c config/unicorn.rb -D
+# Start Puma server daemon
+bundle exec puma -C config/puma.rb -d
 ```
 
 [site]: http://beernearyou.com

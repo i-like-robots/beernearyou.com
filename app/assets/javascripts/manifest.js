@@ -1,1 +1,1 @@
-//= require ../../../vendor/assets/javascripts/fastdom/index
+//= require fastdom/index

@@ -61,7 +61,7 @@ end
 
 group :production do
 
-  # Use Unicorn as the app server
-  gem 'unicorn'
+  # Use Puma as the app server
+  gem 'puma'
 
 end
