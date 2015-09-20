@@ -11,7 +11,7 @@ class SearchController < ApplicationController
     @search_term = (params[:postcode] || @origin).to_s
 
     # vars loaded from .env are always strings
-    center = ENV['LOCALE_CENTER'].split(',').map(&:to_f)
+    center = [ENV['LOCALE_CENTER_LATITUDE'].to_f, ENV['LOCALE_CENTER_LONGITUDE']]
     distance = ENV['LOCALE_DISTANCE'].to_f
 
     if @origin && is_origin_within_locale(@origin, center, distance)
