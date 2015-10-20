@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'slim-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 1.3.0'
+gem 'uglifier', '~> 2.7.2'
 
 # Use HTTParty to wrap requests
 gem 'httparty'
