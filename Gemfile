@@ -68,4 +68,7 @@ group :production do
   # Use Puma as the app server
   gem 'puma'
 
+  # Use 12Factor to log to stdout and serve static assets directly
+  gem 'rails_12factor'
+
 end
