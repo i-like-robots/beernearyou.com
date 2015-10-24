@@ -68,9 +68,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    enable_starttls_auto: false,
-    address: 'localhost',
-    port: 25
+    port: 25,
+    address: ENV['POSTMARK_SMTP_SERVER'],
+    user_name: ENV['POSTMARK_API_TOKEN'],
+    password: ENV['POSTMARK_API_TOKEN'],
+    domain: 'beernearyou.com',
+    authentication: 'plain',
+    enable_starttls_auto: false
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
