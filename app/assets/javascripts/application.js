@@ -1,7 +1,7 @@
 //= require jquery2
 //= require ./config
 //= require ./support
-//= require ./manifest
+//= require fastdom/index
 //= require_tree ./utils
 //= require_tree ./components
 //= require_tree ./views

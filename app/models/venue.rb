@@ -38,8 +38,8 @@ class Venue < ActiveRecord::Base
 
   def self.foursquare_client
     @fsq_client ||= ApiRequest::Foursquare.new(
-      client_id: APP_CONFIG['foursquare_client_id'],
-      client_secret: APP_CONFIG['foursquare_client_secret']
+      client_id: ENV['FOURSQUARE_CLIENT_ID'],
+      client_secret: ENV['FOURSQUARE_CLIENT_SECRET']
     )
   end
 

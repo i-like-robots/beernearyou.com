@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -22,7 +23,7 @@ gem 'jquery-rails'
 gem 'slim-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 1.3.0'
+gem 'uglifier', '~> 2.7.2'
 
 # Use HTTParty to wrap requests
 gem 'httparty'
@@ -34,6 +35,9 @@ gem 'humanizer'
 gem 'upmin-admin', github: 'upmin/upmin-admin-ruby'
 
 group :development, :test do
+
+  # Use .env file for local configuration
+  gem 'dotenv-rails'
 
   # Use Rspec instead of Test::Unit
   gem 'rspec-rails'
@@ -61,7 +65,10 @@ end
 
 group :production do
 
-  # Use Unicorn as the app server
-  gem 'unicorn'
+  # Use Puma as the app server
+  gem 'puma'
+
+  # Use 12Factor to log to stdout and serve static assets directly
+  gem 'rails_12factor'
 
 end
