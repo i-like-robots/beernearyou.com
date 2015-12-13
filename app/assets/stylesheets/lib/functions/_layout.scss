@@ -1,23 +1,19 @@
-@function base-margin($direction: null, $size: null) {
-  @if $size == "small" {
-    @return directional-value($base-margin-small, $direction);
+@function base-padding($direction, $size: "medium") {
+  $margin-values: map-get($base-margins, $size);
+
+  @if $margin-values {
+    @return directional-value($margin-values, $direction);
   }
 
-  @if $size == "large" {
-    @return directional-value($base-margin-large, $direction);
-  }
-
-  @return directional-value($base-margin, $direction);
+  @warn "Margin size '#{$size}' does not exist in $base-margins";
 }
 
-@function base-padding($direction: null, $size: null) {
-  @if $size == "small" {
-    @return directional-value($base-padding-small, $direction);
+@function base-padding($direction, $size: "medium") {
+  $padding-values: map-get($base-padding, $size);
+
+  @if $padding-values {
+    @return directional-value($padding-values, $direction);
   }
 
-  @if $size == "large" {
-    @return directional-value($base-padding-large, $direction);
-  }
-
-  @return directional-value($base-padding, $direction);
+  @warn "Padding size '#{$size}' does not exist in $base-padding";
 }

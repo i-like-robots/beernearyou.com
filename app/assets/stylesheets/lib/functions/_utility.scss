@@ -5,13 +5,15 @@
 @function unpack($shorthand) {
   @if length($shorthand) == 1 {
     @return nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1);
-  } @else if length($shorthand) == 2 {
-    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 1) nth($shorthand, 2);
-  } @else if length($shorthand) == 3 {
-    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 3) nth($shorthand, 2);
-  } @else {
-    @return $shorthand;
   }
+  @if length($shorthand) == 2 {
+    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 1) nth($shorthand, 2);
+  }
+  @if length($shorthand) == 3 {
+    @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 3) nth($shorthand, 2);
+  }
+
+  @return $shorthand;
 }
 
 @function directional-value($values, $direction) {
@@ -29,12 +31,6 @@
   @if $direction == "left" {
     @return nth($values, 4);
   }
-}
 
-@mixin prefixer($property, $value, $prefixes: webkit moz) {
-  @each $prefix in $prefixes {
-    -#{$prefix}-#{$property}: $value;
-  }
-
-  #{$property}: $value;
+  @warn "Direction '#{$direction}' does not exist";
 }

@@ -61,6 +61,9 @@ group :development do
   # Access an IRB console on exception pages or by using <%%= console %> in views
   gem 'web-console', '~> 2.0.0'
 
+  # Use SCSS lint to check Sass style
+  gem 'scss-lint'
+
 end
 
 group :production do

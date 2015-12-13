@@ -70,7 +70,7 @@
 }
 
 .SearchResults-toggle {
-  padding: $base-padding-small;
+  padding: map-get($base-padding, "small");
   border-bottom: 1px solid $palette-gray-20;
 
   &.is-active {
