@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.7'
+ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 
 # Use Postgres as the database for Active Record
 gem 'pg'
@@ -66,7 +66,7 @@ end
 group :production do
 
   # Use Puma as the app server
-  gem 'puma'
+  gem 'puma', '~> 2.15.3'
 
   # Use 12Factor to log to stdout and serve static assets directly
   gem 'rails_12factor'
