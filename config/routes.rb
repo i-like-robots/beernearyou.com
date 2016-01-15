@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  mount Upmin::Engine => '/_admin'
-
   get 'colophon', to: 'static_page#colophon'
 
   get 'suggestion', to: 'suggestion#new'

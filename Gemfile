@@ -31,9 +31,6 @@ gem 'httparty'
 # Use Humanizer to try and avoid spam bots
 gem 'humanizer'
 
-# Use Upmin to create an administration area
-gem 'upmin-admin', github: 'upmin/upmin-admin-ruby'
-
 group :development, :test do
 
   # Use .env file for local configuration
